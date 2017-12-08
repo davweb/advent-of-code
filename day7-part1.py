@@ -11,4 +11,4 @@ for line in file("day7-input.txt"):
     if supporting is not None:
         supported.update(supporting.split(', '))
 
-print names - supported
+print (names - supported).pop()
