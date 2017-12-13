@@ -14,20 +14,11 @@ def load(filename):
     return firewall
 
 def clear(firewall, delay):
-    layers = firewall.keys()
-    max_depth = max(layers)
-    depth = 0 
-
-    while depth <= max_depth:
-        try:
-            range = firewall[depth]
-            turns = depth + delay
-            position = turns % (range * 2 - 2)
-            if position == 0:
-                return False
-        except KeyError:
-            pass
-        depth += 1
+    for depth, range in firewall.items():
+        turns = depth + delay
+        position = turns % (range * 2 - 2)
+        if position == 0:
+            return False
 
     return True
 
