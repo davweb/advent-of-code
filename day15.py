@@ -1,4 +1,4 @@
-from itertools import islice
+from itertools import islice, izip
 
 DIVISOR = 2147483647
 MASK = 2 ** 16 - 1
@@ -10,7 +10,7 @@ def generate(value, factor, matcher=None):
             yield value
 
 def pairs(a, b, count):
-    return zip(islice(a, count), islice(b, count))
+    return izip(islice(a, count), islice(b, count))
 
 def match(pair):
     return pair[0] & MASK == pair[1] & MASK
