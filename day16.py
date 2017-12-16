@@ -25,7 +25,7 @@ def match(line):
 
 def dance_move(line, step):
     line = list(line)
-    move, details = match(step)
+    move, details = step
 
     if move == 'spin':
         line = line[-details:] + line[:-details]
@@ -51,12 +51,17 @@ def do_dance(dance, line):
 
     return line
 
+def parse_dance(dance):
+    return [match(step) for step in dance]
+
 def part1(dance, line_size):
     line = create_line(line_size)
+    dance = parse_dance(dance)
     print do_dance(dance, line)
 
 def part2(dance, line_size):
     line = create_line(line_size)
+    dance = parse_dance(dance)
     history = []
 
     while line not in history:
