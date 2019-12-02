@@ -68,24 +68,21 @@ def intcode(input):
 
         index += 4
 
+def execute(data, noun, verb):
+    input = data.copy();
+    input[1] = noun
+    input[2] = verb
+    return intcode(input)[0]
 
 def part1(data):
-    input = data.copy();
-    input[1] = 12
-    input[2] = 2
-    print(intcode(input)[0])
+    print(execute(data, 12 , 2))
 
 def part2(data):
-    nouns = range(0,100)
-    verbs = range(0,100)
+    nouns = range(0, 100)
+    verbs = range(0, 100)
 
-    for (noun, verb) in itertools.product(nouns,verbs):
-        input = data.copy();
-        input[1] = noun
-        input[2] = verb
-        result = intcode(input)[0];
-
-        if result == 19690720:
+    for (noun, verb) in itertools.product(nouns, verbs):
+        if execute(data, noun, verb) == 19690720:
             print(100 * noun + verb)
             return
 
