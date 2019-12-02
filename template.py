@@ -1,12 +1,24 @@
+#!/usr/bin/python3
+
 import itertools 
 from collections import defaultdict
 import re
-import advent
 
 PATTERN = re.compile(r"(\d+) <-> ((\d+, )*\d+)")
 
 def read_input():
+    file = open('day1-input.txt', 'r')
+    return [int(line) for line in file.readlines()]
     return file('day16-input.txt').read().split(',')
+
+def my_function():
+    """Calculate something
+
+    >>> my_function(12)
+    2
+    >>> my_function(14)
+    2
+    """
 
 def part1(data):
     for line in data:
