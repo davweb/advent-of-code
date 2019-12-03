@@ -1,10 +1,6 @@
 #!/usr/local/bin/python3
 
-import itertools 
 from collections import defaultdict
-import re
-
-PATTERN = re.compile(r"(\d+) <-> ((\d+, )*\d+)")
 
 def read_input():
     file = open('day3-input.txt', 'r')
