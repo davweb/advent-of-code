@@ -8,7 +8,7 @@ def read_input():
 
 
 def taxicab_distance(a, b):
-    """Calculate something
+    """Calculate Manhattan distance
 
     >>> taxicab_distance((0, 0), (0, 0))
     0
