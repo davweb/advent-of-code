@@ -2,6 +2,36 @@
 
 from collections import defaultdict
 
+def digits(n):
+    """
+    >>> digits(0)
+    Traceback (most recent call last):
+        ...
+    ValueError: '0' is not a positive integer
+    >>> digits(1)
+    [1]
+    >>> digits(12)
+    [1, 2]
+    >>> digits(333)
+    [3, 3, 3]
+    >>> digits(123456)
+    [1, 2, 3, 4, 5, 6]
+    """
+
+    if n < 1:
+        raise ValueError("'{}' is not a positive integer".format(n))
+
+    result = []
+
+    while(n > 0):
+        digit = n % 10
+        n //= 10
+        result.append(digit)
+
+    result.reverse()
+    return result
+
+
 def has_adjacent_digits(n):
     """
     >>> has_adjacent_digits(111111)
@@ -9,17 +39,17 @@ def has_adjacent_digits(n):
     >>> has_adjacent_digits(123456)
     False
     >>> has_adjacent_digits(11111)
-    Traceback (most recent call last):
-        ...
-    ValueError: not a six digit number '11111'
+    True
     """
 
-    s = str(n)
+    last = None
 
-    if len(s) != 6:
-        raise ValueError("not a six digit number '{}'".format(s))
+    for digit in digits(n):
+        if last == digit:
+            return True
+        last = digit
 
-    return s[0] == s[1] or s[1] == s[2] or s[2] == s[3] or s[3] == s[4] or s[4] == s[5]
+    return False
 
 def has_never_decreasing_digits(n):
     """
@@ -31,13 +61,10 @@ def has_never_decreasing_digits(n):
     False
     """
 
-    last = None
+    last = -1
 
-    while n > 0:
-        digit = n % 10
-        n //= 10
-
-        if last != None and last < digit:
+    for digit in digits(n):
+        if digit < last:
             return False
 
         last = digit
@@ -61,10 +88,7 @@ def has_pair_of_digits(n):
     last = None
     count = 0
 
-    while n > 0:
-        digit = n % 10
-        n //= 10
-
+    for digit in digits(n):
         if last == digit:
             count += 1
         elif count == 2:
