@@ -21,7 +21,7 @@ import collections
 import itertools
 
 def read_input():
-    file = open('day2-input.txt', 'r')
+    file = open('input/day2-input.txt', 'r')
     return list(line.strip() for line in file.readlines())
 
 def count_letters(label):

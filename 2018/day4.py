@@ -69,7 +69,7 @@ class Event:
         return 'Event(datetime="{datetime}", type="{type}", guard_id={guard_id})'.format(**self.__dict__)
 
 def read_input():
-    file = open('day4-input.txt', 'r')
+    file = open('input/day4-input.txt', 'r')
     return sorted(Event(line) for line in file.readlines())
 
 def key_for_largest_value(some_dict):

@@ -46,7 +46,7 @@ class Claim:
         return "Claim(id={id}, x={x}, y={y}, width={width}, height={height})".format(**self.__dict__)
 
 def read_input():
-    file = open('day3-input.txt', 'r')
+    file = open('input/day3-input.txt', 'r')
     return [Claim(line) for line in file.readlines()]
 
 def part1(claims):

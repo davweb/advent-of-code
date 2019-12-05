@@ -1,7 +1,7 @@
 #!/usr/local/bin/python3
 
 def read_input():
-    return [int(code) for code in open('day5-input.txt', 'r').read().split(',')]
+    return [int(code) for code in open('input/day5-input.txt', 'r').read().split(',')]
 
 class IntCode:
     OP_ADD = 1

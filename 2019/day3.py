@@ -3,7 +3,7 @@
 from collections import defaultdict
 
 def read_input():
-    file = open('day3-input.txt', 'r')
+    file = open('input/day3-input.txt', 'r')
     return [line.split(',') for line in file.readlines()]
 
 

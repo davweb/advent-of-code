@@ -3,7 +3,7 @@
 import itertools 
 
 def read_input():
-    return [int(code) for code in open('day2-input.txt', 'r').read().split(',')]
+    return [int(code) for code in open('input/day2-input.txt', 'r').read().split(',')]
 
 def intcode(input):
     """An Intcode program is a list of integers separated by commas (like

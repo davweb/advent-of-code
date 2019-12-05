@@ -4,7 +4,7 @@ import collections
 import itertools
 
 def read_input():
-    file = open('day1-input.txt', 'r')
+    file = open('input/day1-input.txt', 'r')
     return [int(line) for line in file.readlines()]
 
 def calculate_frequency(data):

@@ -1,4 +1,4 @@
-#!usr/local/bin/python3
+#!/usr/local/bin/python3
 
 # Fuel required to launch a given module is based on its mass. Specifically, to
 # find the fuel required for a module, take its mass, divide by three, round
@@ -20,7 +20,7 @@
 # spacecraft?
 
 def read_input():
-    file = open('day1-input.txt', 'r')
+    file = open('input/day1-input.txt', 'r')
     return [int(line) for line in file.readlines()]
 
 def calculate_fuel(mass):

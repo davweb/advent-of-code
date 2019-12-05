@@ -3,7 +3,7 @@
 import string
 
 def read_input():
-    file = open('day5-input.txt', 'r')
+    file = open('input/day5-input.txt', 'r')
     return file.read()
 
 def reduce(polymer):
