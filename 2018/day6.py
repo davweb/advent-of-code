@@ -1,6 +1,5 @@
 #!/usr/local/bin/python3
 
-import operator 
 import itertools
 from collections import defaultdict
 
@@ -27,14 +26,24 @@ def taxicab_distance(a, b):
 
     return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
-def key_for_largest_value(some_dict):
-    return max(some_dict.items(), key=operator.itemgetter(1))[0]
+def bounds(points):
+    """
+    >>> bounds([(0, 0)])
+    ((0, 0), (0, 0))
+    >>> bounds([(7, 1), (-1, 9)])
+    ((-1, 1), (7, 9))
+    """
 
-def part1(points):
     left = min(x for (x,y) in points)
     right = max(x for (x,y) in points)
     top = min(y for (x,y) in points)
     bottom = max(y for (x,y) in points)
+    
+    return ((left, top), (right, bottom))
+
+def part1(points):
+    ((left, top), (right, bottom)) = bounds(points)
+
     areas = defaultdict(int)
     exclusions = set()
 
@@ -55,7 +64,7 @@ def part1(points):
             areas[closest_point] += 1
             (x,y) = i
 
-            # if a point is closest to another point on the border it's area will be unbounded
+            # if a point is closest to another point on the border its area will be unbounded
             if x == left or x == right or y == top or y == bottom:
                 exclusions.add(closest_point)
 
@@ -65,11 +74,8 @@ def part2(points):
     """What is the size of the region containing all locations which have a total
     distance to all given coordinates of less than 10000?"""
 
-    left = min(x for (x,y) in points)
-    right = max(x for (x,y) in points)
-    top = min(y for (x,y) in points)
-    bottom = max(y for (x,y) in points)
-    
+    ((left, top), (right, bottom)) = bounds(points)
+
     max_distance = 10000
     area = 0
     count = 0
