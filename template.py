@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/local/bin/python3
 
 import itertools 
 from collections import defaultdict
@@ -7,9 +7,9 @@ import re
 PATTERN = re.compile(r"(\d+) <-> ((\d+, )*\d+)")
 
 def read_input():
-    file = open('day1-input.txt', 'r')
+    file = open("input/day1-input.txt", "r")
     return [int(line) for line in file.readlines()]
-    return file('day16-input.txt').read().split(',')
+    return file("input/day16-input.txt").read().split("",")
 
 def my_function():
     """Calculate something
