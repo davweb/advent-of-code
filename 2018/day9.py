@@ -146,9 +146,10 @@ def play_new(players, last_marble):
     current = zero.insert(one)
     scores = defaultdict(int)
     player = 1
+    inc = last_marble // 200
 
     for marble in range(2, last_marble + 1):
-        if marble % 1000 == 0:
+        if marble % inc == 0:
             print("{:3.0f}%".format(marble / last_marble * 100), end = "\r")
 
         player = (player + 1) % players
