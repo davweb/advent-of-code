@@ -9,10 +9,20 @@ def read_input():
         
 
 def part1(data):
-    print(IntCode(data, [1]).execute())
+    i = IntCode(data, [1])
+
+    while True:
+        output = i.execute()
+        if output is None:
+            break
+        result = output
+
+    print(result)
+
+    
 
 def part2(data):
-    print(IntCode(data, [5]).execute())
+    print(IntCode(data).execute([5]))
 
 
 def main():

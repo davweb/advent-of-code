@@ -13,16 +13,14 @@ class OpCode(IntEnum):
 
 class IntCode:
     
-    def __init__(self, code, input):
-        self.memory = code.copy()
-        self.input = input.copy()
-        self.output = []
+    def __init__(self, memory, input=None):
+        self.memory = memory.copy()
+        self.input = [] if input is None else input
         self.index = 0
-        self.parameter_modes = None
-    
+
     def generate_parameter_modes(self, op_code):
         """
-        >>> i = IntCode([], [])
+        >>> i = IntCode([])
         >>> pm = i.generate_parameter_modes(3)
         >>> [next(pm), next(pm)]
         [0, 0]
@@ -42,9 +40,11 @@ class IntCode:
 
     def next_instruction(self):
         """
-        >>> IntCode([1], []).next_instruction()
+        >>> i = IntCode([1])
+        >>> i.next_instruction()
         1
-        >>> IntCode([101], []).next_instruction()
+        >>> i = IntCode([101])
+        >>> i.next_instruction()
         1
         """
 
@@ -55,11 +55,11 @@ class IntCode:
 
     def get_next_parameter(self):
         """
-        >>> i = IntCode([1, 2, 99], [])
+        >>> i = IntCode([1, 2, 99])
         >>> n = i.next_instruction()
         >>> i.get_next_parameter()
         99
-        >>> i= IntCode([101, 2, 99], [])
+        >>> i= IntCode([101, 2, 99])
         >>> n = i.next_instruction()
         >>> i.get_next_parameter()
         2
@@ -90,57 +90,59 @@ class IntCode:
 
     def next_input(self):
         """"
-        >>> i = IntCode([], [1, 2])
+        >>> i = IntCode([])
+        >>> i.input = [1, 2]
         >>> i.next_input()
         1
         >>> i.next_input()
         2
         """
-        return self.input.pop(0)
+        try:
+            return self.input.pop(0)
+        except IndexError:
+            raise ValueError("Not enough input values")
 
-    def execute(self):
+    def execute(self, input=None):
         """
-        >>> IntCode([87], []).execute()
+        >>> IntCode([87]).execute([])
         Traceback (most recent call last):
             ...
         ValueError: Invalid op code '87'
-        >>> IntCode([1, 0, 0, 0, 4, 0, 99], []).execute()
-        [2]
-        >>> IntCode([2, 3, 0, 3, 4, 3, 99], []).execute()
-        [6]
-        >>> IntCode([2, 6, 6, 7, 4, 7, 99, 0], []).execute()
-        [9801]
-        >>> IntCode([1, 1, 1, 4, 99, 5, 6, 0, 4, 0, 99], []).execute()
-        [30]
-        >>> IntCode([3, 5, 4, 5, 99, -1], [7]).execute()
-        [7]
-        >>> IntCode([1002, 8, 3, 7, 4, 7, 99, 4, 33], []).execute()
-        [99]
-        >>> IntCode([1105, 1, 4, 99, 4, 0, 99], []).execute()
-        [1105]
-        >>> IntCode([1105, 0, 4, 99, 4, 0, 99], []).execute()
-        []
-        >>> IntCode([1106, 1, 4, 99, 4, 0, 99], []).execute()
-        []
-        >>> IntCode([1106, 0, 4, 99, 4, 0, 99], []).execute()
-        [1106]
-        >>> IntCode([1107, 1, 2, 7, 4, 7,99, 53], []).execute()
-        [1]
-        >>> IntCode([1107, 2, 1, 7, 4, 7,99, 53], []).execute()
-        [0]
-        >>> IntCode([1108, 1, 1, 7, 4, 7,99, 53], []).execute()
-        [1]
-        >>> IntCode([1108, 2, 1, 7, 4, 7,99, 53], []).execute()
-        [0]
-        >>> IntCode([3,3,1105,-1,9,1101,0,0,12,4,12,99,1], [0]).execute()
-        [0]
-        >>> IntCode([3,12,6,12,15,1,13,14,13,4,13,99,-1,0,1,9], [1000]).execute()
-        [1]
-        >>> IntCode([3,3,1105,-1,9,1101,0,0,12,4,12,99,1], [0]).execute()
-        [0]
-        >>> IntCode([3,3,1105,-1,9,1101,0,0,12,4,12,99,1], [1000]).execute()
-        [1]
+        >>> IntCode([1, 0, 0, 0, 4, 0, 99]).execute([])
+        2
+        >>> IntCode([2, 3, 0, 3, 4, 3, 99]).execute([])
+        6
+        >>> IntCode([2, 6, 6, 7, 4, 7, 99, 0]).execute([])
+        9801
+        >>> IntCode([1, 1, 1, 4, 99, 5, 6, 0, 4, 0, 99]).execute([])
+        30
+        >>> IntCode([3, 5, 4, 5, 99, -1]).execute([7])
+        7
+        >>> IntCode([1002, 8, 3, 7, 4, 7, 99, 4, 33]).execute([])
+        99
+        >>> IntCode([1105, 1, 4, 99, 4, 0, 99]).execute([])
+        1105
+        >>> IntCode([1106, 0, 4, 99, 4, 0, 99]).execute()
+        1106
+        >>> IntCode([1107, 1, 2, 7, 4, 7,99, 53]).execute()
+        1
+        >>> IntCode([1107, 2, 1, 7, 4, 7,99, 53]).execute()
+        0
+        >>> IntCode([1108, 1, 1, 7, 4, 7,99, 53]).execute()
+        1
+        >>> IntCode([1108, 2, 1, 7, 4, 7,99, 53]).execute()
+        0
+        >>> IntCode([3,3,1105,-1,9,1101,0,0,12,4,12,99,1]).execute([0])
+        0
+        >>> IntCode([3,12,6,12,15,1,13,14,13,4,13,99,-1,0,1,9]).execute([1000])
+        1
+        >>> IntCode([3,3,1105,-1,9,1101,0,0,12,4,12,99,1]).execute([0])
+        0
+        >>> IntCode([3,3,1105,-1,9,1101,0,0,12,4,12,99,1]).execute([1000])
+        1
         """
+        if input is not None:
+            self.input += input
 
         while True:
             op_code = self.next_instruction()
@@ -160,8 +162,7 @@ class IntCode:
                 self.set_next_parameter(value)
 
             elif op_code == OpCode.OUTPUT:
-                output_value = self.get_next_parameter()
-                self.output.append(output_value)
+                return self.get_next_parameter()
 
             elif op_code == OpCode.JUMP_IF_TRUE:
                 conditional = self.get_next_parameter()
@@ -188,7 +189,7 @@ class IntCode:
                 self.set_next_parameter(int(first == second))
 
             elif op_code == OpCode.EXIT:
-                return self.output
+                return None
 
             else:
                 raise ValueError("Invalid op code '{}'".format(op_code))

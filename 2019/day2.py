@@ -10,7 +10,7 @@ def execute(data, noun, verb):
     input = data.copy();
     input[1] = noun
     input[2] = verb
-    i = IntCode(input, [])
+    i = IntCode(input)
     i.execute()
     return i.memory[0]
 
