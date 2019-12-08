@@ -15,24 +15,33 @@ def execute(data, noun, verb):
     return i.memory[0]
 
 def part1(data):
-    print(execute(data, 12 , 2))
+    """
+    >>> part1(read_input())
+    4462686
+    """
+
+    return execute(data, 12 , 2)
 
 def part2(data):
+    """
+    >>> part2(read_input())
+    5936
+    """
+
     nouns = range(0, 100)
     verbs = range(0, 100)
 
     for (noun, verb) in itertools.product(nouns, verbs):
         if execute(data, noun, verb) == 19690720:
-            print(100 * noun + verb)
-            return
+            return 100 * noun + verb
 
     raise Exception("No result found")
 
 
 def main():
     data = read_input()
-    part1(data)
-    part2(data)
+    print(part1(data))
+    print(part2(data))
 
 if __name__ == "__main__":
     main()
