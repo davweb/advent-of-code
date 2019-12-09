@@ -4,7 +4,7 @@ from collections import defaultdict
 from operator import itemgetter
 
 def read_input():
-    with open('input/day8-input.txt', 'r') as file:
+    with open('input/2019/day8-input.txt', 'r') as file:
         return [int(digit) for digit in file.read()]
 
 def count_pixels(input, width, height):
@@ -60,17 +60,27 @@ def key_for_smallest_value(some_dict):
     return min(some_dict.items(), key=itemgetter(1))[0]
 
 def part1(input):
+    """
+    >>> part1(read_input())
+    1965
+    """
+
     count = count_pixels(input, 25, 6)
     layer = key_for_smallest_value(count[0])
-    print(count[1][layer] * count[2][layer])
+    return count[1][layer] * count[2][layer]
 
 def part2(code):
-    print(image(code, 25, 6))
+    r"""
+    >>> part2(read_input())
+    ' ██  ████ █  █   ██ █   █\n█  █    █ █ █     █ █   █\n█      █  ██      █  █ █ \n█ ██  █   █ █     █   █  \n█  █ █    █ █  █  █   █  \n ███ ████ █  █  ██    █  '
+    """
+
+    return image(code, 25, 6)
 
 def main():
     data = read_input()
-    part1(data)
-    part2(data)
+    print(part1(data))
+    print(part2(data))
 
 if __name__ == "__main__":
     main()

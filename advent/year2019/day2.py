@@ -1,10 +1,10 @@
 #!/usr/local/bin/python3
 
 import itertools 
-from intcode import IntCode
+from advent.year2019.intcode import IntCode
 
 def read_input():
-    return [int(code) for code in open('input/day2-input.txt', 'r').read().split(',')]
+    return [int(code) for code in open('input/2019/day2-input.txt', 'r').read().split(',')]
 
 def execute(data, noun, verb):
     input = data.copy();

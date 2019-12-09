@@ -101,9 +101,19 @@ def has_pair_of_digits(n):
     return count == 2
 
 def part1(data):
+    """
+    >>> part1(range(245182, 790572))
+    1099
+    """
+
     print(len([x for x in data if has_adjacent_digits(x) and has_never_decreasing_digits(x)]))
 
 def part2(data):
+    """
+    >>> part2(range(245182, 790572))
+    710
+    """
+
     print(len([x for x in data if has_pair_of_digits(x) and has_never_decreasing_digits(x)]))
 
 def main():

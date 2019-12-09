@@ -3,7 +3,7 @@
 from collections import defaultdict
 
 def read_input():
-    file = open("input/day6-input.txt", "r")    
+    file = open("input/2019/day6-input.txt", "r")    
     orbits = []
 
     for line in file.readlines():
@@ -22,6 +22,11 @@ def count_orbits(point, relationships):
     return count
 
 def part1(orbits):
+    """
+    >>> part1(read_input())
+    110190
+    """
+
     relationships  = defaultdict(list)
     points = set()
 
@@ -38,6 +43,11 @@ def part1(orbits):
     print(count)
 
 def part2(orbits):
+    """
+    >>> part2(read_input())
+    343
+    """
+
     relationships  = defaultdict(list)
 
     for (left, right) in orbits:

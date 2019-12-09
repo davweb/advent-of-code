@@ -1,7 +1,7 @@
 #!/usr/local/bin/python3
 
 def read_input():
-    file = open('input/day1-input.txt', 'r')
+    file = open('input/2019/day1-input.txt', 'r')
     return [int(line) for line in file.readlines()]
 
 def calculate_fuel(mass):
