@@ -9,14 +9,22 @@ class OpCode(IntEnum):
     JUMP_IF_FALSE = 6
     LESS_THAN = 7
     EQUAL_TO = 8
+    RELATIVE_BASE = 9
     EXIT = 99
+
+class ParameterMode(IntEnum):
+    POSITION = 0
+    IMMEDIATE = 1
+    RELATIVE = 2
 
 class IntCode:
     
-    def __init__(self, memory, input=None):
-        self.memory = memory.copy()
+    def __init__(self, code, input=None, memory_size=2048):
+        self.memory = [0] * memory_size
+        self.memory[:len(code)] = code 
         self.input = [] if input is None else input
         self.index = 0
+        self.relative_base = 0
 
     def generate_parameter_modes(self, op_code):
         """
@@ -68,12 +76,12 @@ class IntCode:
         self.index += 1
         parameter_mode = next(self.parameter_modes)
 
-        # position mode   
-        if parameter_mode == 0:
+        if parameter_mode == ParameterMode.POSITION:
             return self.memory[parameter_value]
-        # immediate mode    
-        elif parameter_mode == 1:
+        elif parameter_mode == ParameterMode.IMMEDIATE:
             return parameter_value
+        elif parameter_mode == ParameterMode.RELATIVE:
+            return self.memory[parameter_value + self.relative_base]
         else:
             raise ValueError("Invalid parameter mode '{}'".format(parameter_mode))
         
@@ -83,8 +91,10 @@ class IntCode:
         parameter_mode = next(self.parameter_modes)
 
         # position mode   
-        if parameter_mode == 0:
+        if parameter_mode == ParameterMode.POSITION:
             self.memory[destination_index] = parameter_value
+        elif parameter_mode == ParameterMode.RELATIVE:
+            self.memory[destination_index + self.relative_base] = parameter_value
         else:
             raise ValueError("Invalid parameter mode '{}'".format(parameter_mode)) 
 
@@ -101,6 +111,25 @@ class IntCode:
             return self.input.pop(0)
         except IndexError:
             raise ValueError("Not enough input values")
+
+    def run(self, input=None):
+        """
+        >>> IntCode([109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99]).run()
+        [109, 1, 204, -1, 1001, 100, 1, 100, 1008, 100, 16, 101, 1006, 101, 0, 99]
+        """
+
+        if input is not None:
+            self.input += input
+
+        output = []
+
+        while True:
+            value = self.execute()
+            if value is None:
+                break
+            output.append(value)
+
+        return output
 
     def execute(self, input=None):
         """
@@ -140,6 +169,10 @@ class IntCode:
         0
         >>> IntCode([3,3,1105,-1,9,1101,0,0,12,4,12,99,1]).execute([1000])
         1
+        >>> IntCode([104,1125899906842624,99]).execute()
+        1125899906842624
+        >>> IntCode([1102,34915192,34915192,7,4,7,99,0]).execute()
+        1219070632396864
         """
         if input is not None:
             self.input += input
@@ -187,6 +220,9 @@ class IntCode:
                 first = self.get_next_parameter()
                 second = self.get_next_parameter()
                 self.set_next_parameter(int(first == second))
+
+            elif op_code == OpCode.RELATIVE_BASE:
+                self.relative_base += self.get_next_parameter()
 
             elif op_code == OpCode.EXIT:
                 return None
