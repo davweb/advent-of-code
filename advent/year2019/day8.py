@@ -2,6 +2,7 @@
 
 from collections import defaultdict
 from operator import itemgetter
+import hashlib
 
 def read_input():
     with open('input/2019/day8-input.txt', 'r') as file:
@@ -70,9 +71,9 @@ def part1(input):
     return count[1][layer] * count[2][layer]
 
 def part2(code):
-    r"""
-    >>> part2(read_input())
-    ' ██  ████ █  █   ██ █   █\n█  █    █ █ █     █ █   █\n█      █  ██      █  █ █ \n█ ██  █   █ █     █   █  \n█  █ █    █ █  █  █   █  \n ███ ████ █  █  ██    █  '
+    """
+    >>> hashlib.md5(part2(read_input()).encode('utf-8')).hexdigest()
+    '70918ebfcb8099bc4cc51de972a09319'
     """
 
     return image(code, 25, 6)

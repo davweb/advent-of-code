@@ -69,7 +69,7 @@ class Event:
         return 'Event(datetime="{datetime}", type="{type}", guard_id={guard_id})'.format(**self.__dict__)
 
 def read_input():
-    file = open('input/day4-input.txt', 'r')
+    file = open('input/2018/day4-input.txt', 'r')
     return sorted(Event(line) for line in file.readlines())
 
 def key_for_largest_value(some_dict):
@@ -124,6 +124,10 @@ def process_events(events):
 
 
 def part1(events):
+    """
+    >>> part1(read_input())
+    84834
+    """
     sleepiest_guard_id = sleepiest_guard(events)
     minutes_sleeping = process_events(events)[sleepiest_guard_id]
     sleepiest_minute = key_for_largest_value(minutes_sleeping)
@@ -131,6 +135,10 @@ def part1(events):
 
 
 def part2(events):
+    """
+    >>> part2(read_input())
+    53427
+    """
     minutes_sleeping = process_events(events)
     sleepiest_guard_id = None
     sleepiest_minute = None

@@ -1,5 +1,6 @@
 #!/usr/local/bin/python3
 
+import sys
 from collections import defaultdict
 
 def play(players, last_marble):
@@ -146,11 +147,11 @@ def play_new(players, last_marble):
     current = zero.insert(one)
     scores = defaultdict(int)
     player = 1
-    inc = last_marble // 200
+    inc = 2 if last_marble < 200 else (last_marble // 200)
 
     for marble in range(2, last_marble + 1):
         if marble % inc == 0:
-            print("{:3.0f}%".format(marble / last_marble * 100), end = "\r")
+            print("{:3.0f}%".format(marble / last_marble * 100), end = "\r", file=sys.stderr)
 
         player = (player + 1) % players
 
@@ -162,20 +163,29 @@ def play_new(players, last_marble):
             current = current.forward(2)
             current = current.insert(Marble(marble))
     
-    print("Done!")
+    print("Done!", file=sys.stderr)
     return max(score for score in scores.values())
 
 
 def part1(players, last_marble):
-    print(play(players, last_marble))
+    """
+    >>> part1(468, 71010)
+    374287
+    """
+
+    return play(players, last_marble)
 
 def part2(players, last_marble):
-    print(play_new(players, last_marble * 100))
+    """
+    >>> part2(468, 71010)
+    3083412635
+    """
+    return play_new(players, last_marble * 100)
 
 def main():
     # 468 players; last marble is worth 71010 points
-    part1(468, 71010)
-    part2(468, 71010)
+    print(part1(468, 71010))
+    print(part2(468, 71010))
 
 if __name__ == "__main__":
     main()

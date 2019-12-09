@@ -3,11 +3,16 @@
 from collections import defaultdict
 
 def read_input():
-    with open("input/day8-input.txt", "r") as file:
+    with open("input/2018/day8-input.txt", "r") as file:
         data = file.read()
         return [int(x) for x in data.split(' ')]
 
 def part1(data):
+    """
+    >>> part1(read_input())
+    37439
+    """
+
     data = data.copy()
 
     queue = [True]
@@ -28,7 +33,7 @@ def part1(data):
         else:
             metadata += data.pop(0)
     
-    print (metadata)
+    return metadata
 
 
 def node_value(data):
@@ -72,12 +77,16 @@ def node_value(data):
 
 
 def part2(data):
-    print(node_value(data)[0])
+    """
+    >>> part2(read_input())
+    20815
+    """
+    return node_value(data)[0]
 
 def main():
     data = read_input()
-    part1(data)
-    part2(data)
+    print(part1(data))
+    print(part2(data))
 
 if __name__ == "__main__":
     main()

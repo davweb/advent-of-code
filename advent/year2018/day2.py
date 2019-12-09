@@ -21,7 +21,7 @@ import collections
 import itertools
 
 def read_input():
-    file = open('input/day2-input.txt', 'r')
+    file = open('input/2018/day2-input.txt', 'r')
     return list(line.strip() for line in file.readlines())
 
 def count_letters(label):
@@ -84,6 +84,11 @@ def different_letter_count(first, second):
     return sum(a != b for (a,b) in zip(first, second))
 
 def part1(data):
+    """
+    >>> part1(read_input())
+    6916
+    """
+    
     twos = 0
     threes = 0
     
@@ -93,20 +98,24 @@ def part1(data):
         if has_count(label, 3):
             threes += 1
 
-    print(twos * threes)
+    return twos * threes
 
 def part2(data):
+    """
+    >>> part2(read_input())
+    'oeylbtcxjqnzhgyylfapviusr'
+    """
+
+
     for (first, second) in itertools.product(data, data):
         if different_letter_count(first, second) == 1:
-            result = "".join(a for (a, b) in zip(first,second) if a == b)
-            print(result)
-            return
+            return "".join(a for (a, b) in zip(first,second) if a == b)
 
 
 def main():
     data = read_input()
-    part1(data)
-    part2(data)
+    print(part1(data))
+    print(part2(data))
 
 if __name__ == "__main__":
     main()

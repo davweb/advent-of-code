@@ -1,6 +1,7 @@
 #!/usr/local/bin/python3
 
 import re
+import hashlib
 
 PATTERN = re.compile(r"position=<([- ]\d+), ([- ]\d+)> velocity=<([- ]\d+), ([- ]\d+)>")
 
@@ -56,7 +57,7 @@ class Light:
         return "Light(x={x}, y={y}, dx={dx}, dy={dy})".format(**self.__dict__)
 
 def read_input():
-    file = open('input/day10-input.txt', 'r')
+    file = open('input/2018/day10-input.txt', 'r')
     return [Light(line) for line in file.readlines()]
 
 def bounds(points):
@@ -76,7 +77,7 @@ def bounds(points):
 
 def area(points):
     """
-    >>> area((0,0), (7, 8))
+    >>> area([(0,0), (7, 8)])
     56
     """
     (left, top), (right, bottom) = bounds(points)
@@ -102,6 +103,14 @@ def output(lights):
     return "\n".join(output)
 
 def part1and2(lights):
+    """
+    >>> output = part1and2(read_input())
+    >>> hashlib.md5(output[0].encode('utf-8')).hexdigest()
+    'a72b6658dc84b74b1f1ecdfa0a2f98b9'
+    >>> output[1]
+    10612
+    """
+
     size = area([light.point() for light in lights])
     last_size = size
     seconds = 0
@@ -121,13 +130,12 @@ def part1and2(lights):
         light.back()
     seconds -= 1
 
-    print(output(lights))
-    print(seconds)
+    return(output(lights), seconds)
 
 
 def main():
     lights = read_input()
-    part1and2(lights)   
+    print("{}\n{}".format(*part1and2(lights)))
 
 if __name__ == "__main__":
     main()

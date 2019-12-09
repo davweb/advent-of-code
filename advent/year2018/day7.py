@@ -6,7 +6,7 @@ import re
 PATTERN = re.compile(r"Step (\w) must be finished before step (\w) can begin.")
 
 def read_input():
-    file = open("input/day7-input.txt", "r")
+    file = open("input/2018/day7-input.txt", "r")
     
     pre_reqs = defaultdict(set)
 
@@ -21,6 +21,11 @@ def read_input():
     return pre_reqs
 
 def part1(pre_reqs):
+    """
+    >>> part1(read_input())
+    FHICMRTXYDBOAJNPWQGVZUEKLS
+    """
+
     pre_reqs = pre_reqs.copy()
     order = []
 
@@ -42,6 +47,11 @@ def time_to_complete(step):
     return ord(step) - 4
 
 def part2(pre_reqs):
+    """
+    >>> part2(read_input())
+    946
+    """
+
     remaining = dict((step, time_to_complete(step)) for step in pre_reqs.keys())
     minutes = 0
     done = set()
@@ -59,12 +69,12 @@ def part2(pre_reqs):
             else:
                 remaining[task] = todo
 
-    print(minutes)
+    return minutes
 
 def main():
     data = read_input()
-    part1(data)
-    part2(data)
+    print(part1(data))
+    print(part2(data))
 
 if __name__ == "__main__":
     main()

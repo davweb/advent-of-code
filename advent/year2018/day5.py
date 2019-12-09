@@ -3,7 +3,7 @@
 import string
 
 def read_input():
-    file = open('input/day5-input.txt', 'r')
+    file = open('input/2018/day5-input.txt', 'r')
     return file.read()
 
 def reduce(polymer):
@@ -21,9 +21,17 @@ def reduce(polymer):
     return before_len
 
 def part1(polymer):
-    print(reduce(polymer))
+    """
+    >>> part1(read_input())
+    11264
+    """
+    return reduce(polymer)
 
 def part2(polymer):
+    """
+    >>> part2(read_input())
+    4552
+    """
     min_length = len(polymer) + 1
     
     for lower in string.ascii_lowercase:
@@ -34,12 +42,12 @@ def part2(polymer):
         if length < min_length:
             min_length = length
 
-    print(min_length)
+    return min_length
 
 def main():
     data = read_input()
-    part1(data)
-    part2(data)
+    print(part1(data))
+    print(part2(data))
 
 if __name__ == "__main__":
     main()

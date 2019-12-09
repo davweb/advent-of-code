@@ -46,19 +46,29 @@ class Claim:
         return "Claim(id={id}, x={x}, y={y}, width={width}, height={height})".format(**self.__dict__)
 
 def read_input():
-    file = open('input/day3-input.txt', 'r')
+    file = open('input/2018/day3-input.txt', 'r')
     return [Claim(line) for line in file.readlines()]
 
 def part1(claims):
+    """
+    >>> part1(read_input())
+    116491
+    """
     grid = defaultdict(int)
 
     for claim in claims:
         for square in claim.squares():
             grid[square] += 1 
 
-    print (sum(1 for value in grid.values() if value >= 2))
+    return sum(1 for value in grid.values() if value >= 2)
 
 def part2(claims):
+    """
+    >>> part2(read_input())
+    707
+    """
+    
+
     grid = defaultdict(int)
 
     for claim in claims:
@@ -74,13 +84,12 @@ def part2(claims):
                 break
 
         if winner:
-            print(claim.id)
-            return 
+            return claim.id
 
 def main():
     claims = read_input()
-    part1(claims)
-    part2(claims)
+    print(part1(claims))
+    print(part2(claims))
 
 if __name__ == "__main__":
     main()

@@ -72,6 +72,11 @@ def calc_grid_power(serial_number, cell, size):
     return power
 
 def part1(serial_number):
+    """
+    >>> part1(9005)
+    (20, 32)
+    """
+
     # minimum possible power is -5 * 9 
     max_power = -46
     
@@ -81,7 +86,7 @@ def part1(serial_number):
             max_power = grid_power
             max_cell = cell
 
-    print(max_cell)
+    return (max_cell)
 
 def part2(serial_number):
     # power will be at least -5 since it's the minimum power for a 1 * 1 square
@@ -98,12 +103,12 @@ def part2(serial_number):
                 max_cell = cell
                 max_size = size
 
-    print(max_cell, max_size)
+    return (max_cell) + (max_size,)
 
 def main():
     # Serial number is 9005
-    part1(9005)
-    part2(9005)
+    print(part1(9005))
+    print(part2(9005))
 
 if __name__ == "__main__":
     main()

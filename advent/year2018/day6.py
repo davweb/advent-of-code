@@ -1,10 +1,11 @@
 #!/usr/local/bin/python3
 
 import itertools
+import sys
 from collections import defaultdict
 
 def read_input():
-    file = open("input/day6-input.txt", "r")    
+    file = open("input/2018/day6-input.txt", "r")    
     points = []
 
     for line in file.readlines():
@@ -42,6 +43,11 @@ def bounds(points):
     return ((left, top), (right, bottom))
 
 def part1(points):
+    """
+    >>> part1(read_input())
+    4171
+    """
+
     ((left, top), (right, bottom)) = bounds(points)
 
     areas = defaultdict(int)
@@ -68,11 +74,15 @@ def part1(points):
             if x == left or x == right or y == top or y == bottom:
                 exclusions.add(closest_point)
 
-    print(max(areas[point] for point in points if point not in exclusions))
+    return max(areas[point] for point in points if point not in exclusions)
 
 def part2(points):
     """What is the size of the region containing all locations which have a total
-    distance to all given coordinates of less than 10000?"""
+    distance to all given coordinates of less than 10000?
+    
+    >>> part2(read_input())
+    39545
+    """
 
     ((left, top), (right, bottom)) = bounds(points)
 
@@ -90,7 +100,7 @@ def part2(points):
     for i in itertools.product(range(left - limit, right + limit), range(top - limit, bottom + limit)):
         count += 1
         if count % increment == 0:
-            print("{:3.0f}%".format(count / pc), end="\r")
+            print("{:3.0f}%".format(count / pc), end="\r", file=sys.stderr)
 
         distance = 0
 
@@ -102,13 +112,13 @@ def part2(points):
         if distance < max_distance:
             area += 1
 
-    print("Done!")
-    print(area)
+    print("Done!", file=sys.stderr)
+    return area
 
 def main():
     data = read_input()
-    part1(data)
-    part2(data)
+    print(part1(data))
+    print(part2(data))
 
 if __name__ == "__main__":
     main()
