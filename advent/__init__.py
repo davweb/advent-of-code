@@ -22,3 +22,16 @@ def md5(string):
     """
     
     return hashlib.md5(string.encode('utf-8')).hexdigest()
+
+def taxicab_distance(a, b):
+    """Calculate Manhattan distance
+
+    >>> taxicab_distance((0, 0), (0, 0))
+    0
+    >>> taxicab_distance((0, 0), (1, 1))
+    2
+    >>> taxicab_distance((-1, -1), (-4, -3))
+    5
+    """
+
+    return abs(a[0] - b[0]) + abs(a[1] - b[1])

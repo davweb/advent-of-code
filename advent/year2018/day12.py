@@ -3,7 +3,6 @@
 import re
 from collections import defaultdict
 from itertools import count
-from advent import md5
 
 STATE_PATTERN = re.compile(r"^initial state: ([#|.]{100})$")
 NOTE_PATTERN = re.compile(r"^([#|.]{5}) => ([#|.])$")

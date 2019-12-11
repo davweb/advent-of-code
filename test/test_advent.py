@@ -11,7 +11,7 @@ root_dir = 'advent'
 
 for root, _, filenames in os.walk(root_dir):
     for filename in filenames:
-        if filename == '__init__.py' or filename[-3:] != '.py':
+        if filename[-3:] != '.py':
             continue
         f = os.path.join(root, filename)
         f = f.replace('/', '.')

@@ -3,6 +3,7 @@
 import itertools
 import sys
 from collections import defaultdict
+from advent import bounds, taxicab_distance
 
 def read_input():
     file = open("input/2018/day6-input.txt", "r")    
@@ -13,34 +14,6 @@ def read_input():
         points.append((int(x), int(y)))
 
     return points
-
-def taxicab_distance(a, b):
-    """Calculate Manhattan distance
-
-    >>> taxicab_distance((0, 0), (0, 0))
-    0
-    >>> taxicab_distance((0, 0), (1, 1))
-    2
-    >>> taxicab_distance((-1, -1), (-4, -3))
-    5
-    """
-
-    return abs(a[0] - b[0]) + abs(a[1] - b[1])
-
-def bounds(points):
-    """
-    >>> bounds([(0, 0)])
-    ((0, 0), (0, 0))
-    >>> bounds([(7, 1), (-1, 9)])
-    ((-1, 1), (7, 9))
-    """
-
-    left = min(x for (x,y) in points)
-    right = max(x for (x,y) in points)
-    top = min(y for (x,y) in points)
-    bottom = max(y for (x,y) in points)
-    
-    return ((left, top), (right, bottom))
 
 def part1(points):
     """

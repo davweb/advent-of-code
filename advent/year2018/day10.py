@@ -1,7 +1,7 @@
 #!/usr/local/bin/python3
 
 import re
-import hashlib
+from advent import bounds, md5
 
 PATTERN = re.compile(r"position=<([- ]\d+), ([- ]\d+)> velocity=<([- ]\d+), ([- ]\d+)>")
 
@@ -60,21 +60,6 @@ def read_input():
     file = open('input/2018/day10-input.txt', 'r')
     return [Light(line) for line in file.readlines()]
 
-def bounds(points):
-    """
-    >>> bounds([(0, 0)])
-    ((0, 0), (0, 0))
-    >>> bounds([(7, 1), (-1, 9)])
-    ((-1, 1), (7, 9))
-    """
-
-    left = min(x for (x,y) in points)
-    right = max(x for (x,y) in points)
-    top = min(y for (x,y) in points)
-    bottom = max(y for (x,y) in points)
-    
-    return ((left, top), (right, bottom))
-
 def area(points):
     """
     >>> area([(0,0), (7, 8)])
@@ -105,7 +90,7 @@ def output(lights):
 def part1and2(lights):
     """
     >>> output = part1and2(read_input())
-    >>> hashlib.md5(output[0].encode('utf-8')).hexdigest()
+    >>> md5(output[0])
     'a72b6658dc84b74b1f1ecdfa0a2f98b9'
     >>> output[1]
     10612

@@ -1,24 +1,11 @@
 #!/usr/local/bin/python3
 
 from collections import defaultdict
+from advent import taxicab_distance
 
 def read_input():
     file = open('input/2019/day3-input.txt', 'r')
     return [line.split(',') for line in file.readlines()]
-
-
-def taxicab_distance(a, b):
-    """Calculate Manhattan distance
-
-    >>> taxicab_distance((0, 0), (0, 0))
-    0
-    >>> taxicab_distance((0, 0), (1, 1))
-    2
-    >>> taxicab_distance((-1, -1), (-4, -3))
-    5
-    """
-
-    return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
 def steps(start, instruction):
     """
