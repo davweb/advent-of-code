@@ -40,7 +40,7 @@ def part1(orbits):
     for point in points:
         count += count_orbits(point, relationships)
 
-    print(count)
+    return count
 
 def part2(orbits):
     """
@@ -67,8 +67,7 @@ def part2(orbits):
 
         if q == end:
             # Number of transfers doesn't include YOU, SAN or first element in route
-            print(len(route) - 3)
-            return
+            return len(route) - 3
             
         for n in relationships[q]:
             if n not in seen:
@@ -79,8 +78,8 @@ def part2(orbits):
 
 def main():
     data = read_input() 
-    part1(data)
-    part2(data)
+    print(part1(data))
+    print(part2(data))
 
 if __name__ == "__main__":
     main()

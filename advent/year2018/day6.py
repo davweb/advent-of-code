@@ -76,7 +76,7 @@ def part1(points):
 
     return max(areas[point] for point in points if point not in exclusions)
 
-def part2(points):
+def part2(points, progress=False):
     """What is the size of the region containing all locations which have a total
     distance to all given coordinates of less than 10000?
     
@@ -98,9 +98,11 @@ def part2(points):
     increment = pc // 100
 
     for i in itertools.product(range(left - limit, right + limit), range(top - limit, bottom + limit)):
-        count += 1
-        if count % increment == 0:
-            print("{:3.0f}%".format(count / pc), end="\r", file=sys.stderr)
+        if progress:
+            count += 1
+            
+            if count % increment == 0:
+                print("{:3.0f}%".format(count / pc), end="\r", file=sys.stderr)
 
         distance = 0
 
@@ -112,13 +114,15 @@ def part2(points):
         if distance < max_distance:
             area += 1
 
-    print("Done!", file=sys.stderr)
+    if progress:
+        print("Done!", file=sys.stderr)
+
     return area
 
 def main():
     data = read_input()
     print(part1(data))
-    print(part2(data))
+    print(part2(data), progress=True)
 
 if __name__ == "__main__":
     main()

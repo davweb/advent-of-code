@@ -106,7 +106,7 @@ def part1(data):
     1099
     """
 
-    print(len([x for x in data if has_adjacent_digits(x) and has_never_decreasing_digits(x)]))
+    return len([x for x in data if has_adjacent_digits(x) and has_never_decreasing_digits(x)])
 
 def part2(data):
     """
@@ -114,7 +114,7 @@ def part2(data):
     710
     """
 
-    print(len([x for x in data if has_pair_of_digits(x) and has_never_decreasing_digits(x)]))
+    return len([x for x in data if has_pair_of_digits(x) and has_never_decreasing_digits(x)])
 
 def main():
     input = (245182, 790572)

@@ -88,12 +88,13 @@ def part1(serial_number):
 
     return (max_cell)
 
-def part2(serial_number):
+def part2(serial_number, progress=False):
     # power will be at least -5 since it's the minimum power for a 1 * 1 square
     max_power = -6
     
     for size in range(1, 301):
-        print("{:3.0f}%".format(size / 3 ), end = "\r") 
+        if progress:
+            print("{:3.0f}%".format(size / 3 ), end = "\r") 
 
         for cell in product(range(1, 302 - size), range(1, 302 - size)):
             grid_power = calc_grid_power(serial_number, cell, size)
@@ -108,7 +109,7 @@ def part2(serial_number):
 def main():
     # Serial number is 9005
     print(part1(9005))
-    print(part2(9005))
+    print(part2(9005), True)
 
 if __name__ == "__main__":
     main()

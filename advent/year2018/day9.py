@@ -126,7 +126,7 @@ class Marble:
     def __repr__(self):
         return 'Marble({})'.format(self.value)
 
-def play_new(players, last_marble):
+def play_new(players, last_marble, progress=False):
     """
     >>> play_new(9, 25)
     32
@@ -150,7 +150,7 @@ def play_new(players, last_marble):
     inc = 2 if last_marble < 200 else (last_marble // 200)
 
     for marble in range(2, last_marble + 1):
-        if marble % inc == 0:
+        if progress and (marble % inc == 0):
             print("{:3.0f}%".format(marble / last_marble * 100), end = "\r", file=sys.stderr)
 
         player = (player + 1) % players
@@ -163,7 +163,8 @@ def play_new(players, last_marble):
             current = current.forward(2)
             current = current.insert(Marble(marble))
     
-    print("Done!", file=sys.stderr)
+    if progress:
+        print("Done!", file=sys.stderr)
     return max(score for score in scores.values())
 
 
@@ -175,17 +176,17 @@ def part1(players, last_marble):
 
     return play(players, last_marble)
 
-def part2(players, last_marble):
+def part2(players, last_marble, progress=False):
     """
     >>> part2(468, 71010)
     3083412635
     """
-    return play_new(players, last_marble * 100)
+    return play_new(players, last_marble * 100, progress=progress)
 
 def main():
     # 468 players; last marble is worth 71010 points
     print(part1(468, 71010))
-    print(part2(468, 71010))
+    print(part2(468, 71010, progress=True))
 
 if __name__ == "__main__":
     main()

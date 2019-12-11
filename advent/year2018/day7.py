@@ -23,7 +23,7 @@ def read_input():
 def part1(pre_reqs):
     """
     >>> part1(read_input())
-    FHICMRTXYDBOAJNPWQGVZUEKLS
+    'FHICMRTXYDBOAJNPWQGVZUEKLS'
     """
 
     pre_reqs = pre_reqs.copy()
@@ -34,7 +34,7 @@ def part1(pre_reqs):
         order.append(next)
         del pre_reqs[next]
 
-    print("".join(order))
+    return "".join(order)
 
 def time_to_complete(step):
     """

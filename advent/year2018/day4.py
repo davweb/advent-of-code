@@ -131,7 +131,7 @@ def part1(events):
     sleepiest_guard_id = sleepiest_guard(events)
     minutes_sleeping = process_events(events)[sleepiest_guard_id]
     sleepiest_minute = key_for_largest_value(minutes_sleeping)
-    print(sleepiest_guard_id * sleepiest_minute)
+    return sleepiest_guard_id * sleepiest_minute
 
 
 def part2(events):
@@ -153,12 +153,12 @@ def part2(events):
                 sleepiest_guard_id = guard_id
                 sleepiest_minute = minute
 
-    print(sleepiest_guard_id * sleepiest_minute)
+    return sleepiest_guard_id * sleepiest_minute
 
 def main():
     events = read_input()
-    part1(events)
-    part2(events)
+    print(part1(events))
+    print(part2(events))
 
 if __name__ == "__main__":
     main()
