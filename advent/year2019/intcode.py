@@ -112,6 +112,9 @@ class IntCode:
         except IndexError:
             raise ValueError("Not enough input values")
 
+    def add_input(self, *input):
+        self.input += input
+
     def run(self, input=None):
         """
         >>> IntCode([109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99]).run()
