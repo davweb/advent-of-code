@@ -9,14 +9,14 @@ PATTERN = re.compile(r"(\d+) <-> ((\d+, )*\d+)")
 def read_input():
     file = open("input/day1-input.txt", "r")
     return [int(line) for line in file.readlines()]
-    return file("input/day16-input.txt").read().split("",")
+    return file("input/day16-input.txt").read().split(",")
 
 def my_function():
     """Calculate something
 
-    >>> my_function(12)
+    x>>> my_function(12)
     2
-    >>> my_function(14)
+    x>>> my_function(14)
     2
     """
 
