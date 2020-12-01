@@ -63,8 +63,8 @@ def can_see(asteroid, asteroids):
     ...87
 
     >>> asteroids = set(((1, 0), (4, 0), (0, 2), (1, 2), (2, 2), (3, 2), (4, 2), (4, 3), (3, 4), (4, 4)))
-    >>> can_see((1,0), asteroids)
-    [(1, 2), (3, 2), (4, 4), (2, 2), (4, 2), (0, 2), (4, 0)]
+    >>> sorted(can_see((1,0), asteroids))
+    [(0, 2), (1, 2), (2, 2), (3, 2), (4, 0), (4, 2), (4, 4)]
     >>> len(can_see((4,0), asteroids))
     7
     >>> len(can_see((0,2), asteroids))
