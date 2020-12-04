@@ -18,7 +18,7 @@ def read_input():
     file = open('input/2017/day22-input.txt', 'r')
     data = []
 
-    for line in open('input/2017/day22-input.txt', 'r'):
+    for line in file:
         data.append([State.INFECTED if c == '#' else State.CLEAN for c in line.strip()])    
  
     return data
@@ -125,9 +125,9 @@ def part2(data):
 
 
 def main():
-    rules = read_input();
-    print(part1(rules))
-    print(part2(rules))
+    data = read_input();
+    print(part1(data))
+    print(part2(data))
 
 
 if __name__ == "__main__":
