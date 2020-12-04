@@ -51,7 +51,7 @@ def part1(data):
 
 def part2():
     """
-    >>> part1(read_input())
+    >>> part2()
     907
     """
 
