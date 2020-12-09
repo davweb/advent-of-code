@@ -17,9 +17,9 @@ def validate_stream(window, stream):
     del(stream[0:window])
 
     for number in stream:
-        valid = [sum(x) for x in combinations(previous, 2)]
+        valid_numbers = [sum(x) for x in combinations(previous, 2)]
 
-        if number not in valid:
+        if number not in valid_numbers:
             return number
     
         previous.pop(0)
@@ -45,9 +45,7 @@ def find_combination(value, stream):
         elif total > value:
             x += 1
         else:
-            break
-
-    return min(stream[x:y]) + max(stream[x:y])
+            return min(stream[x:y]) + max(stream[x:y])
 
 
 def part1(data):
