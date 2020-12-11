@@ -47,8 +47,8 @@ def part1(data):
 
 def part2(data):
     """
-    >>> part2(read_input())
-    0
+    # >>> part2(read_input())
+    # 0
     """
 
     (ip, instructions) = data
