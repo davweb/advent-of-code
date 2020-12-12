@@ -1,15 +1,16 @@
-#!/usr/local/bin/python3
+# -*- coding: utf-8 -*-
 
-import itertools 
-from collections import defaultdict
 import re
+from collections import defaultdict
 
 PATTERN = re.compile(r"(\d+) <-> ((\d+, )*\d+)")
 
 def read_input():
-    file = open("input/day1-input.txt", "r")
-    return [int(line) for line in file.readlines()]
-    return file("input/day16-input.txt").read().split(",")
+    file = open("input/2020/day1-input.txt", "r")
+    
+    #return [int(line) for line in file.readlines()]
+    return file.read().split(",")
+
 
 def my_function():
     """Calculate something
@@ -21,17 +22,26 @@ def my_function():
     """
 
 def part1(data):
-    for line in data:
-        result = PATTERN.match(line)
+    """
+    >>> part1(read_input())
+    0
+    """
+
+    return 0
+
 
 def part2(data):
-    pass
+    """
+    >>> part1(read_input())
+    0
+    """
+
 
 def main():
-    part1("sample data")
     data = read_input()
     part1(data)
     part2(data)
+
 
 if __name__ == "__main__":
     main()
