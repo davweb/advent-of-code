@@ -65,7 +65,7 @@ def calculate(start_a):
 
 def part2():
     """
-    >>> part2(read_input())
+    >>> part2()
     22157688
     """
 
