@@ -32,15 +32,17 @@ def part1(data):
 
 def part2(data):
     """
-    >>> part1(read_input())
+    >>> part2(read_input())
     0
     """
+
+    return 0
 
 
 def main():
     data = read_input()
-    part1(data)
-    part2(data)
+    print(part1(data))
+    print(part2(data))
 
 
 if __name__ == "__main__":
