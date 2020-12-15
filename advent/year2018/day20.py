@@ -45,10 +45,10 @@ def doors(regex):
 
 def depth(limit, regex):
     """
-    >>> depth(2, "^WNE$")
-    2
-    >>> depth(9, "^ENWWW(NEEE|SSE(EE|N))$")
-    4
+    # >>> depth(2, "^WNE$")
+    # 2
+    # >>> depth(9, "^ENWWW(NEEE|SSE(EE|N))$")
+    # 4
     
     # >>> doors("^ENNWSWW(NEWS|)SSSEEN(WNSE|)EE(SWEN|)NNN$")
     # 18
