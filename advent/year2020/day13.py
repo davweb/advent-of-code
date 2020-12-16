@@ -13,32 +13,37 @@ def read_input():
     return (depart, buses)
 
 
-def cadence(a, b, required_gap):
+def cadence(a, b, required_gap, start):
     """
     For the pair of numbers determine when they first repeat with the required gap
-    and the period that it will repeat.
+    and the period that it will repeat, starting at the given value
 
-    >>> cadence(67, 7, 1)
-    (335, 336, 469)
-    >>> cadence(67, 7, 2)
-    (201, 203, 469)
-    >>> cadence(1789, 37, 1)
-    (30413, 30414, 66193)
-    >>> cadence(17, 13, 21)
-    Traceback (most recent call last):
-    ...
-    ValueError: Did not find matching gap
+    >>> cadence(67, 7, 1, 0)
+    (335, 469)
+    >>> cadence(67, 7, 2, 0)
+    (201, 469)
+    >>> cadence(1789, 37, 1, 0)
+    (30413, 66193)
+    >>> cadence(17, 13, 21, 0)
+    (187, 221)
     """
 
-    for i in range(b, a * b, b):
-        if i % a == required_gap:
-            return (i - required_gap, i, a * b)
+    value = start
+    first = None
 
-    raise ValueError("Did not find matching gap")
+    while True:
+        if (value + required_gap) % b == 0:
+            if first is None:
+                first = value
+            else:
+                return (first, value - first)
+        value += a
 
 
-def solve(target, gap):
+def solve(targets, gaps):
     """
+    >>> solve((2, 5, 7, 97), (1, 1, 1))
+    3974
     >>> solve((67, 7, 59, 61), (1, 1, 1))
     754018
     >>> solve((1789, 37, 47, 1889), (1, 1, 1))
@@ -47,55 +52,19 @@ def solve(target, gap):
     779210
     """
 
+    targets = list(targets)
+    gaps = list(gaps)
 
-    progress_delta = 100000000000000 // 10000
-    progress = progress_delta
+    # We can solve by solving for a pair of numbers and then matching that solution to the next number
+    start = 0
+    total_gap = 0
+    loop = targets.pop(0)
 
+    while len(targets) > 0:
+        total_gap += gaps.pop(0)
+        (start, loop) = cadence(loop, targets.pop(0), total_gap, start)
 
-    count = len(target) - 1
-    first, second, delta = [None] * count, [None] * count, [None] * count
-
-    # Calculate the repeating pairs for each number and its successor    
-    for i in range(0, count):
-        first[i], second[i], delta[i] = cadence(target[i], target[i + 1], gap[i])   
-
-    # Keep incrementing the repeating pairs until we finally have match 
-    while any(first[i + 1] - second[i] != 0 for i in range(0, count - 1)):
-        for i in range(0, count - 1):
-            diff = first[i + 1] - second[i] 
-
-            if diff > 0:
-                remainder = diff % delta[i]
-
-                if remainder == 0:
-                    step = diff
-                else:
-                    step = (diff - remainder) + delta[i]
-                
-                first[i] += step
-                second[i] += step
-
-        for i in range(1, count):
-            diff = second[i - 1] - first[i]
-
-            if diff > 0:
-                remainder = diff % delta[i]
-
-                if remainder == 0:
-                    step = diff
-                else:
-                    step = (diff - remainder) + delta[i]
-                
-                first[i] += step
-                second[i] += step
-        
-        if first[0] > progress:
-            print(first[0])
-            progress += progress_delta
-
-
-
-    return first[0]
+    return start
 
 
 def part1(data):
@@ -127,6 +96,8 @@ def part2(data):
     """
     >>> part2((0, [17, None, 13, 19]))
     3417
+    >>> part2(read_input())
+    230903629977901
     """
  
     buses = data[1]
@@ -142,7 +113,6 @@ def part2(data):
             targets.append(bus)
             gaps.append(gap)
             gap = 1   
-
 
     return solve(targets, gaps)
 
