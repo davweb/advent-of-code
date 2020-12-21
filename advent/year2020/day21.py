@@ -26,7 +26,7 @@ def part1(data):
     ...     ({'sqjhc', 'mxmxvkd', 'sbzzf'}, {'fish'})
     ... ])
     5
-    >>> part1and2(read_input())
+    >>> part1(read_input())
     2436
     """
 
@@ -96,7 +96,7 @@ def part2(data):
 
 def main():
     data = read_input()
-    print(part1and2(data))
+    print(part1(data))
     print(part2(data))
 
 
