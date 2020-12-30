@@ -47,7 +47,7 @@ def part1(data):
     >>> part1((5764801, 17807724))
     14897079
     >>> part1(INPUT)
-    0
+    3803729
     """
 
     door_public_key, card_public_key = data
