@@ -1,5 +1,6 @@
 from enum import IntEnum
 
+
 class OpCode(IntEnum):
     ADD = 1
     MULTIPLY = 2
@@ -12,16 +13,18 @@ class OpCode(IntEnum):
     RELATIVE_BASE = 9
     EXIT = 99
 
+
 class ParameterMode(IntEnum):
     POSITION = 0
     IMMEDIATE = 1
     RELATIVE = 2
 
+
 class IntCode:
-    
+
     def __init__(self, code, input=None, memory_size=2048):
         self.memory = [0] * memory_size
-        self.memory[:len(code)] = code 
+        self.memory[:len(code)] = code
         self.input = [] if input is None else input
         self.index = 0
         self.relative_base = 0
@@ -42,7 +45,7 @@ class IntCode:
         while modes > 0:
             yield modes % 10
             modes //= 10
-        
+
         while True:
             yield 0
 
@@ -84,19 +87,19 @@ class IntCode:
             return self.memory[parameter_value + self.relative_base]
         else:
             raise ValueError("Invalid parameter mode '{}'".format(parameter_mode))
-        
+
     def set_next_parameter(self, parameter_value):
         destination_index = self.memory[self.index]
         self.index += 1
         parameter_mode = next(self.parameter_modes)
 
-        # position mode   
+        # position mode
         if parameter_mode == ParameterMode.POSITION:
             self.memory[destination_index] = parameter_value
         elif parameter_mode == ParameterMode.RELATIVE:
             self.memory[destination_index + self.relative_base] = parameter_value
         else:
-            raise ValueError("Invalid parameter mode '{}'".format(parameter_mode)) 
+            raise ValueError("Invalid parameter mode '{}'".format(parameter_mode))
 
     def next_input(self):
         """"
@@ -188,12 +191,12 @@ class IntCode:
                 right = self.get_next_parameter()
                 self.set_next_parameter(left + right)
 
-            elif op_code ==  OpCode.MULTIPLY:
+            elif op_code == OpCode.MULTIPLY:
                 left = self.get_next_parameter()
                 right = self.get_next_parameter()
                 self.set_next_parameter(left * right)
 
-            elif op_code ==  OpCode.SAVE:
+            elif op_code == OpCode.SAVE:
                 value = self.next_input()
                 self.set_next_parameter(value)
 
@@ -207,18 +210,18 @@ class IntCode:
                 if conditional != 0:
                     self.index = destination_index
 
-            elif op_code ==  OpCode.JUMP_IF_FALSE:
+            elif op_code == OpCode.JUMP_IF_FALSE:
                 conditional = self.get_next_parameter()
                 destination_index = self.get_next_parameter()
 
                 if conditional == 0:
                     self.index = destination_index
 
-            elif op_code ==  OpCode.LESS_THAN:
+            elif op_code == OpCode.LESS_THAN:
                 first = self.get_next_parameter()
                 second = self.get_next_parameter()
                 self.set_next_parameter(int(first < second))
-            
+
             elif op_code == OpCode.EQUAL_TO:
                 first = self.get_next_parameter()
                 second = self.get_next_parameter()

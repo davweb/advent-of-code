@@ -1,8 +1,10 @@
 from advent import knot_hash, bytes_to_hex
 
+
 def read_input():
     file = open('input/2017/day10-input.txt', 'r')
     return file.read()
+
 
 def part1(data):
     """
@@ -16,11 +18,10 @@ def part1(data):
     hash_size = 256
     hash = list(range(hash_size))
 
-
     for length in data:
         for i in range(length // 2):
             a = (position + i) % hash_size
-            b = (position + length - i - 1)  % hash_size
+            b = (position + length - i - 1) % hash_size
             hash[a], hash[b] = hash[b], hash[a]
 
         position = (position + length + skip) % hash_size
@@ -37,6 +38,7 @@ def part2(data):
 
     hash = knot_hash(data)
     return bytes_to_hex(hash)
+
 
 def main():
     data = read_input()

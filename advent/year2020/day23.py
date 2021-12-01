@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-INPUT = "716892543"
 from collections import deque
+INPUT = "716892543"
 
 
 def play(cups, turns):
@@ -24,7 +24,7 @@ def play(cups, turns):
 
     while turn < turns:
         turn += 1
-        
+
         # pick up three cups
         cups.rotate(- current_index - 1)
         holding = []

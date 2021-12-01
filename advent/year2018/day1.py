@@ -3,9 +3,11 @@
 import collections
 import itertools
 
+
 def read_input():
     file = open('input/2018/day1-input.txt', 'r')
     return [int(line) for line in file.readlines()]
+
 
 def calculate_frequency(data):
     """For example, if the device displays frequency changes of +1, -2, +3, +1, then
@@ -29,6 +31,7 @@ def calculate_frequency(data):
 
     return sum(data)
 
+
 def find_repeat(data):
     """You notice that the device repeats the same frequency change list over and
     over. To calibrate the device, you need to find the first frequency it
@@ -42,7 +45,7 @@ def find_repeat(data):
     5
     >>> find_repeat([+7, +7, -2, -7, -4])
     14
-    """ 
+    """
 
     count = collections.defaultdict(int)
     value = 0
@@ -56,7 +59,6 @@ def find_repeat(data):
         value += increment
 
 
-
 def part1(data):
     """
     >>> part1(read_input())
@@ -65,18 +67,21 @@ def part1(data):
 
     return calculate_frequency(data)
 
+
 def part2(data):
     """
     >>> part2(read_input())
     56360
     """
-    
+
     return find_repeat(data)
+
 
 def main():
     data = read_input()
     print(part1(data))
     print(part2(data))
+
 
 if __name__ == "__main__":
     main()

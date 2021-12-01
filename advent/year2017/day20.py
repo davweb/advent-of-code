@@ -16,16 +16,17 @@ def read_input():
 
     return dict(data)
 
-def vector_add(x,y):
-    return tuple(a + b for a,b in zip(x,y))
+
+def vector_add(x, y):
+    return tuple(a + b for a, b in zip(x, y))
 
 
-def same_sign(v,a):
+def same_sign(v, a):
     return a == 0 or ((v > 0) == (a > 0))
 
 
-def same_direction(v,a):
-    return all(same_sign(a,b) for a,b in zip(v,a))
+def same_direction(v, a):
+    return all(same_sign(a, b) for a, b in zip(v, a))
 
 
 def manhattan_distance(p):

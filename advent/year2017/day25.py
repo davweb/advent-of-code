@@ -43,8 +43,8 @@ def read_input():
 
 def part1(data):
     """
-    >>> part1(('A', 6, { 
-    ...    ('A', 0): (1, 1, 'B'), 
+    >>> part1(('A', 6, {
+    ...    ('A', 0): (1, 1, 'B'),
     ...    ('A', 1): (0, -1, 'B'),
     ...    ('B', 0): (1, -1, 'A'),
     ...    ('B', 1): (1, 1, 'A')
@@ -70,7 +70,7 @@ def part1(data):
 
 
 def main():
-    data = read_input();
+    data = read_input()
     print(part1(data))
 
 

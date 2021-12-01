@@ -7,7 +7,7 @@ def addr(registers, a, b, c):
     >>> registers
     [3, 2, 5, 0]
     """
-    
+
     registers[c] = registers[a] + registers[b]
 
 
@@ -112,7 +112,7 @@ def setr(registers, a, b, c):
     [3, 2, 3, 0]
     """
 
-    registers[c] = registers[a] 
+    registers[c] = registers[a]
 
 
 def seti(registers, a, b, c):
@@ -165,6 +165,7 @@ def gtrr(registers, a, b, c):
     """
 
     registers[c] = 1 if registers[a] > registers[b] else 0
+
 
 def eqir(registers, a, b, c):
     """

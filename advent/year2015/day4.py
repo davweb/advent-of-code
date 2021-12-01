@@ -1,8 +1,9 @@
 from _md5 import md5
 import itertools
 
+
 def mine(key, prefix):
- 
+
     for count in itertools.count(start=1):
         message = "{}{}".format(key, count).encode('utf-8')
         hash = md5(message)
@@ -30,7 +31,7 @@ def part2(data):
     >>> part2("iwrupvqb")
     9958218
     """
-    
+
     return mine(data, "000000")
 
 

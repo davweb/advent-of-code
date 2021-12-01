@@ -4,6 +4,7 @@ from collections import defaultdict
 OUTER_PATTEN = re.compile(r"^([a-z ]+) bags contain")
 INNER_PATTERN = re.compile(r"(\d+) ([a-z ]+) bag")
 
+
 def read_input():
     file = open('input/2020/day7-input.txt', 'r')
     return parse(file.read())
@@ -25,21 +26,21 @@ def part1(bags):
     >>> part1(read_input())
     254
     """
- 
+
     reverse = defaultdict(list)
 
     for colour, bags in bags.items():
         for (_, bag) in bags:
             reverse[bag].append(colour)
-    
+
     queue = ['shiny gold']
     colours = set()
-    
+
     while queue:
         colour = queue.pop(0)
-        
+
         for colour in reverse[colour]:
-             if colour not in colours:
+            if colour not in colours:
                 colours.add(colour)
                 queue.append(colour)
 

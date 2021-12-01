@@ -2,6 +2,7 @@ from os import truncate
 import re
 from itertools import combinations
 
+
 def read_input():
     file = open('input/2020/day9-input.txt', 'r')
     return [int(line.strip()) for line in file.readlines()]
@@ -21,7 +22,7 @@ def validate_stream(window, stream):
 
         if number not in valid_numbers:
             return number
-    
+
         previous.pop(0)
         previous.append(number)
 
@@ -53,7 +54,7 @@ def part1(data):
     >>> part1(read_input())
     26134589
     """
- 
+
     return validate_stream(25, data)
 
 

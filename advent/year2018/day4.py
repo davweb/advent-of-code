@@ -8,6 +8,7 @@ import re
 
 PATTERN = re.compile(r"\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2})\] (Guard #(\d+) begins shift|wakes up|falls asleep)")
 
+
 @total_ordering
 class Event:
 
@@ -62,18 +63,21 @@ class Event:
         return self.datetime < other.datetime
 
     def __eq__(self, other):
-        # Assuming timestamps are uniques  
+        # Assuming timestamps are uniques
         return self.datetime == other.datetime
-    
+
     def __repr__(self):
         return 'Event(datetime="{datetime}", type="{type}", guard_id={guard_id})'.format(**self.__dict__)
+
 
 def read_input():
     file = open('input/2018/day4-input.txt', 'r')
     return sorted(Event(line) for line in file.readlines())
 
+
 def key_for_largest_value(some_dict):
     return max(some_dict.items(), key=operator.itemgetter(1))[0]
+
 
 def sleepiest_guard(events):
     time_asleep = defaultdict(int)
@@ -89,6 +93,7 @@ def sleepiest_guard(events):
             time_asleep[guard_id] += time
 
     return key_for_largest_value(time_asleep)
+
 
 def process_events(events):
     """
@@ -155,10 +160,12 @@ def part2(events):
 
     return sleepiest_guard_id * sleepiest_minute
 
+
 def main():
     events = read_input()
     print(part1(events))
     print(part2(events))
+
 
 if __name__ == "__main__":
     main()

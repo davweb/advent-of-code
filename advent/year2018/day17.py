@@ -3,25 +3,27 @@ from enum import Enum
 
 SPRING_LOCATION = (500, 0)
 
+
 class Block(Enum):
-    CLAY  = '#'
+    CLAY = '#'
     WATER = '|'
     STILL_WATER = '~'
     SPRING = '+'
 
 
 class Action(Enum):
-    POUR  = 1
+    POUR = 1
     SPREAD = 2
 
 
 class Direction(Enum):
-    LEFT  = -1
+    LEFT = -1
     RIGHT = 1
 
 
 HORIZONTAL_PATTERN = re.compile(r"y=(\d+), x=(\d+)..(\d+)")
 VERTICAL_PATTERN = re.compile(r"x=(\d+), y=(\d+)..(\d+)")
+
 
 def read_input():
     file = open('input/2018/day17-input.txt', 'r')
@@ -67,15 +69,13 @@ class Slice:
                 self.grid[(x, y)] = Block.CLAY
 
         # pad X to show water flow to the side of the clay
-        self.min_x = min(x for (x,y) in self.grid.keys()) - 3
-        self.max_x = max(x for (x,y) in self.grid.keys()) + 3
-        self.min_y = min(y for (x,y) in self.grid.keys())
-        self.max_y = max(y for (x,y) in self.grid.keys())
-
+        self.min_x = min(x for (x, y) in self.grid.keys()) - 3
+        self.max_x = max(x for (x, y) in self.grid.keys()) + 3
+        self.min_y = min(y for (x, y) in self.grid.keys())
+        self.max_y = max(y for (x, y) in self.grid.keys())
 
     def count_blocks(self, block_type):
         return sum(1 for ((x, y), block) in self.grid.items() if block == block_type and y >= self.min_y)
-
 
     def start_water(self):
         """
@@ -96,10 +96,10 @@ class Slice:
         ...     r"x=520, y=1..4\\n"
         ...     r"x=499, y=2..7\\n"
         ...     r"x=501, y=2..7\\n"
-        ...     r"y=7, x=499..501\\n" 
+        ...     r"y=7, x=499..501\\n"
         ...     r"x=496, y=8..10\\n"
         ...     r"x=504, y=5..10\\n"
-        ...     r"y=10, x=497..503\\n" 
+        ...     r"y=10, x=497..503\\n"
         ... )
         >>> slice.start_water()
         >>> slice.count_blocks(Block.WATER) + slice.count_blocks(Block.STILL_WATER)
@@ -108,13 +108,13 @@ class Slice:
         ...     r"x=520, y=1..4\\n"
         ...     r"x=499, y=2..7\\n"
         ...     r"x=501, y=2..7\\n"
-        ...     r"y=7, x=499..501\\n" 
+        ...     r"y=7, x=499..501\\n"
         ...     r"x=496, y=8..10\\n"
         ...     r"x=504, y=5..10\\n"
-        ...     r"y=10, x=497..503\\n" 
+        ...     r"y=10, x=497..503\\n"
         ...     r"x=480, y=12..20\\n"
         ...     r"x=510, y=15..20\\n"
-        ...     r"y=20, x=481..509\\n" 
+        ...     r"y=20, x=481..509\\n"
         ... )
         >>> slice.start_water()
         >>> slice.count_blocks(Block.WATER) + slice.count_blocks(Block.STILL_WATER)
@@ -123,22 +123,22 @@ class Slice:
         ...     r"x=520, y=1..4\\n"
         ...     r"x=499, y=6..8\\n"
         ...     r"x=501, y=6..8\\n"
-        ...     r"y=8, x=499..501\\n" 
+        ...     r"y=8, x=499..501\\n"
         ...     r"x=496, y=4..11\\n"
         ...     r"x=504, y=4..11\\n"
-        ...     r"y=11, x=497..503\\n" 
+        ...     r"y=11, x=497..503\\n"
         ... )
         >>> slice.start_water()
         >>> slice.count_blocks(Block.WATER) + slice.count_blocks(Block.STILL_WATER)
         71
         >>> slice = Slice(
-        ...     r"x=520, y=1..4\\n"    
+        ...     r"x=520, y=1..4\\n"
         ...     r"x=489, y=6..8\\n"
         ...     r"x=491, y=6..8\\n"
-        ...     r"y=8, x=489..491\\n" 
+        ...     r"y=8, x=489..491\\n"
         ...     r"x=486, y=4..11\\n"
         ...     r"x=514, y=4..11\\n"
-        ...     r"y=11, x=487..513\\n" 
+        ...     r"y=11, x=487..513\\n"
         ... )
         >>> slice.start_water()
         >>> slice.count_blocks(Block.WATER) + slice.count_blocks(Block.STILL_WATER)
@@ -147,10 +147,10 @@ class Slice:
         ...     r"x=520, y=1..4\\n"
         ...     r"x=498, y=2..4\\n"
         ...     r"x=502, y=2..4\\n"
-        ...     r"y=4, x=498..502\\n" 
+        ...     r"y=4, x=498..502\\n"
         ...     r"x=486, y=6..11\\n"
         ...     r"x=502, y=6..11\\n"
-        ...     r"y=11, x=487..502\\n" 
+        ...     r"y=11, x=487..502\\n"
         ... )
         >>> slice.start_water()
         >>> slice.count_blocks(Block.WATER) + slice.count_blocks(Block.STILL_WATER)
@@ -166,11 +166,11 @@ class Slice:
         while action_queue:
             action, location = action_queue.pop(0)
             x, y = location
-            
+
             # Pour water downwards until we hit something
             if action == Action.POUR:
                 while y <= self.max_y and self.grid.get((x, y)) is None:
-                    self.grid[(x,y)] = Block.WATER
+                    self.grid[(x, y)] = Block.WATER
                     y += 1
 
                 # If we hit sand or still water spread horizontally
@@ -215,7 +215,6 @@ class Slice:
                     self.grid[(x, y - 1)] = Block.WATER
                     action_queue.append((Action.SPREAD, (x, y - 1)))
 
-
     def __str__(self):
         output = ['     {}'.format(self.min_x)]
 
@@ -223,7 +222,7 @@ class Slice:
             row = []
 
             for x in range(self.min_x, self.max_x + 1):
-                block = self.grid.get((x ,y))
+                block = self.grid.get((x, y))
 
                 if block is None:
                     row.append('.')

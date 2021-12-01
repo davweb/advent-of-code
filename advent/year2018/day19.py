@@ -10,7 +10,7 @@ INSTRUCTION_PATTERN = re.compile(r"([a-z]{4}) (\d+) (\d+) (\d+)")
 def read_input():
     file = open('input/2018/day19-input.txt', 'r')
     text = file.read()
-    
+
     match = POINTER_PATTERN.match(text)
     register = int(match.group(1))
 
@@ -33,13 +33,13 @@ def part1(data):
     (ip, instructions) = data
 
     registers = [0, 0, 0, 0, 0, 0]
-    pointer = 0 
+    pointer = 0
 
     while 0 <= pointer < len(instructions):
         registers[ip] = pointer
         op, a, b, c = instructions[registers[ip]]
         getattr(opcodes, op)(registers, a, b, c)
-        pointer = registers[ip] 
+        pointer = registers[ip]
         pointer += 1
 
     return registers[0]

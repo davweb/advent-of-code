@@ -21,7 +21,7 @@ def part1(data):
             count += 1
 
         previous = value
-    
+
     return count
 
 
@@ -35,12 +35,12 @@ def part2(data):
     count = 0
 
     for i in range(1, len(data) - 2):
-        previous = sum(data[i-1:i + 2])
+        previous = sum(data[i - 1:i + 2])
         value = sum(data[i:i + 3])
 
         if value > previous:
             count += 1
-    
+
     return count
 
 

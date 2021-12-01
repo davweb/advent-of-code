@@ -5,15 +5,17 @@ import sys
 from collections import defaultdict
 from advent import bounds, taxicab_distance
 
+
 def read_input():
-    file = open("input/2018/day6-input.txt", "r")    
+    file = open("input/2018/day6-input.txt", "r")
     points = []
 
     for line in file.readlines():
-        (x,y) = line.split(",")[:2]
+        (x, y) = line.split(",")[:2]
         points.append((int(x), int(y)))
 
     return points
+
 
 def part1(points):
     """
@@ -26,7 +28,7 @@ def part1(points):
     areas = defaultdict(int)
     exclusions = set()
 
-    for i in itertools.product(range(left, right + 1), range(top, bottom + 1)):    
+    for i in itertools.product(range(left, right + 1), range(top, bottom + 1)):
         closest_distance = bottom + right
 
         for point in points:
@@ -41,7 +43,7 @@ def part1(points):
 
         if closest_count == 1:
             areas[closest_point] += 1
-            (x,y) = i
+            (x, y) = i
 
             # if a point is closest to another point on the border its area will be unbounded
             if x == left or x == right or y == top or y == bottom:
@@ -49,10 +51,11 @@ def part1(points):
 
     return max(areas[point] for point in points if point not in exclusions)
 
+
 def part2(points, progress=False):
     """What is the size of the region containing all locations which have a total
     distance to all given coordinates of less than 10000?
-    
+
     >>> part2(read_input())
     39545
     """
@@ -62,7 +65,7 @@ def part2(points, progress=False):
     max_distance = 10000
     area = 0
     count = 0
-    
+
     # Even if all points are in same place no point checking further away than this distance
     limit = max_distance // len(points)
 
@@ -73,7 +76,7 @@ def part2(points, progress=False):
     for i in itertools.product(range(left - limit, right + limit), range(top - limit, bottom + limit)):
         if progress:
             count += 1
-            
+
             if count % increment == 0:
                 print("{:3.0f}%".format(count / pc), end="\r", file=sys.stderr)
 
@@ -92,10 +95,12 @@ def part2(points, progress=False):
 
     return area
 
+
 def main():
     data = read_input()
     print(part1(data))
     print(part2(data), progress=True)
+
 
 if __name__ == "__main__":
     main()

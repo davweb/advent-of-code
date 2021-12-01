@@ -45,7 +45,7 @@ def part1(data):
 
         elif dir == 'S':
             north -= val
-            
+
         elif dir == 'E':
             east += val
 
@@ -75,7 +75,7 @@ def part2(data):
         elif dir == 'L':
             for _ in range(0, val // 90):
                 waypoint_east, waypoint_north = (- waypoint_north, waypoint_east)
-                
+
         elif dir == 'F':
             east += waypoint_east * val
             north += waypoint_north * val

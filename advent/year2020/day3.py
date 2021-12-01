@@ -2,6 +2,7 @@
 
 from math import prod
 
+
 def read_input():
     file = open('input/2020/day3-input.txt', 'r')
     return [[c == '#' for c in line.strip()] for line in file.readlines()]
@@ -36,7 +37,7 @@ def count_trees(data, route):
     while y < height:
         if data[y][x]:
             trees += 1
-        
+
         x = (x + dx) % width
         y += dy
 
@@ -48,7 +49,7 @@ def part1(data):
     >>> part1(read_input())
     159
     """
-    
+
     return count_trees(data, (3, 1))
 
 
@@ -57,7 +58,7 @@ def part2(data):
     >>> part2(read_input())
     6419669520
     """
-    
+
     routes = ((1, 1), (3, 1), (5, 1), (7, 1), (1, 2))
     return prod(count_trees(data, route) for route in routes)
 

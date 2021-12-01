@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Acre(Enum):
     TREE = '|'
     LUMBERYARD = '#'
@@ -29,23 +30,20 @@ class Forest:
                 else:
                     raise ValueError("Invalid Forest acre '{}'".format(cell))
 
-                self.set(x,y, acre)
-        
+                self.set(x, y, acre)
+
         self.width = x + 1
         self.height = y + 1
-
 
     def get(self, x, y):
         return self.map.get((x, y))
 
-
     def set(self, x, y, acre):
         self.map[(x, y)] = acre
 
-
     def adjacent_cells(self, x, y):
-        return ((x - 1, y - 1), (x, y - 1), (x + 1, y - 1), (x - 1, y), (x + 1, y), (x - 1, y + 1), (x, y + 1), (x + 1, y + 1))
-
+        return ((x - 1, y - 1), (x, y - 1), (x + 1, y - 1), (x - 1, y),
+                (x + 1, y), (x - 1, y + 1), (x, y + 1), (x + 1, y + 1))
 
     def count_adjacent(self, acre_x, acre_y, acre):
         """
@@ -58,7 +56,6 @@ class Forest:
 
         return sum(1 for (x, y) in self.adjacent_cells(acre_x, acre_y) if self.get(x, y) == acre)
 
-    
     def process(self):
         new_map = {}
 
@@ -78,15 +75,13 @@ class Forest:
                         acre = None
 
                 new_map[(x, y)] = acre
-        
+
         self.map = new_map
         self.minute += 1
-
 
     def run(self, minutes):
         while self.minute < minutes:
             self.process()
-
 
     def count(self, acre):
         """
@@ -99,7 +94,6 @@ class Forest:
 
         return sum(1 for cell in self.map.values() if cell == acre)
 
-
     def resource_value(self):
         """
         >>> forest = Forest(".#.#...|#.\\n.....#|##|\\n.|..|...#.\\n..|#.....#\\n#.#|||#|#|\\n...#.||...\\n.|....|...\\n||...#|.#|\\n|.||||..|.\\n...#.|..|.")
@@ -108,7 +102,6 @@ class Forest:
         1147
         """
         return self.count(Acre.TREE) * self.count(Acre.LUMBERYARD)
-
 
     def __str__(self):
         output = []
@@ -127,9 +120,7 @@ class Forest:
 
             output.append("".join(row) + " " + " ".join(units))
 
-
         return "\n".join(output)
-
 
 
 def part1(data):
@@ -158,7 +149,7 @@ def part2(data):
 
         if map in seen:
 
-            if start == None:
+            if start is None:
                 start = forest.minute
                 seen = set()
                 seen.add(map)

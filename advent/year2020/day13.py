@@ -5,9 +5,10 @@ from collections import defaultdict
 
 PATTERN = re.compile(r"(\d+) <-> ((\d+, )*\d+)")
 
+
 def read_input():
     file = open("input/2020/day13-input.txt", "r")
-    
+
     depart = int(file.readline())
     buses = [int(bus) if bus != 'x' else None for bus in file.readline().split(',')]
     return (depart, buses)
@@ -48,7 +49,7 @@ def solve(targets, gaps):
     754018
     >>> solve((1789, 37, 47, 1889), (1, 1, 1))
     1202161486
-    >>> solve((67, 7, 59, 61), (2, 1, 1)) 
+    >>> solve((67, 7, 59, 61), (2, 1, 1))
     779210
     """
 
@@ -99,7 +100,7 @@ def part2(data):
     >>> part2(read_input())
     230903629977901
     """
- 
+
     buses = data[1]
 
     targets = [buses[0]]
@@ -112,7 +113,7 @@ def part2(data):
         else:
             targets.append(bus)
             gaps.append(gap)
-            gap = 1   
+            gap = 1
 
     return solve(targets, gaps)
 

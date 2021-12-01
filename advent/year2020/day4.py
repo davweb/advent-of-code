@@ -30,7 +30,7 @@ def read_input():
 def is_valid(passport):
     """
     >>> is_valid({
-    ...     'ecl': 'gry', 'pid': '860033327', 'eyr': '2020', 'hcl': '#fffffd', 'byr': '1937', 
+    ...     'ecl': 'gry', 'pid': '860033327', 'eyr': '2020', 'hcl': '#fffffd', 'byr': '1937',
     ...     'iyr': '2017', 'cid': '147', 'hgt': '183cm'
     ... })
     True
@@ -52,7 +52,7 @@ def is_valid(passport):
 def is_completely_valid(passport):
     """
     >>> is_completely_valid({
-    ...     'ecl': 'gry', 'pid': '860033327', 'eyr': '2020', 'hcl': '#fffffd', 'byr': '1937', 
+    ...     'ecl': 'gry', 'pid': '860033327', 'eyr': '2020', 'hcl': '#fffffd', 'byr': '1937',
     ...     'iyr': '2017', 'cid': '147', 'hgt': '183cm'
     ... })
     True
@@ -67,18 +67,18 @@ def is_completely_valid(passport):
     ... })
     True
     >>> is_completely_valid({
-    ...     'ecl': 'teal', 'pid': '860033327', 'eyr': '2020', 'hcl': '#fffffd', 'byr': '1937', 
+    ...     'ecl': 'teal', 'pid': '860033327', 'eyr': '2020', 'hcl': '#fffffd', 'byr': '1937',
     ...     'iyr': '2017', 'cid': '147', 'hgt': '183cm'
     ... })
     False
     >>> is_completely_valid({
-    ...     'ecl': 'gry', 'pid': '860033327', 'eyr': '2020', 'hcl': '#fffffd', 'byr': '1937', 
+    ...     'ecl': 'gry', 'pid': '860033327', 'eyr': '2020', 'hcl': '#fffffd', 'byr': '1937',
     ...     'iyr': '2017', 'cid': '147', 'hgt': '83cm'
     ... })
     False
     """
 
-    try:    
+    try:
         byr = int(passport['byr'])
         iyr = int(passport['iyr'])
         eyr = int(passport['eyr'])
@@ -91,7 +91,7 @@ def is_completely_valid(passport):
 
     if not 1920 <= byr <= 2002:
         return False
-    
+
     if not 2010 <= iyr <= 2020:
         return False
 
@@ -115,7 +115,7 @@ def is_completely_valid(passport):
     if not HCL_PATTERN.match(hcl):
         return False
 
-    if not ecl in ECL_SET:
+    if ecl not in ECL_SET:
         return False
 
     if not PID_PATTERN.match(pid):
@@ -129,7 +129,7 @@ def part1(data):
     >>> part1(read_input())
     192
     """
-    
+
     return sum(is_valid(passport) for passport in data)
 
 
@@ -138,7 +138,7 @@ def part2(data):
     >>> part2(read_input())
     101
     """
-    
+
     return sum(is_completely_valid(passport) for passport in data)
 
 

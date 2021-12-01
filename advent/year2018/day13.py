@@ -1,15 +1,17 @@
 #!/usr/local/bin/python3
 
 from collections import defaultdict
-import itertools 
+import itertools
 from functools import total_ordering
 from enum import Enum
 
+
 class Direction(Enum):
-    UP  = 0
+    UP = 0
     RIGHT = 1
     DOWN = 2
     LEFT = 3
+
 
 @total_ordering
 class Cart:
@@ -49,12 +51,12 @@ class Cart:
         self.position = position
         self.tunnels = tunnels
         self.turn = 0
-    
+
         try:
             self.direction = Cart.DIRECTION_MAP[direction]
         except KeyError:
             raise ValueError("Invalid direction '{}'".format(direction))
-    
+
     def __repr__(self):
         return "Cart(position={position}, direction={direction}, turn={turn})".format(**self.__dict__)
 
@@ -93,35 +95,36 @@ class Cart:
 
         if cell == "/":
             if self.direction == Direction.UP:
-                self.direction = Direction.RIGHT 
+                self.direction = Direction.RIGHT
             elif self.direction == Direction.DOWN:
-                self.direction = Direction.LEFT 
+                self.direction = Direction.LEFT
             elif self.direction == Direction.LEFT:
-                self.direction = Direction.DOWN 
+                self.direction = Direction.DOWN
             elif self.direction == Direction.RIGHT:
-                self.direction = Direction.UP 
+                self.direction = Direction.UP
         elif cell == "\\":
             if self.direction == Direction.UP:
-                self.direction = Direction.LEFT 
+                self.direction = Direction.LEFT
             elif self.direction == Direction.DOWN:
-                self.direction = Direction.RIGHT 
+                self.direction = Direction.RIGHT
             elif self.direction == Direction.LEFT:
-                self.direction = Direction.UP 
+                self.direction = Direction.UP
             elif self.direction == Direction.RIGHT:
-                self.direction = Direction.DOWN 
+                self.direction = Direction.DOWN
         elif cell == "+":
             self.direction = Direction((self.direction.value + Cart.TURNS[self.turn]) % 4)
             self.turn = (self.turn + 1) % 3
 
         return self
-        
+
 
 def read_input():
     with open('input/2018/day13-input.txt', 'r') as file:
         data = [[cell for cell in line] for line in file.readlines()]
-        
+
     # Swap x and y before returning
     return list(zip(*data))
+
 
 def print_map(map):
     for y in range(0, len(map[0])):
@@ -135,7 +138,7 @@ def print_map(map):
 def get_carts(tunnels):
     carts = []
 
-    for (x,y) in itertools.product(range(0, len(tunnels)), range(0, len(tunnels[0]))):
+    for (x, y) in itertools.product(range(0, len(tunnels)), range(0, len(tunnels[0]))):
         cell = tunnels[x][y]
 
         if cell == "^" or cell == "v":
@@ -145,7 +148,7 @@ def get_carts(tunnels):
         else:
             continue
 
-        carts.append(Cart((x,y), cell, tunnels))
+        carts.append(Cart((x, y), cell, tunnels))
 
     return carts
 
@@ -165,10 +168,10 @@ def part1(tunnels):
         for cart in carts:
             positions.remove(cart.position)
             cart.move()
-            
+
             if cart.position in positions:
                 return cart.position
-            
+
             positions.add(cart.position)
 
 
@@ -180,20 +183,20 @@ def part2(tunnels):
 
     carts = get_carts(tunnels)
     positions = set(cart.position for cart in carts)
-    
+
     while True:
         carts.sort()
         crashed = []
-        
+
         for cart in carts:
             if cart in crashed:
-                continue 
+                continue
 
             positions.remove(cart.position)
             cart.move()
-            
+
             if cart.position in positions:
-                crashed += [other for other in carts if other.position == cart.position]    
+                crashed += [other for other in carts if other.position == cart.position]
                 positions.remove(cart.position)
             else:
                 positions.add(cart.position)

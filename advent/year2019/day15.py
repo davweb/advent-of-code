@@ -6,8 +6,10 @@ from advent.year2019.intcode import IntCode
 from advent import bounds
 import sys
 
+
 def read_input():
     return [int(code) for code in open('input/2019/day15-input.txt', 'r').read().split(',')]
+
 
 class Movement(enum.Enum):
 
@@ -27,7 +29,7 @@ class Movement(enum.Enum):
     SOUTH = 2, 1, 0, -1
     WEST = 3, 4, -1, 0
     EAST = 4, 3, 1, 0
-    
+
 
 def explore(code):
     i = IntCode(code)
@@ -39,8 +41,8 @@ def explore(code):
 
         for movement in Movement:
             next_location = (location[0] + movement.x, location[1] + movement.y)
-            
-            if next_location in seen: 
+
+            if next_location in seen:
                 continue
 
             output = i.execute([movement.forward])
@@ -59,6 +61,7 @@ def explore(code):
     search(location)
     return seen
 
+
 def draw_map(robot_map):
     (left, top), (right, bottom) = bounds(robot_map.keys())
     output = []
@@ -67,7 +70,7 @@ def draw_map(robot_map):
         line = []
 
         for x in range(left, right + 1):
-            if (x,y) in robot_map:
+            if (x, y) in robot_map:
                 line.append(robot_map[(x, y)])
             else:
                 line.append("?")
@@ -87,7 +90,7 @@ def part1(robot_map):
     destination = next(node for node in nodes if robot_map[node] == '*')
 
     distances = defaultdict(lambda: 999)
-    distances[(0,0)] = 0
+    distances[(0, 0)] = 0
 
     while nodes[0] != destination:
         nodes.sort(key=lambda node: distances[node])
@@ -102,6 +105,7 @@ def part1(robot_map):
         nodes.remove(location)
 
     return distances[destination]
+
 
 def part2(robot_map):
     """
@@ -136,6 +140,7 @@ def main():
     print(draw_map(robot_map))
     print(part1(robot_map))
     print(part2(robot_map))
+
 
 if __name__ == "__main__":
     main()

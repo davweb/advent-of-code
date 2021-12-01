@@ -7,6 +7,7 @@ from itertools import count
 STATE_PATTERN = re.compile(r"^initial state: ([#|.]{100})$")
 NOTE_PATTERN = re.compile(r"^([#|.]{5}) => ([#|.])$")
 
+
 class Note:
 
     def __init__(self, definition):
@@ -24,12 +25,13 @@ class Note:
             raise ValueError("Invalid defintion '{}'".format(definition))
         self.pattern = [pot == "#" for pot in match.group(1)]
         self.grows = match.group(2) == "#"
-    
+
     def match(self, pots):
         return self.pattern == pots
 
     def __repr__(self):
         return "Note(pattern={pattern}, grows={grows})".format(**self.__dict__)
+
 
 def read_input():
     with open('input/2018/day12-input.txt', 'r') as file:
@@ -39,14 +41,15 @@ def read_input():
         for (index, pot) in zip(count(), match.group(1)):
             if pot == "#":
                 state[index] = True
-        
+
         file.readline()
         notes = [Note(line) for line in file.readlines()]
         return(state, notes)
 
+
 def next_generation(state, notes):
     next_state = defaultdict(bool)
-    start = min(state.keys()) - 2 
+    start = min(state.keys()) - 2
     end = max(state.keys()) + 3
 
     for i in range(start, end):
@@ -72,7 +75,7 @@ def part1(state, notes):
     while generation < 20:
         generation += 1
         state = next_generation(state, notes)
-        
+
     return sum(state.keys())
 
 
@@ -85,10 +88,10 @@ def part2(state, notes):
     previous_pots = None
     previous_score = None
     generation = 0
-    
+
     while True:
         generation += 1
-        
+
         next_state = next_generation(state, notes)
 
         # Have to calculate score here as creating pots string will distort the score

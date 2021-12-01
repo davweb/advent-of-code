@@ -29,7 +29,7 @@ def split(range, upper):
 
     start, end = range
     length = (end - start + 1) // 2
-    
+
     if upper:
         return (start + length, end)
     else:
@@ -63,7 +63,7 @@ def part1(data):
     >>> part1(read_input())
     835
     """
-    
+
     return max(seat_id(directions) for directions in data)
 
 
@@ -72,16 +72,16 @@ def part2(data):
     >>> part2(read_input())
     649
     """
-    
+
     previous = 0
 
-    for seat in sorted(seat_id(directions) for directions in data): 
+    for seat in sorted(seat_id(directions) for directions in data):
         if seat - previous == 2:
             return seat - 1
 
         previous = seat
 
-    raise ValueError('Seat not found') 
+    raise ValueError('Seat not found')
 
 
 def main():

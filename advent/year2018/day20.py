@@ -108,17 +108,17 @@ def parse_regex(regex):
     return group[0] if len(group) == 1 else group
 
 
-def follow_directions(directions, doors = None, x = 0, y = 0):
+def follow_directions(directions, doors=None, x=0, y=0):
 
     if doors is None:
         doors = set()
 
     for d in directions:
 
-        if type(d) == list:
+        if isinstance(d, list):
             (_, x, y) = follow_directions(d, doors, x, y)
 
-        elif type(d) == tuple:
+        elif isinstance(d, tuple):
             checkpoint_x, checkpoint_y = x, y
 
             for option in d:

@@ -1,7 +1,8 @@
 #!/usr/local/bin/python3
 
 import itertools
-import numpy 
+import numpy
+
 
 class Moon:
     def __init__(self, position, velocity=None):
@@ -20,10 +21,8 @@ class Moon:
         else:
             self.velocity = velocity
 
-
     def __repr__(self):
         return "Moon(position={0}, velocity={1})".format(self.position, self.velocity)
-
 
     def move(self):
         """
@@ -33,8 +32,7 @@ class Moon:
         Moon(position=(5, 7, 9), velocity=(4, 5, 6))
         """
 
-        self.position = tuple(p + v for p,v in zip(self.position, self.velocity))
-
+        self.position = tuple(p + v for p, v in zip(self.position, self.velocity))
 
     def gravity(self, other):
         """
@@ -48,15 +46,15 @@ class Moon:
         (2, 0, -2)
         """
 
-        self.velocity = tuple(self.velocity[i] + closer(self.position[i], other.position[i]) for i in range(0, len(self.velocity)))
+        self.velocity = tuple(self.velocity[i] + closer(self.position[i], other.position[i])
+                              for i in range(0, len(self.velocity)))
 
-    
     def potential_energy(self):
         """
         >>> Moon((-1, 2, 7)).potential_energy()
         10
         """
-        
+
         return sum(abs(v) for v in self.position)
 
     def kinetic_energy(self):
@@ -64,7 +62,7 @@ class Moon:
         >>> Moon((-1, 2, 7), (-3, 8, 2)).kinetic_energy()
         13
         """
-        
+
         return sum(abs(v) for v in self.velocity)
 
     def energy(self):
@@ -91,7 +89,7 @@ def closer(a, b):
         return 1
     else:
         return 0
-        
+
 
 def simulate(moons, steps):
     """
@@ -112,11 +110,11 @@ def simulate(moons, steps):
     """
 
     step = 0
-    
+
     while step < steps:
         step += 1
 
-        for (a,b) in itertools.combinations(moons, 2):
+        for (a, b) in itertools.combinations(moons, 2):
             a.gravity(b)
             b.gravity(a)
 
@@ -139,14 +137,14 @@ def part2(moons):
     >>> part2(input_moons())
     356658899375688
     """
-    
+
     cycles = []
 
     for axis in range(0, 3):
         axis_moons = []
         cache = set()
         steps = 0
-        
+
         for moon in moons:
             axis_moons.append(Moon((moon.position[axis],)))
 
@@ -156,7 +154,7 @@ def part2(moons):
             if cachekey in cache:
                 cycles.append(steps)
                 break
-            
+
             cache.add(cachekey)
             steps += 1
             simulate(axis_moons, 1)
@@ -167,9 +165,11 @@ def part2(moons):
 def input_moons():
     return [Moon((3, -6, 6)), Moon((10, 7, -9)), Moon((-3, -7, 9)), Moon((-8, 0, 4))]
 
+
 def main():
     print(part1(input_moons()))
     print(part2(input_moons()))
+
 
 if __name__ == "__main__":
     main()

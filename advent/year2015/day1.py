@@ -24,7 +24,7 @@ def part1(data):
 
     for move in data:
         floor += 1 if move == '(' else -1
-    
+
     return floor
 
 
@@ -33,14 +33,14 @@ def part2(data):
     >>> part2(read_input())
     1797
     """
-    
+
     floor = 0
 
     for (count, move) in enumerate(data):
         floor += 1 if move == '(' else -1
         if floor < 0:
             return count + 1
-    
+
     return Exception("Never entered basement")
 
 

@@ -4,9 +4,11 @@ from collections import defaultdict
 from operator import itemgetter
 from advent import md5
 
+
 def read_input():
     with open('input/2019/day8-input.txt', 'r') as file:
         return [int(digit) for digit in file.read()]
+
 
 def count_pixels(input, width, height):
     """
@@ -38,8 +40,9 @@ def count_pixels(input, width, height):
 
     return count
 
+
 def image(data, width, height):
-    image = [[2 for x in range(0, width)] for y in range(0,height)]
+    image = [[2 for x in range(0, width)] for y in range(0, height)]
     x = 0
     y = 0
 
@@ -57,8 +60,10 @@ def image(data, width, height):
 
     return "\n".join("".join("█" if pixel else " " for pixel in row) for row in image)
 
+
 def key_for_smallest_value(some_dict):
     return min(some_dict.items(), key=itemgetter(1))[0]
+
 
 def part1(input):
     """
@@ -70,6 +75,7 @@ def part1(input):
     layer = key_for_smallest_value(count[0])
     return count[1][layer] * count[2][layer]
 
+
 def part2(code):
     """
     >>> md5(part2(read_input()))
@@ -78,10 +84,12 @@ def part2(code):
 
     return image(code, 25, 6)
 
+
 def main():
     data = read_input()
     print(part1(data))
     print(part2(data))
+
 
 if __name__ == "__main__":
     main()

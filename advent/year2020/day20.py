@@ -10,6 +10,7 @@ SEA_MONSTER = (
     ' #  #  #  #  #  #   '
 )
 
+
 def rotations(rows):
     """
     >>> rotations(('...', '###', '#.#'))
@@ -81,20 +82,16 @@ class Tile:
         self.permutations = permutations(rows)
         self.reset()
 
-
     def rows(self):
         if self.state == -1:
             raise ValueError("Tile is not aligned")
         return self.permutations[self.state]
 
-
     def reset(self):
         self.state = -1
 
-
     def has_next(self):
         return self.state < len(self.permutations) - 1
-
 
     def next(self):
         if not self.has_next():
@@ -102,7 +99,6 @@ class Tile:
 
         self.state += 1
         return self.rows()
-
 
     def side(self, side):
         """
@@ -129,7 +125,6 @@ class Tile:
             return "".join(row[-1] for row in self.rows())
         else:
             raise ValueError("Unknown side '{}'".format(side))
-
 
     def matches(self, side, other):
         """
@@ -304,8 +299,8 @@ def part1and2(tiles):
         for row in range(1, 9):
             line = ""
 
-            for x in range (0, size):
-                tile = grid[(x,y)]
+            for x in range(0, size):
+                tile = grid[(x, y)]
                 line += tile.rows()[row][1:-1]
 
             pattern.append(line)

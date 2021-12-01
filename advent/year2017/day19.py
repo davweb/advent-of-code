@@ -5,7 +5,7 @@ def read_input():
 def read_file(filename):
     network = []
 
-    for line in open(filename, 'r'): #.readlines():
+    for line in open(filename, 'r'):  # .readlines():
         network.append(line)
 
     return network
@@ -18,7 +18,7 @@ def find_start(network):
     while network[y][x] != '|':
         x += 1
 
-    return (x,y)
+    return (x, y)
 
 
 def move(direction, x, y):
@@ -31,7 +31,7 @@ def move(direction, x, y):
     elif direction == 'W':
         x -= 1
 
-    return x ,y
+    return x, y
 
 
 def valid_move(network, x, y):

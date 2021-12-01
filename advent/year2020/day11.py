@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Seat(Enum):
     UNOCCUPIED = 'L'
     OCCUPIED = '#'
@@ -29,24 +30,21 @@ class Floor:
                 else:
                     raise ValueError("Invalid Forest acre '{}'".format(cell))
 
-                self.set(x,y, acre)
-        
+                self.set(x, y, acre)
+
         self.width = x + 1
         self.height = y + 1
-
 
     def get(self, x, y):
         return self.map.get((x, y))
 
-
     def set(self, x, y, acre):
         self.map[(x, y)] = acre
 
-
     def adjacent_cells(self, x, y):
-        return ((x - 1, y - 1), (x, y - 1), (x + 1, y - 1), (x - 1, y), (x + 1, y), (x - 1, y + 1), (x, y + 1), (x + 1, y + 1))
-    
-    
+        return ((x - 1, y - 1), (x, y - 1), (x + 1, y - 1), (x - 1, y),
+                (x + 1, y), (x - 1, y + 1), (x, y + 1), (x + 1, y + 1))
+
     def count_adjacent(self, cell_x, cell_y, seat):
         """
         >>> floor = Floor("L#.\\n##L\\n.##\\n")
@@ -67,7 +65,7 @@ class Floor:
 
             while 0 <= x <= self.width and 0 <= y <= self.height:
                 cell = self.get(x, y)
-                
+
                 if cell is not None:
                     visible.append(cell)
                     break
@@ -77,14 +75,11 @@ class Floor:
 
         return visible
 
-
     def count_visible(self, cell_x, cell_y, seat):
         return sum(1 for s in self.visible_seats(cell_x, cell_y) if s == seat)
 
-
     def all_seats(self):
         return self.map.items()
-
 
     def process(self):
         new_map = {}
@@ -102,24 +97,22 @@ class Floor:
                     changes += 1
 
             new_map[(x, y)] = cell
-        
+
         self.map = new_map
         self.turn += 1
         return changes
 
-
     def run(self):
         """
-        >>> floor = Floor("L.LL.LL.LL\\nLLLLLLL.LL\\nL.L.L..L..\\nLLLL.LL.LL\\nL.LL.LL.LL\\nL.LLLLL.LL\\n..L.L.....\\nLLLLLLLLLL\\nL.LLLLLL.L\\nL.LLLLL.LL") 
+        >>> floor = Floor("L.LL.LL.LL\\nLLLLLLL.LL\\nL.L.L..L..\\nLLLL.LL.LL\\nL.LL.LL.LL\\nL.LLLLL.LL\\n..L.L.....\\nLLLLLLLLLL\\nL.LLLLLL.L\\nL.LLLLL.LL")
         >>> floor.run()
         37
         """
-        
+
         while self.process() > 0:
             pass
 
         return self.count(Seat.OCCUPIED)
-
 
     def process_visible(self):
         new_map = {}
@@ -137,24 +130,22 @@ class Floor:
                     changes += 1
 
             new_map[(x, y)] = cell
-        
+
         self.map = new_map
         self.turn += 1
         return changes
 
-
     def run_visible(self):
         """
-        >>> floor = Floor("L.LL.LL.LL\\nLLLLLLL.LL\\nL.L.L..L..\\nLLLL.LL.LL\\nL.LL.LL.LL\\nL.LLLLL.LL\\n..L.L.....\\nLLLLLLLLLL\\nL.LLLLLL.L\\nL.LLLLL.LL") 
+        >>> floor = Floor("L.LL.LL.LL\\nLLLLLLL.LL\\nL.L.L..L..\\nLLLL.LL.LL\\nL.LL.LL.LL\\nL.LLLLL.LL\\n..L.L.....\\nLLLLLLLLLL\\nL.LLLLLL.L\\nL.LLLLL.LL")
         >>> floor.run_visible()
         26
         """
-        
+
         while self.process_visible() > 0:
             pass
 
         return self.count(Seat.OCCUPIED)
-
 
     def count(self, acre):
         """
@@ -166,7 +157,6 @@ class Floor:
         """
 
         return sum(1 for cell in self.map.values() if cell == acre)
-
 
     def __str__(self):
         output = []
@@ -184,7 +174,6 @@ class Floor:
                     row.append(cell.value)
 
             output.append("".join(row) + " " + " ".join(units))
-
 
         return "\n".join(output)
 

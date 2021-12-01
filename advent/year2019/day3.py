@@ -3,9 +3,11 @@
 from collections import defaultdict
 from advent import taxicab_distance
 
+
 def read_input():
     file = open('input/2019/day3-input.txt', 'r')
     return [line.split(',') for line in file.readlines()]
+
 
 def steps(start, instruction):
     """
@@ -28,15 +30,16 @@ def steps(start, instruction):
     distance = int(instruction[1:])
 
     if direction == "U":
-        return ((x, i) for i in range(y + 1, y + distance + 1)) 
+        return ((x, i) for i in range(y + 1, y + distance + 1))
     elif direction == "D":
-        return ((x, i) for i in range(y - 1, y - distance -1, -1)) 
+        return ((x, i) for i in range(y - 1, y - distance - 1, -1))
     elif direction == "R":
-        return ((i, y) for i in range(x + 1, x + distance + 1)) 
+        return ((i, y) for i in range(x + 1, x + distance + 1))
     elif direction == "L":
-        return ((i, y) for i in range(x - 1, x - distance - 1, -1)) 
+        return ((i, y) for i in range(x - 1, x - distance - 1, -1))
     else:
         raise ValueError("invalid direction '{}'".format(direction))
+
 
 def process_instructions(data):
     grid = {}
@@ -51,32 +54,35 @@ def process_instructions(data):
             if location not in grid:
                 grid[location] = length
 
-    return grid       
+    return grid
+
 
 def part1and2(data):
     """
     >>> part1and2(read_input())
     (266, 19242)
     """
-    
+
     grid = defaultdict(int)
     length = defaultdict(int)
 
     for wire in data:
         wire_grid = process_instructions(wire)
-        
+
         for location in wire_grid:
-            grid[location] += 1 
+            grid[location] += 1
             length[location] += wire_grid[location]
 
-    min_dist = min(taxicab_distance((0,0), item[0]) for item in grid.items() if item[1] == 2)
-    min_length  = min(length[item[0]] for item in grid.items() if item[1] == 2)
+    min_dist = min(taxicab_distance((0, 0), item[0]) for item in grid.items() if item[1] == 2)
+    min_length = min(length[item[0]] for item in grid.items() if item[1] == 2)
 
     return (min_dist, min_length)
+
 
 def main():
     data = read_input()
     print(part1and2(data))
+
 
 if __name__ == "__main__":
     main()

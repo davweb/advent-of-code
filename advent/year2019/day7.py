@@ -3,8 +3,10 @@
 from advent.year2019.intcode import IntCode
 import itertools
 
+
 def read_input():
     return [int(code) for code in open('input/2019/day7-input.txt', 'r').read().split(',')]
+
 
 def calc_signal(code, phases):
     """
@@ -20,6 +22,7 @@ def calc_signal(code, phases):
 
     return signal
 
+
 def max_signal(code):
     """
     >>> max_signal([3,15,3,16,1002,16,10,16,1,16,15,15,4,15,99,0,0])
@@ -31,6 +34,7 @@ def max_signal(code):
     """
 
     return max(calc_signal(code, phases) for phases in itertools.permutations(range(0, 5)))
+
 
 def calc_feedback(code, phases):
     """
@@ -50,6 +54,7 @@ def calc_feedback(code, phases):
 
         signal = output
 
+
 def max_feedback(code):
     """
     >>> max_feedback([3,26,1001,26,-4,26,3,27,1002,27,2,27,1,27,26,27,4,27,1001,28,-1,28,1005,28,6,99,0,0,5])
@@ -60,6 +65,7 @@ def max_feedback(code):
 
     return max(calc_feedback(code, phases) for phases in itertools.permutations(range(5, 10)))
 
+
 def part1(code):
     """
     >>> part1(read_input())
@@ -67,6 +73,7 @@ def part1(code):
     """
 
     return max_signal(code)
+
 
 def part2(code):
     """
@@ -81,6 +88,7 @@ def main():
     code = read_input()
     print(part1(code))
     print(part2(code))
+
 
 if __name__ == "__main__":
     main()

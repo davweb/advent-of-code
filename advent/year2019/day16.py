@@ -35,6 +35,7 @@ def read_input():
 
 #     return output
 
+
 def pattern_series(element_no, size):
     """
     >>> list(pattern_series(0, 8))
@@ -56,16 +57,16 @@ def pattern_series(element_no, size):
         modifier = - modifier
 
 
-
 def transform(input):
     output = []
     length = len(input)
 
-    for i in range(0, length): 
+    for i in range(0, length):
         value = sum(modifier * sum(input[start:end]) for (modifier, start, end) in pattern_series(i, length))
         output.append(abs(value) % 10)
 
     return output
+
 
 def sum_input(input, start, end, cache):
     if start == end:
@@ -75,21 +76,22 @@ def sum_input(input, start, end, cache):
         return input[start]
 
     key = (start, end)
-    
+
     try:
-        return cache[key] 
+        return cache[key]
     except KeyError:
         middle = start + (end - start) // 2
         value = sum_input(input, start, middle, cache) + sum_input(input, middle, end, cache)
         cache[key] = value
         return value
 
+
 def transform_cache(input):
     print(".")
     output = []
-    length = len(input) 
+    length = len(input)
     cache = {}
-    
+
     for i in range(0, length):
         value = 0
 
@@ -99,6 +101,7 @@ def transform_cache(input):
         output.append(abs(value) % 10)
 
     return output
+
 
 def fft(input):
     """
@@ -116,16 +119,17 @@ def fft(input):
     output = transform(input)
     return "".join(str(i) for i in output)
 
+
 def part1(input):
     """
     >>> part1('80871224585914546619083218645595')
     '24176176'
-    
+
     >>> part1(read_input())
     '15841929'
     """
     input = [int(code) for code in input]
-    output = functools.reduce(lambda a,b: transform(a), [input] + list(range(0,100)))
+    output = functools.reduce(lambda a, b: transform(a), [input] + list(range(0, 100)))
     return "".join(str(i) for i in output[:8])
 
 
@@ -133,13 +137,13 @@ def part2(input):
     """
     # >>> part2('80871224585914546619083218645595')
     '24176176'
-    
+
     # >>> part2(read_input())
     '15841929'
     """
 
     input = [int(code) for code in input]
-    output = functools.reduce(lambda a,b: transform_cache(a), [input] + list(range(0,100)))
+    output = functools.reduce(lambda a, b: transform_cache(a), [input] + list(range(0, 100)))
     return "".join(str(i) for i in output[:8])
 
 
@@ -148,6 +152,7 @@ def main():
     print(len(input))
     print(part1(input))
     print(part2(input * 100))
+
 
 if __name__ == "__main__":
     main()

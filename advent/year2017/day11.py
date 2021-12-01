@@ -1,11 +1,11 @@
 
 DIRECTIONS = {
-    'n': (0,2),
-    'ne': (1,1),
-    'se': (1,-1),
-    's': (0,-2),
-    'sw': (-1,-1),
-    'nw': (-1,1)
+    'n': (0, 2),
+    'ne': (1, 1),
+    'se': (1, -1),
+    's': (0, -2),
+    'sw': (-1, -1),
+    'nw': (-1, 1)
 }
 
 
@@ -26,7 +26,7 @@ def distance_home(x, y):
     4
     """
 
-    x,y = abs(x),abs(y)
+    x, y = abs(x), abs(y)
     steps = 0
 
     while x != 0 or y != 0:
@@ -50,16 +50,16 @@ def part1and2(data):
     (664, 1447)
     """
 
-    x, y = 0,0
+    x, y = 0, 0
     furthest = 0
 
     for move in data:
-        dx,dy = DIRECTIONS[move]
+        dx, dy = DIRECTIONS[move]
         x += dx
         y += dy
-        furthest = max(furthest, distance_home(x,y))
+        furthest = max(furthest, distance_home(x, y))
 
-    return (distance_home(x,y), furthest)
+    return (distance_home(x, y), furthest)
 
 
 def main():

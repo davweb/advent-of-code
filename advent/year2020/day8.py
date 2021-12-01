@@ -1,6 +1,7 @@
 import re
 from collections import defaultdict
 
+
 def read_input():
     file = open('input/2020/day8-input.txt', 'r')
     data = []
@@ -29,7 +30,7 @@ def run(data):
         elif ins == 'jmp':
             index += val
         else:
-            raise ValueError("Invalid instruction '{}'".format(ins)) 
+            raise ValueError("Invalid instruction '{}'".format(ins))
 
     return (acc, index < len(data))
 
@@ -39,7 +40,7 @@ def part1(data):
     >>> part1(read_input())
     1337
     """
- 
+
     return run(data)[0]
 
 
@@ -52,7 +53,7 @@ def part2(data):
     for index in range(0, len(data)):
         copy = list(data)
         ins, val = copy[index]
-        
+
         if ins == 'nop':
             copy[index] = ('jmp', val)
         elif ins == 'acc':
@@ -60,13 +61,13 @@ def part2(data):
         elif ins == 'jmp':
             copy[index] = ('nop', val)
         else:
-            raise ValueError("Invalid instruction '{}'".format(ins)) 
+            raise ValueError("Invalid instruction '{}'".format(ins))
 
         (acc, looped) = run(copy)
-        
+
         if not looped:
             return acc
-        
+
     raise ValueError("Result not found")
 
 

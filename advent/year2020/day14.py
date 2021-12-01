@@ -6,6 +6,7 @@ import itertools
 MASK_PATTERN = re.compile(r"mask = ([01X]+)")
 MEM_PATTERN = re.compile(r"mem\[(\d+)\] = (\d+)")
 
+
 def read_input():
     file = open("input/2020/day14-input.txt", "r")
     data = []
@@ -69,8 +70,8 @@ def floating_mask(value, mask):
 
     for i, c in enumerate(mask):
         bit = 2 ** i
-        set_bit = lambda x, bit=bit: x | bit
-        unset_bit = lambda x, bit=bit: x & ~bit
+        def set_bit(x, bit=bit): return x | bit
+        def unset_bit(x, bit=bit): return x & ~bit
 
         if c == '1':
             value = set_bit(value)
@@ -81,7 +82,7 @@ def floating_mask(value, mask):
 
     for floaters in itertools.product(*masks):
         x = value
-        
+
         for f in floaters:
             x = f(x)
 

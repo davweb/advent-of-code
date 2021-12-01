@@ -3,9 +3,11 @@
 import collections
 import itertools
 
+
 def read_input():
     file = open('input/2018/day2-input.txt', 'r')
     return list(line.strip() for line in file.readlines())
+
 
 def count_letters(label):
     """
@@ -20,6 +22,7 @@ def count_letters(label):
         count[letter] += 1
 
     return dict(count)
+
 
 def has_count(label, count):
     """
@@ -49,6 +52,7 @@ def has_count(label, count):
 
     return count in count_letters(label).values()
 
+
 def different_letter_count(first, second):
     """
     >>> different_letter_count('aaaa', 'aaa')
@@ -64,17 +68,18 @@ def different_letter_count(first, second):
     if len(first) != len(second):
         raise ValueError('labels are not the same length "{}", "{}"'.format(first, second))
 
-    return sum(a != b for (a,b) in zip(first, second))
+    return sum(a != b for (a, b) in zip(first, second))
+
 
 def part1(data):
     """
     >>> part1(read_input())
     6916
     """
-    
+
     twos = 0
     threes = 0
-    
+
     for label in data:
         if has_count(label, 2):
             twos += 1
@@ -82,6 +87,7 @@ def part1(data):
             threes += 1
 
     return twos * threes
+
 
 def part2(data):
     """
@@ -91,13 +97,14 @@ def part2(data):
 
     for (first, second) in itertools.product(data, data):
         if different_letter_count(first, second) == 1:
-            return "".join(a for (a, b) in zip(first,second) if a == b)
+            return "".join(a for (a, b) in zip(first, second) if a == b)
 
 
 def main():
     data = read_input()
     print(part1(data))
     print(part2(data))
+
 
 if __name__ == "__main__":
     main()

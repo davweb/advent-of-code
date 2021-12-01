@@ -44,7 +44,7 @@ def part1(banks):
     >>> part1(read_input())
     7864
     """
-   
+
     prev = set()
     count = 0
 
@@ -62,7 +62,7 @@ def part2(banks):
     >>> part2(read_input())
     1695
     """
-   
+
     prev = {}
     count = 0
 

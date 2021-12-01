@@ -6,7 +6,7 @@ def read_input():
 
 
 class Unit:
-    
+
     def __init__(self, elf, ap):
         self.elf = elf
         self.hp = 200
@@ -16,7 +16,7 @@ class Unit:
         return 'E' if self.elf else 'G'
 
     def __repr__(self):
-        return 'Unit({elf}, {hp})'.format(**self.__dict__)    
+        return 'Unit({elf}, {hp})'.format(**self.__dict__)
 
 
 class Location:
@@ -30,7 +30,7 @@ class Location:
 
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
-    
+
     def __hash__(self):
         return hash((self.x, self.y))
 
@@ -38,7 +38,7 @@ class Location:
         return '({x}, {y})'.format(**self.__dict__)
 
     def __repr__(self):
-        return 'Location({x}, {y})'.format(**self.__dict__)    
+        return 'Location({x}, {y})'.format(**self.__dict__)
 
 
 def join_locations(locations):
@@ -68,8 +68,8 @@ class Board:
                 else:
                     raise ValueError("Invalid Board cell '{}'".format(cell))
 
-                self.board[Location(x,y)] = value
-          
+                self.board[Location(x, y)] = value
+
         self.width = x + 1
         self.height = y + 1
 
@@ -86,7 +86,7 @@ class Board:
             for x in range(0, self.width):
                 cell = self[Location(x, y)]
 
-                if type(cell) == Unit:
+                if isinstance(cell, Unit):
                     char = 'E' if cell.elf else 'G'
                     row.append(char)
                     units.append('{}({})'.format(char, cell.hp))
@@ -102,18 +102,14 @@ class Board:
 
         return "\n".join(output)
 
-
     def __getitem__(self, key):
         return self.board.get(key, None)
-
 
     def __setitem__(self, key, value):
         self.board[key] = value
 
-
     def filled_locations(self):
         return self.board.keys()
-
 
     def targets(self, location):
         """
@@ -123,19 +119,18 @@ class Board:
         """
 
         source = self[location]
-        find_elf = not source.elf 
+        find_elf = not source.elf
 
         targets = []
 
         for location in self.filled_locations():
             value = self[location]
 
-            if type(value) == Unit and value.elf == find_elf:
+            if isinstance(value, Unit) and value.elf == find_elf:
                 targets.append(location)
 
         return targets
 
- 
     def adjacents(self, location):
         """
         Return the other locations adjacent to pass in location in reading order
@@ -148,30 +143,28 @@ class Board:
         >>> join_locations(board.adjacents(Location(2, 2)))
         '(2, 1), (1, 2)'
         """
-        
+
         x = location.x
         y = location.y
-        
+
         adjacents = []
 
         if y > 0:
             adjacents.append(Location(x, y - 1))
-            
+
         if x > 0:
             adjacents.append(Location(x - 1, y))
 
         if x < self.width - 1:
             adjacents.append(Location(x + 1, y))
-        
+
         if y < self.height - 1:
             adjacents.append(Location(x, y + 1))
 
         return adjacents
 
-
     def empty_adjacents(self, location):
         return [a for a in self.adjacents(location) if self[a] is None]
-
 
     def find_path(self, source, destination):
         """
@@ -196,7 +189,7 @@ class Board:
                     paths[option] = option_score
                     queue.append(option)
 
-        # Work out which step brings us closest (in reading order)  
+        # Work out which step brings us closest (in reading order)
         shortest_distance = None
         first_step = None
 
@@ -211,7 +204,6 @@ class Board:
 
         return (shortest_distance, first_step)
 
-
     def unit_locations(self):
         """
         >>> board = Board('#######\\n#.G.E.#\\n#E.G.E#\\n#.G.E.#\\n#######')
@@ -220,8 +212,7 @@ class Board:
         '(2, 1), (4, 1), (1, 2), (3, 2), (5, 2), (2, 3), (4, 3)'
         """
 
-        return sorted(l for l in self.filled_locations() if type(self[l]) == Unit)
-
+        return sorted(l for l in self.filled_locations() if isinstance(self[l], Unit))
 
     def take_turn(self):
         unit_locations = self.unit_locations()
@@ -237,7 +228,7 @@ class Board:
             adjacents = self.adjacents(location)
             targets = self.targets(location)
 
-            # If there are no targets the battle is over 
+            # If there are no targets the battle is over
             if not targets:
                 self.running = False
                 return
@@ -266,7 +257,7 @@ class Board:
             for adjacent in self.adjacents(location):
                 neighbour = self[adjacent]
 
-                if type(neighbour) == Unit and neighbour.elf == enemy:
+                if isinstance(neighbour, Unit) and neighbour.elf == enemy:
                     if attack_target is None or attack_target.hp > neighbour.hp:
                         attack_target = neighbour
                         attack_location = adjacent
@@ -280,7 +271,6 @@ class Board:
                         self.dead_elves += 1
 
         self.turns += 1
-
 
     def play(self, debug=False):
         """
@@ -324,7 +314,7 @@ class Board:
 
         self.running = True
 
-        while self.running:  
+        while self.running:
             if debug:
                 print(self)
 
@@ -333,10 +323,8 @@ class Board:
         if debug:
             print(self)
 
-
     def total_hp(self):
         return sum(self[unit_location].hp for unit_location in self.unit_locations())
-
 
     def score(self):
         return self.turns * self.total_hp()
@@ -347,7 +335,7 @@ def part1(data, debug=False):
     >>> part1(read_input())
     184206
     """
-    
+
     board = Board(data)
     board.play()
     return board.score()
@@ -358,7 +346,7 @@ def part2(data, debug=False):
     >>> part2(read_input())
     41804
     """
-    
+
     lower = 4
     upper = 50
     scores = {}

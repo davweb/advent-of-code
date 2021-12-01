@@ -58,7 +58,7 @@ def part1():
 
     a = generate(INPUT_A, GENERATOR_A)
     b = generate(INPUT_B, GENERATOR_B)
-    return sum(match(pair) for pair in pairs(a, b,  40000000))
+    return sum(match(pair) for pair in pairs(a, b, 40000000))
 
 
 def part2():

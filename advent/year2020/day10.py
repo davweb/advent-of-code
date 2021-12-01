@@ -23,7 +23,7 @@ def part1(adapters):
     >>> part1(read_input())
     2775
     """
- 
+
     current = 0
     gaps = defaultdict(int)
 
@@ -32,8 +32,6 @@ def part1(adapters):
         current = adapter
 
     return gaps[1] * gaps[3]
-
-
 
 
 def part2(adapters):
@@ -48,7 +46,7 @@ def part2(adapters):
 
     routes = {}
     routes[0] = 1
-    adapters.insert(0,0)
+    adapters.insert(0, 0)
 
     for adapter in adapters[1:]:
         routes[adapter] = sum(routes[parent] for parent in adapters if 1 <= adapter - parent <= 3)

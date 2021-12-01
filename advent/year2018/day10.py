@@ -5,6 +5,7 @@ from advent import bounds, md5
 
 PATTERN = re.compile(r"position=<([- ]\d+), ([- ]\d+)> velocity=<([- ]\d+), ([- ]\d+)>")
 
+
 class Light:
 
     def __init__(self, definition):
@@ -24,7 +25,7 @@ class Light:
         self.y = int(match.group(2))
         self.dx = int(match.group(3))
         self.dy = int(match.group(4))
-    
+
     def point(self):
         """
         >>> light =  Light("position=< 3, -7> velocity=< 0,  0>")
@@ -56,9 +57,11 @@ class Light:
     def __repr__(self):
         return "Light(x={x}, y={y}, dx={dx}, dy={dy})".format(**self.__dict__)
 
+
 def read_input():
     file = open('input/2018/day10-input.txt', 'r')
     return [Light(line) for line in file.readlines()]
+
 
 def area(points):
     """
@@ -69,6 +72,7 @@ def area(points):
     width = abs(right - left)
     height = abs(top - bottom)
     return width * height
+
 
 def output(lights):
     (left, top), (right, bottom) = bounds([light.point() for light in lights])
@@ -86,6 +90,7 @@ def output(lights):
         output.append("".join(line))
 
     return "\n".join(output)
+
 
 def part1and2(lights):
     """
@@ -107,7 +112,7 @@ def part1and2(lights):
 
         for light in lights:
             light.move()
-        
+
         size = area([light.point() for light in lights])
 
     # move back to smallest state
@@ -121,6 +126,7 @@ def part1and2(lights):
 def main():
     lights = read_input()
     print("{}\n{}".format(*part1and2(lights)))
+
 
 if __name__ == "__main__":
     main()

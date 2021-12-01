@@ -12,7 +12,7 @@ def part1(instructions):
     >>> part1(read_input())
     318883
     """
-   
+
     size = len(instructions)
     index = 0
     count = 0

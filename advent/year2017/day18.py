@@ -1,5 +1,6 @@
 from collections import defaultdict
 
+
 def read_input():
     file = open('input/2017/day18-input.txt', 'r')
     return parse_input(file.readlines())
@@ -44,7 +45,7 @@ def part1(instructions):
     >>> part1(read_input())
     4601
     """
-    
+
     registers = defaultdict(int)
     pointer = 0
     playing = None
@@ -90,7 +91,7 @@ def part2(instructions):
     """
 
     all_registers = [defaultdict(int), defaultdict(int)]
-    all_pointers = [0,0]
+    all_pointers = [0, 0]
     all_queues = [[], []]
     program = 0
 
@@ -99,7 +100,7 @@ def part2(instructions):
 
     first = True
     count = 0
-    
+
     while sum(len(q) for q in all_queues) > 0 or first:
         registers = all_registers[program]
         pointer = all_pointers[program]
@@ -113,7 +114,7 @@ def part2(instructions):
         step = 1
 
         if command == "snd":
-            first = False            
+            first = False
             other_queue.append(x)
             if program == 1:
                 count += 1
@@ -147,6 +148,7 @@ def main():
     data = read_input()
     print(part1(data))
     print(part2(data))
+
 
 if __name__ == "__main__":
     main()

@@ -31,7 +31,7 @@ def play(start, rounds):
         last = 0 if index is None else round - index
         round += 1
 
-    return last 
+    return last
 
 
 def part1(data):

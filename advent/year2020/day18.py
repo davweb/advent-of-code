@@ -5,7 +5,8 @@ import operator
 
 def read_input():
     file = open('input/2020/day18-input.txt', 'r')
-    return [[int(v) if v not in ('+', '*', '(', ')') else v for v in line.strip() if v != ' '] for line in file.readlines()]
+    return [[int(v) if v not in ('+', '*', '(', ')') else v for v in line.strip() if v != ' ']
+            for line in file.readlines()]
 
 
 def calculate(line):
@@ -15,7 +16,7 @@ def calculate(line):
     >>> calculate([1, '+', '(', 2, '*', 3, ')', '+', '(', 4, '*', '(', 5, '+', 6, ')', ')'])
     51
     """
-    
+
     stack = []
     group = 0
     op = operator.add
@@ -60,7 +61,7 @@ def brackets(line):
     >>> brackets([1, '+', '(', 2, '*', 3, ')', '+', '(', 4, '*', '(', 5, '+', 6, ')', ')'])
     51
     """
-    
+
     stack = []
     group = []
 
@@ -92,7 +93,7 @@ def part2(data):
     >>> part2(read_input())
     218621700997826
     """
-    
+
     return sum(brackets(line) for line in data)
 
 

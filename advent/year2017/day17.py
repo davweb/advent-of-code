@@ -45,7 +45,7 @@ def part2():
         buffer_size += 1
         if position == 1:
             current = value
-    
+
     return current
 
 

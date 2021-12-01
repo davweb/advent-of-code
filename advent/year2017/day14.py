@@ -2,10 +2,11 @@ import advent
 
 INPUT = 'jxqlasbh'
 
+
 def read_input():
     map = []
 
-    for row in range(0,128):
+    for row in range(0, 128):
         seed = "%s-%d" % (INPUT, row)
         hash = advent.knot_hash(seed)
         hash = "".join("{0:08b}".format(value) for value in hash)
@@ -25,11 +26,11 @@ def find_first(map):
     for y in range(0, len(map)):
         for x in range(0, len(map[y])):
             if map[y][x] == 1:
-                return (x,y)
+                return (x, y)
 
     return None
- 
- 
+
+
 def zero(map, x, y):
     if x < 0 or y < 0:
         return
@@ -46,7 +47,7 @@ def zero(map, x, y):
     zero(map, x, y - 1)
     zero(map, x + 1, y)
     zero(map, x, y + 1)
- 
+
 
 def part1(map):
     """
@@ -68,7 +69,7 @@ def part2(map):
 
     while c is not None:
         count += 1
-        x,y = c
+        x, y = c
         zero(map, x, y)
         c = find_first(map)
 

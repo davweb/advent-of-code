@@ -1,7 +1,8 @@
 import re
 from collections import defaultdict
 
-PATTERN = re.compile("([a-z]+) (inc|dec) (-?\d+) if ([a-z]+) ([<>=!]+) (-?\d+)")
+PATTERN = re.compile("([a-z]+) (inc|dec) (-?\\d+) if ([a-z]+) ([<>=!]+) (-?\\d+)")
+
 
 def read_input():
     file = open('input/2017/day8-input.txt', 'r')
@@ -46,11 +47,11 @@ def part1and2(data):
 
         if result:
             old = values[target]
-            
+
             if op == "inc":
                 old += amount
             elif op == "dec":
-                old -= amount    
+                old -= amount
             else:
                 raise ValueError("Unknown operator: %s" % op)
 

@@ -3,6 +3,7 @@
 import sys
 from collections import defaultdict
 
+
 def play(players, last_marble):
     """
     >>> play(9, 25)
@@ -33,9 +34,10 @@ def play(players, last_marble):
             del ring[index]
         else:
             index = (index + 2) % len(ring)
-            ring.insert(index, marble)  
-    
+            ring.insert(index, marble)
+
     return max(score for score in scores.values())
+
 
 class Marble:
     def __init__(self, value):
@@ -43,7 +45,7 @@ class Marble:
         self.next = self
         self.previous = self
 
-    def forward(self, count = 1):
+    def forward(self, count=1):
         """
         >>> a = Marble(1)
         >>> b = Marble(2)
@@ -59,10 +61,10 @@ class Marble:
         >>> a.forward(2)
         Marble(3)
         """
-        
+
         return self if count == 0 else self.next.forward(count - 1)
-    
-    def back(self, count = 1):
+
+    def back(self, count=1):
         """
         >>> a = Marble(1)
         >>> b = Marble(2)
@@ -126,6 +128,7 @@ class Marble:
     def __repr__(self):
         return 'Marble({})'.format(self.value)
 
+
 def play_new(players, last_marble, progress=False):
     """
     >>> play_new(9, 25)
@@ -151,7 +154,7 @@ def play_new(players, last_marble, progress=False):
 
     for marble in range(2, last_marble + 1):
         if progress and (marble % inc == 0):
-            print("{:3.0f}%".format(marble / last_marble * 100), end = "\r", file=sys.stderr)
+            print("{:3.0f}%".format(marble / last_marble * 100), end="\r", file=sys.stderr)
 
         player = (player + 1) % players
 
@@ -162,7 +165,7 @@ def play_new(players, last_marble, progress=False):
         else:
             current = current.forward(2)
             current = current.insert(Marble(marble))
-    
+
     if progress:
         print("Done!", file=sys.stderr)
     return max(score for score in scores.values())
@@ -176,6 +179,7 @@ def part1(players, last_marble):
 
     return play(players, last_marble)
 
+
 def part2(players, last_marble, progress=False):
     """
     >>> part2(468, 71010)
@@ -183,11 +187,12 @@ def part2(players, last_marble, progress=False):
     """
     return play_new(players, last_marble * 100, progress=progress)
 
+
 def main():
     # 468 players; last marble is worth 71010 points
     print(part1(468, 71010))
     print(part2(468, 71010, progress=True))
 
+
 if __name__ == "__main__":
     main()
-    

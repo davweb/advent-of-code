@@ -1,12 +1,13 @@
 from enum import Enum
 
+
 def read_input():
     file = open('input/2017/day23-input.txt', 'r')
     data = []
 
     for line in file:
-        data.append(line.strip().split())    
- 
+        data.append(line.strip().split())
+
     return data
 
 
@@ -16,11 +17,11 @@ def part1(data):
     5929
     """
 
-    registers = { 'a': 0, 'b': 0, 'c': 0, 'd': 0, 'e': 0, 'f': 0, 'g': 0, 'h': 0 }
+    registers = {'a': 0, 'b': 0, 'c': 0, 'd': 0, 'e': 0, 'f': 0, 'g': 0, 'h': 0}
     count = 0
     index = 0
 
-    while index >=0 and index < len(data):
+    while index >= 0 and index < len(data):
         (ins, x, y) = data[index]
 
         if y.isalpha():
@@ -49,6 +50,7 @@ def part1(data):
 
     return count
 
+
 def part2():
     """
     >>> part2()
@@ -71,12 +73,12 @@ def part2():
             d += 1
 
         b += 17
-    
+
     return h
 
 
 def main():
-    data = read_input();
+    data = read_input()
     print(part1(data))
     print(part2())
 

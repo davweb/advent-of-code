@@ -4,6 +4,7 @@ def read_input():
     file = open('input/2017/day1-input.txt', 'r')
     return file.read()
 
+
 def part1(captcha):
     """
     >>> part1("91212129")
@@ -11,7 +12,7 @@ def part1(captcha):
     >>> part1(read_input())
     1029
     """
-   
+
     prev = captcha[0]
     captcha += prev
     total = 0
@@ -34,21 +35,23 @@ def part2(captcha):
     >>> part2(read_input())
     1220
     """
-    
+
     half = len(captcha) // 2
-    rotated = captcha[half:] + captcha[:half] 
+    rotated = captcha[half:] + captcha[:half]
     total = 0
 
-    for (a,b) in zip(captcha, rotated):
+    for (a, b) in zip(captcha, rotated):
         if a == b:
             total += int(a)
 
     return total
 
+
 def main():
     data = read_input()
     print(part1(data))
     print(part2(data))
+
 
 if __name__ == "__main__":
     main()

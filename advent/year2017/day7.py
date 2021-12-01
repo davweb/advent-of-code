@@ -3,7 +3,8 @@
 import re
 from collections import Counter
 
-PATTERN = re.compile("([a-z]+) \((\d+)\)( -> ([a-z, ]+))?")
+PATTERN = re.compile("([a-z]+) \\((\\d+)\\)( -> ([a-z, ]+))?")
+
 
 def read_input():
     file = open('input/2017/day7-input.txt', 'r')
@@ -14,7 +15,7 @@ def read_input():
         name, weight, supporting = result.group(1, 2, 4)
         supporting = [] if supporting is None else supporting.split(', ')
         data.append((name, int(weight), supporting))
-    
+
     return data
 
 
@@ -23,7 +24,7 @@ def part1(data):
     >>> part1(read_input())
     'fbgguv'
     """
-   
+
     supported = set()
     names = set()
 
@@ -45,14 +46,13 @@ def part2(data):
     weights = {}
 
     def total_weight(name):
-        w = weights[name] 
+        w = weights[name]
         if name in children:
             w += sum(total_weight(child) for child in children[name])
         return w
 
-
     def odd_one_out(map):
-        singles = [value for (value,count) in Counter(map.values()).items() if count == 1]
+        singles = [value for (value, count) in Counter(map.values()).items() if count == 1]
 
         if len(singles) != 1:
             return None
@@ -62,13 +62,11 @@ def part2(data):
         for name, value in map.items():
             if value == single:
                 return name
-        
-        raise AssertionError("Should find match in the map") 
 
+        raise AssertionError("Should find match in the map")
 
     def children_weights(name):
         return dict((child, total_weight(child)) for child in children[name])
-
 
     def calculate_correct_weight(name):
         parent = parents[name]
@@ -76,7 +74,6 @@ def part2(data):
         wrong_weight = sibling_weights[name]
         right_weight = next(filter(lambda x: x[0] != name, sibling_weights.items()))[1]
         return weights[name] - wrong_weight + right_weight
-
 
     def find(name):
         child_weights = children_weights(name)
@@ -86,7 +83,6 @@ def part2(data):
             return calculate_correct_weight(name)
 
         return find(odd)
-
 
     for (name, weight, supporting) in data:
         weights[name] = int(weight)

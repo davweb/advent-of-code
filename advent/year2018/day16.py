@@ -13,7 +13,7 @@ INSTRUCTION_PATTERN = re.compile(
 def read_input():
     file = open('input/2018/day16-input.txt', 'r')
     text = file.read()
-    
+
     (samples, listing) = text.split("\n\n\n\n")
 
     instructions = []
@@ -41,7 +41,7 @@ def op_matches(before, after, a, b, c):
     >>> len(op_matches([3, 2, 1, 1], [3, 2, 2, 1], 2, 1, 2))
     3
     """
-    
+
     ops = [addr, addi, mulr, muli, banr, bani, borr, bori, setr, seti, gtir, gtri, gtrr, eqir, eqri, eqrr]
     matches = []
 
@@ -65,10 +65,10 @@ def part1(data):
 
     for (before, instruction, after) in data[0]:
         (_, a, b, c) = instruction
-        
+
         if len(op_matches(before, after, a, b, c)) >= 3:
             count += 1
-    
+
     return count
 
 
@@ -93,7 +93,7 @@ def part2(data):
     while sum(len(matches) for matches in match_map.values()) > 0:
         # Find the first id that maps to only one function
         op_id, op = next(iter((key, next(iter(matches))) for key, matches in match_map.items() if len(matches) == 1))
-        
+
         # record the mapping found
         op_map[op_id] = op
 

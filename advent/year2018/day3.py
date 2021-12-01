@@ -5,6 +5,7 @@ import re
 
 PATTERN = re.compile(r"#(\d+) @ (\d+),(\d+): (\d+)x(\d+)")
 
+
 class Claim:
 
     def __init__(self, definition):
@@ -25,7 +26,7 @@ class Claim:
         self.y = int(match.group(3))
         self.width = int(match.group(4))
         self.height = int(match.group(5))
-    
+
     def squares(self):
         """
         >>> list(Claim("#1 @ 0,0: 2x2").squares())
@@ -45,9 +46,11 @@ class Claim:
     def __repr__(self):
         return "Claim(id={id}, x={x}, y={y}, width={width}, height={height})".format(**self.__dict__)
 
+
 def read_input():
     file = open('input/2018/day3-input.txt', 'r')
     return [Claim(line) for line in file.readlines()]
+
 
 def part1(claims):
     """
@@ -58,22 +61,22 @@ def part1(claims):
 
     for claim in claims:
         for square in claim.squares():
-            grid[square] += 1 
+            grid[square] += 1
 
     return sum(1 for value in grid.values() if value >= 2)
+
 
 def part2(claims):
     """
     >>> part2(read_input())
     707
     """
-    
 
     grid = defaultdict(int)
 
     for claim in claims:
         for square in claim.squares():
-            grid[square] += 1 
+            grid[square] += 1
 
     for claim in claims:
         winner = True
@@ -86,10 +89,12 @@ def part2(claims):
         if winner:
             return claim.id
 
+
 def main():
     claims = read_input()
     print(part1(claims))
     print(part2(claims))
+
 
 if __name__ == "__main__":
     main()

@@ -16,7 +16,7 @@ def part1(data):
     >>> part1(read_input())
     451
     """
-   
+
     valid = 0
 
     for words in data:

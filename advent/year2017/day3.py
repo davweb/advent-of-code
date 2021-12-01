@@ -2,6 +2,7 @@
 
 INPUT = 347991
 
+
 def part1(input):
     """
     >>> part1(12)
@@ -13,7 +14,7 @@ def part1(input):
     >>> part1(INPUT)
     480
     """
-   
+
     x = 0
     y = 0
     i = 1
@@ -72,14 +73,13 @@ def part2(input):
 
     direction = 'right'
     values = {}
-    values[(0,0)] = 1
+    values[(0, 0)] = 1
 
     def adjacent(x, y):
         try:
-            return values[(x,y)]
+            return values[(x, y)]
         except KeyError:
             return 0
-
 
     while value < input:
         i += 1
@@ -105,9 +105,10 @@ def part2(input):
                 min_y = y
                 direction = 'right'
 
-        value = adjacent(x - 1, y - 1) + adjacent(x, y - 1) + adjacent(x + 1, y - 1) + adjacent(x - 1, y) + adjacent(x + 1, y) + adjacent(x - 1, y + 1) + adjacent(x, y + 1) + adjacent(x + 1, y + 1)
-        
-        values[(x,y)] = value
+        value = adjacent(x - 1, y - 1) + adjacent(x, y - 1) + adjacent(x + 1, y - 1) + adjacent(x - 1, y) + \
+            adjacent(x + 1, y) + adjacent(x - 1, y + 1) + adjacent(x, y + 1) + adjacent(x + 1, y + 1)
+
+        values[(x, y)] = value
 
     return value
 

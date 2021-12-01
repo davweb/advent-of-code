@@ -2,7 +2,7 @@
 
 import re
 
-PATTERN = re.compile("^(\d+)-(\d+) (\w): (.*)")
+PATTERN = re.compile("^(\\d+)-(\\d+) (\\w): (.*)")
 
 
 def read_input():
@@ -63,7 +63,7 @@ def valid_toboggan_password(line):
 
     firstMatch = password[firstIndex] == letter
     secondMatch = password[secondIndex] == letter
-    
+
     return firstMatch != secondMatch
 
 
@@ -72,7 +72,7 @@ def part1(data):
     >>> part1(read_input())
     622
     """
-    
+
     return sum(valid_sled_password(line) for line in data)
 
 
@@ -81,7 +81,7 @@ def part2(data):
     >>> part2(read_input())
     263
     """
-    
+
     return sum(valid_toboggan_password(line) for line in data)
 
 

@@ -5,6 +5,7 @@ from math import prod
 
 RULE_PATTERN = re.compile(r"(.*): (\d+)-(\d+) or (\d+)-(\d+)")
 
+
 def read_input():
     file = open("input/2020/day16-input.txt", "r")
     (rule_definitions, my_ticket_list, other_ticket_list) = file.read().split("\n\n")
@@ -85,8 +86,9 @@ def part2(data):
 
     while sum(len(columns) for columns in column_matches.values()) > 0:
         # Find the first rule that maps to only one column
-        rule_name, column = next(iter((rule, next(iter(columns))) for rule, columns in column_matches.items() if len(columns) == 1))
-        
+        rule_name, column = next(iter((rule, next(iter(columns)))
+                                 for rule, columns in column_matches.items() if len(columns) == 1))
+
         # record the mapping found
         field_map[rule_name] = column
 

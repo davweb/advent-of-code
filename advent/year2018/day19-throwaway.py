@@ -7,7 +7,7 @@ INSTRUCTION_PATTERN = re.compile(r"([a-z]{4}) (\d+) (\d+) (\d+)")
 def read_input():
     file = open('input/2018/day19-input.txt', 'r')
     text = file.read()
-    
+
     match = POINTER_PATTERN.match(text)
     register = int(match.group(1))
 
@@ -21,7 +21,7 @@ def read_input():
 
 def rewrite():
     (_, instructions) = read_input()
-    
+
     IF_PATTERN = re.compile(
         r"if (.*) then e = 1 else e = 0\n"
         r"skip e\n"
@@ -41,26 +41,26 @@ def rewrite():
                 a = line
 
             b = names[b]
-            
+
             if b == "i":
                 b = line
 
-            if c == "i":                 
+            if c == "i":
                 if str(a) > str(b):
                     (a, b) = (b, a)
 
                 command = "goto {} + {}".format(a, b)
-            else:    
-                command = "{} = {} + {}".format(c, a, b)            
-        
+            else:
+                command = "{} = {} + {}".format(c, a, b)
+
         elif op == "addi":
             a = names[a]
-            if c == "i": 
+            if c == "i":
                 b = b + line + 1
                 command = "goto {}".format(b)
-            else:    
-                command = "{} = {} + {}".format(c, a, b)            
-        
+            else:
+                command = "{} = {} + {}".format(c, a, b)
+
         elif op == "mulr":
             a = names[a]
             b = names[b]
@@ -75,7 +75,7 @@ def rewrite():
                 delta = line * line + 1
                 command = "goto {}".format(delta)
             else:
-                command = "{} = {} * {}".format(c, a, b)            
+                command = "{} = {} * {}".format(c, a, b)
         elif op == "muli":
             a = names[a]
             command = "{} = {} * {}".format(c, a, b)
@@ -134,9 +134,9 @@ def rewrite():
         output.append("{}{}".format(label, command))
 
     output = "\n".join(output)
-    
+
     output = IF_PATTERN.sub(r"if not (\1) then \2\n", output)
-    
+
     print(output)
 
 

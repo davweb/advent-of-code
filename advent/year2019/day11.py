@@ -6,23 +6,25 @@ from advent import bounds, md5
 
 DIRECTIONS = [(0, -1), (1, 0), (0, 1), (-1, 0)]
 
+
 def read_input():
     return [int(code) for code in open('input/2019/day11-input.txt', 'r').read().split(',')]
 
-def paint(code, painted = []):
+
+def paint(code, painted=[]):
     hull = defaultdict(int)
 
     for point in painted:
         hull[point] = 1
 
-    robot =  IntCode(code)
+    robot = IntCode(code)
 
     direction = 0
-    point = (0,0)
+    point = (0, 0)
 
     while True:
         input = [hull[point]]
-        
+
         paint = robot.execute(input)
 
         if paint is None:
@@ -40,6 +42,7 @@ def paint(code, painted = []):
 
     return(hull)
 
+
 def part1(code):
     """
     >>> part1(read_input())
@@ -55,8 +58,8 @@ def part2(code):
     '02f9c4484ef489931028014595e96565'
     """
 
-    hull = paint(code, [(0,0)])
-    
+    hull = paint(code, [(0, 0)])
+
     points = [point for point in hull.keys() if hull[point]]
 
     (left, top), (right, bottom) = bounds(points)
@@ -66,7 +69,7 @@ def part2(code):
         line = []
 
         for x in range(left, right + 1):
-            if (x,y) in points:
+            if (x, y) in points:
                 line.append("█")
             else:
                 line.append(" ")
@@ -80,6 +83,7 @@ def main():
     code = read_input()
     print(part1(code))
     print(part2(code))
+
 
 if __name__ == "__main__":
     main()

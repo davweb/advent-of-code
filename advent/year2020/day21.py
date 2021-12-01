@@ -4,6 +4,7 @@ import re
 
 PATTERN = re.compile(r"((\w+ )*)(\(contains (.*)\))?")
 
+
 def read_input():
     file = open("input/2020/day21-input.txt", "r")
     data = []
@@ -43,7 +44,7 @@ def part1(data):
                 allergen_map[allergen] = set(ingredients)
 
     used_ingredients = set()
-    
+
     for i in allergen_map.values():
         used_ingredients |= i
 
@@ -79,8 +80,9 @@ def part2(data):
 
     while sum(len(ingredients) for ingredients in allergen_map.values()) > 0:
         # Find the first rule that maps to only one ingredient
-        allergen, ingredient = next(iter((allergen, next(iter(ingredients))) for allergen, ingredients in allergen_map.items() if len(ingredients) == 1))
-        
+        allergen, ingredient = next(iter((allergen, next(iter(ingredients)))
+                                    for allergen, ingredients in allergen_map.items() if len(ingredients) == 1))
+
         # record the mapping found
         allergen_key[allergen] = ingredient
 

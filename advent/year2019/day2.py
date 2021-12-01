@@ -1,18 +1,21 @@
 #!/usr/local/bin/python3
 
-import itertools 
+import itertools
 from advent.year2019.intcode import IntCode
+
 
 def read_input():
     return [int(code) for code in open('input/2019/day2-input.txt', 'r').read().split(',')]
 
+
 def execute(data, noun, verb):
-    input = data.copy();
+    input = data.copy()
     input[1] = noun
     input[2] = verb
     i = IntCode(input)
     i.execute()
     return i.memory[0]
+
 
 def part1(data):
     """
@@ -20,7 +23,8 @@ def part1(data):
     4462686
     """
 
-    return execute(data, 12 , 2)
+    return execute(data, 12, 2)
+
 
 def part2(data):
     """
@@ -42,6 +46,7 @@ def main():
     data = read_input()
     print(part1(data))
     print(part2(data))
+
 
 if __name__ == "__main__":
     main()

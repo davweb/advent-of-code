@@ -4,6 +4,7 @@ from collections import defaultdict
 from itertools import product
 from functools import lru_cache
 
+
 def part1(input):
     """
     >>> part1(5)
@@ -18,7 +19,7 @@ def part1(input):
 
     elves = [0, 1]
     recipes = [3, 7]
-    
+
     while len(recipes) < input + 10:
         total = sum(recipes[elf] for elf in elves)
         recipes += [int(digit) for digit in str(total)]
@@ -77,7 +78,6 @@ def main():
     print(part1(503761))
     print(part2("503761"))
 
-    
+
 if __name__ == "__main__":
     main()
-    

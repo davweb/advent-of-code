@@ -1,6 +1,6 @@
 import re
 
-PATTERN = re.compile("(\d+): (\d+)")
+PATTERN = re.compile("(\\d+): (\\d+)")
 
 
 def read_input():
@@ -44,7 +44,7 @@ def part2(firewall):
 
     delay = 0
 
-    while(not clear(firewall,delay)):
+    while(not clear(firewall, delay)):
         delay += 1
 
     return delay

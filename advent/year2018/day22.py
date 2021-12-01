@@ -6,15 +6,18 @@ DEPTH = 5616
 TARGET = (10, 785)
 PADDING = 20
 
+
 class Type(Enum):
     ROCKY = 0
     WET = 1
     NARROW = 2
 
+
 class Tool(Enum):
     NEITHER = 0
     TORCH = 1
     CLIMBING_GEAR = 2
+
 
 BANNED_TOOL = {
     Type.ROCKY: Tool.NEITHER,
@@ -22,7 +25,8 @@ BANNED_TOOL = {
     Type.NARROW: Tool.CLIMBING_GEAR
 }
 
-def calculate_map(depth, target, padding = 0):
+
+def calculate_map(depth, target, padding=0):
     geologic_index = {}
     erosion_level = {}
     region_map = {}
@@ -41,9 +45,8 @@ def calculate_map(depth, target, padding = 0):
             else:
                 index = erosion_level[(x - 1, y)] * erosion_level[(x, y - 1)]
 
-          
             geologic_index[(x, y)] = index
-            
+
             level = (index + depth) % 20183
             erosion_level[(x, y)] = level
 
@@ -70,13 +73,13 @@ def adjacents(location, max_x, max_y):
 
     if y > 0:
         yield (x, y - 1)
-        
+
     if x > 0:
         yield (x - 1, y)
 
     if x < max_x:
         yield (x + 1, y)
-    
+
     if y < max_y:
         yield (x, y + 1)
 
@@ -129,7 +132,7 @@ def part2(depth, target):
             if new_pair not in time or time[new_pair] > option_time:
                 time[new_pair] = option_time
                 queue.append(new_pair)
-    
+
     return time[(target, Tool.TORCH)]
 
 

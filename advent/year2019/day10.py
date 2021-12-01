@@ -3,10 +3,12 @@
 import itertools
 import math
 
+
 def read_input():
     with open('input/2019/day10-input.txt', 'r') as file:
         data = [[cell == "#" for cell in line.strip()] for line in file.readlines()]
-        return set((x,y) for (x,y) in itertools.product(range(0, len(data[0])), range(0,len(data))) if data[y][x])
+        return set((x, y) for (x, y) in itertools.product(range(0, len(data[0])), range(0, len(data))) if data[y][x])
+
 
 def path(start, end):
     """
@@ -28,7 +30,7 @@ def path(start, end):
 
     (x, y) = start
     (ex, ey) = end
-    dx = ex - x 
+    dx = ex - x
     dy = ey - y
     path = []
 
@@ -53,6 +55,7 @@ def path(start, end):
                 path.append((x + mx, y + my))
 
     return path
+
 
 def can_see(asteroid, asteroids):
     """
@@ -93,9 +96,8 @@ def part1(asteroids):
     >>> part1(read_input())
     314
     """
- 
-    return max(len(can_see(asteroid, asteroids)) for asteroid in asteroids)
 
+    return max(len(can_see(asteroid, asteroids)) for asteroid in asteroids)
 
 
 def part2(asteroids):
@@ -106,7 +108,7 @@ def part2(asteroids):
 
     asteroids = asteroids.copy()
     max_seen = 0
-    
+
     for asteroid in asteroids:
         seen = len(can_see(asteroid, asteroids))
 
@@ -143,10 +145,12 @@ def part2(asteroids):
 
     return target[2][0] * 100 + target[2][1]
 
+
 def main():
     data = read_input()
     print(part1(data))
     print(part2(data))
+
 
 if __name__ == "__main__":
     main()

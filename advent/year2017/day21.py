@@ -3,7 +3,7 @@ def split_rule(rule):
     >>> split_rule('AB/CD')
     [['A', 'B'], ['C', 'D']]
     """
-    
+
     return [list(row) for row in rule.split('/')]
 
 
@@ -18,12 +18,12 @@ def join_rule(value):
 
 def rotations(rule):
     """
-    >>> sorted(rotations("ABC/DEF/GHI"))    
+    >>> sorted(rotations("ABC/DEF/GHI"))
     ['ABC/DEF/GHI', 'CFI/BEH/ADG', 'GDA/HEB/IFC', 'IHG/FED/CBA']
-    >>> sorted(rotations("AB/CD"))    
+    >>> sorted(rotations("AB/CD"))
     ['AB/CD', 'BD/AC', 'CA/DB', 'DC/BA']
     """
-    
+
     value = split_rule(rule)
     rotations = []
 
@@ -31,19 +31,19 @@ def rotations(rule):
         rotations.append(value)
         value = list(zip(*value[::-1]))
 
-    return (join_rule(rotation) for rotation in rotations) 
+    return (join_rule(rotation) for rotation in rotations)
 
 
 def flips(rule):
     """
-    >>> sorted(flips("AB/CD"))    
+    >>> sorted(flips("AB/CD"))
     ['AB/CD', 'BA/DC', 'CD/AB']
     >>> sorted(flips("ABC/DEF/GHI"))
     ['ABC/DEF/GHI', 'CBA/FED/IHG', 'GHI/DEF/ABC']
     """
-    
+
     value = split_rule(rule)
-    
+
     flips = []
     flips.append(value)
     flips.append(reversed(value))
@@ -54,10 +54,10 @@ def flips(rule):
 
 def permutations(rule):
     """
-    >>> sorted(permutations("AB/CD"))    
+    >>> sorted(permutations("AB/CD"))
     ['AB/CD', 'AC/BD', 'BA/DC', 'BD/AC', 'CA/DB', 'CD/AB', 'DB/CA', 'DC/BA']
     """
-    
+
     result = set()
 
     for rotation in rotations(rule):
@@ -80,7 +80,7 @@ def read_input():
 
 
 def process(rules, steps):
-    pattern = ".#.\n..#\n###" 
+    pattern = ".#.\n..#\n###"
     step = 0
 
     # Break the pattern into blocks
@@ -102,7 +102,7 @@ def process(rules, steps):
 
             for j in range(0, len(lines), size):
                 key = []
-                
+
                 for k in range(0, size):
                     key.append(lines[i + k][j:j + size])
 
@@ -145,16 +145,15 @@ def part2(rules):
     >>> part2(read_input())
     3389823
     """
-    
+
     return process(rules, 18)
 
 
 def main():
-    rules = read_input();
+    rules = read_input()
     print(part1(rules))
     print(part2(rules))
 
 
 if __name__ == "__main__":
     main()
-

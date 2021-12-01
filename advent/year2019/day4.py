@@ -2,6 +2,7 @@
 
 from collections import defaultdict
 
+
 def digits(n):
     """
     >>> digits(0)
@@ -51,6 +52,7 @@ def has_adjacent_digits(n):
 
     return False
 
+
 def has_never_decreasing_digits(n):
     """
     >>> has_never_decreasing_digits(111111)
@@ -70,6 +72,7 @@ def has_never_decreasing_digits(n):
         last = digit
 
     return True
+
 
 def has_pair_of_digits(n):
     """
@@ -100,6 +103,7 @@ def has_pair_of_digits(n):
 
     return count == 2
 
+
 def part1(data):
     """
     >>> part1(range(245182, 790572))
@@ -107,6 +111,7 @@ def part1(data):
     """
 
     return len([x for x in data if has_adjacent_digits(x) and has_never_decreasing_digits(x)])
+
 
 def part2(data):
     """
@@ -116,10 +121,12 @@ def part2(data):
 
     return len([x for x in data if has_pair_of_digits(x) and has_never_decreasing_digits(x)])
 
+
 def main():
     input = (245182, 790572)
     part1(range(*input))
     part2(range(*input))
+
 
 if __name__ == "__main__":
     main()

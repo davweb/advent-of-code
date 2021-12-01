@@ -2,8 +2,9 @@
 
 import re
 from advent import taxicab_distance
-          
+
 PATTERN = re.compile(r"pos=<(-?\d+),(-?\d+),(-?\d+)>, r=(\d+)")
+
 
 def read_input():
     file = open("input/2018/day23-input.txt", "r")
@@ -20,6 +21,7 @@ def read_input():
 
     return nanobots
 
+
 def distance(a, b):
     """
     >>> distance((0, 0, 0), (1, 3, 1))
@@ -33,6 +35,7 @@ def distance(a, b):
     """
 
     return abs(a[0] - b[0]) + abs(a[1] - b[1]) + abs(a[2] - b[2])
+
 
 def part1(nanobots):
     """
@@ -80,7 +83,7 @@ def part2(nanobots):
 
         for dx in range(-bot_range, bot_range + 1):
             yrange = bot_range - abs(dx)
-                
+
             for dy in range(-yrange, yrange + 1):
                 zrange = bot_range - abs(dx) - abs(dy)
 

@@ -1,6 +1,7 @@
 from itertools import chain
 from functools import reduce
 
+
 def read_input():
     file = open('input/2020/day6-input.txt', 'r')
     groups = []
@@ -25,7 +26,7 @@ def part1(groups):
     >>> part1(read_input())
     6680
     """
- 
+
     return sum(len(reduce(set.union, group)) for group in groups)
 
 

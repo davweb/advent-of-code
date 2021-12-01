@@ -2,9 +2,10 @@ def read_input():
     file = open('input/2015/day3-input.txt', 'r')
     return file.read()
 
+
 def move(location, direction):
     (x, y) = location
- 
+
     if direction == '>':
         x += 1
     elif direction == '<':
@@ -31,7 +32,7 @@ def part1(data):
     2572
     """
 
-    santa = (0,0) 
+    santa = (0, 0)
     visited = set([santa])
 
     for d in data:

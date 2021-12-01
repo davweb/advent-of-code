@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class State(Enum):
     CLEAN = 1
     WEAKENED = 2
@@ -19,8 +20,8 @@ def read_input():
     data = []
 
     for line in file:
-        data.append([State.INFECTED if c == '#' else State.CLEAN for c in line.strip()])    
- 
+        data.append([State.INFECTED if c == '#' else State.CLEAN for c in line.strip()])
+
     return data
 
 
@@ -63,8 +64,8 @@ def process(data, state_processor, bursts):
 
     for y, row in enumerate(data):
         for x, value in enumerate(row):
-            grid[(x,y)] = value
-  
+            grid[(x, y)] = value
+
     y = len(data) // 2
     x = len(data[0]) // 2
     direction = Direction.UP
@@ -73,9 +74,9 @@ def process(data, state_processor, bursts):
 
     while burst < bursts:
         burst += 1
-        state = grid.get((x,y), State.CLEAN)
+        state = grid.get((x, y), State.CLEAN)
         new_state = state_processor(state)
-        grid[(x,y)] = new_state
+        grid[(x, y)] = new_state
 
         if new_state == State.INFECTED:
             count += 1
@@ -99,7 +100,7 @@ def part1(data):
             return State.CLEAN
         else:
             return State.INFECTED
-    
+
     return process(data, next_state, 10000)
 
 
@@ -108,7 +109,7 @@ def part2(data):
     >>> part2(read_input())
     2512008
     """
-    
+
     def next_state(state):
         if state == State.INFECTED:
             return State.FLAGGED
@@ -118,14 +119,14 @@ def part2(data):
             return State.WEAKENED
         elif state == State.WEAKENED:
             return State.INFECTED
-        
+
         raise ValueError("Invalid State '{}'".format(state))
 
     return process(data, next_state, 10000000)
 
 
 def main():
-    data = read_input();
+    data = read_input()
     print(part1(data))
     print(part2(data))
 

@@ -15,7 +15,7 @@ def part1(data):
     >>> part1(read_input())
     43074
     """
-   
+
     return sum(max(row) - min(row) for row in data)
 
 
@@ -28,9 +28,9 @@ def part2(data):
     """
 
     checksum = 0
-    
+
     for row in data:
-        for (a,b) in itertools.permutations(row, 2):
+        for (a, b) in itertools.permutations(row, 2):
             if a % b == 0:
                 checksum += a // b
                 break

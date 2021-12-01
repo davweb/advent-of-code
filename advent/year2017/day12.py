@@ -3,6 +3,7 @@ from collections import defaultdict
 
 PATTERN = re.compile(r"(\d+) <-> ((\d+, )*\d+)")
 
+
 def read_input():
     graph = defaultdict(set)
     file = open('input/2017/day12-input.txt', 'r')
@@ -19,16 +20,18 @@ def read_input():
 
     return graph
 
+
 def find(graph, node, seen=None):
     if seen is None:
         seen = set()
     seen.add(node)
-    
+
     for target in graph[node]:
         if target not in seen:
             find(graph, target, seen)
-            
+
     return seen
+
 
 def part1(graph):
     """
@@ -37,6 +40,7 @@ def part1(graph):
     """
 
     return len(find(graph, 0))
+
 
 def part2(graph):
     """

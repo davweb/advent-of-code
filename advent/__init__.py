@@ -5,6 +5,7 @@ import functools
 KNOT_HASH_SIZE = 256
 KNOT_SLICE_SIZE = 16
 
+
 def bytes_to_hex(list_of_bytes):
     """
     >>> bytes_to_hex([1])
@@ -42,13 +43,14 @@ def knot_hash(input):
     for length in input_list:
         for i in range(length // 2):
             a = (position + i) % KNOT_HASH_SIZE
-            b = (position + length - i - 1)  % KNOT_HASH_SIZE
+            b = (position + length - i - 1) % KNOT_HASH_SIZE
             hash[a], hash[b] = hash[b], hash[a]
 
         position = (position + length + skip) % KNOT_HASH_SIZE
         skip += 1
 
-    hash = [functools.reduce(operator.xor, hash[i:i + KNOT_SLICE_SIZE]) for i in range(0, KNOT_HASH_SIZE, KNOT_SLICE_SIZE)]
+    hash = [functools.reduce(operator.xor, hash[i:i + KNOT_SLICE_SIZE])
+            for i in range(0, KNOT_HASH_SIZE, KNOT_SLICE_SIZE)]
     return hash
 
 
@@ -60,11 +62,11 @@ def bounds(points):
     ((-1, 1), (7, 9))
     """
 
-    left = min(x for (x,y) in points)
-    right = max(x for (x,y) in points)
-    top = min(y for (x,y) in points)
-    bottom = max(y for (x,y) in points)
-    
+    left = min(x for (x, y) in points)
+    right = max(x for (x, y) in points)
+    top = min(y for (x, y) in points)
+    bottom = max(y for (x, y) in points)
+
     return ((left, top), (right, bottom))
 
 
@@ -73,7 +75,7 @@ def md5(string):
     >>> md5("test")
     '098f6bcd4621d373cade4e832627b4f6'
     """
-    
+
     return hashlib.md5(string.encode('utf-8')).hexdigest()
 
 

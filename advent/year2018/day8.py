@@ -2,10 +2,12 @@
 
 from collections import defaultdict
 
+
 def read_input():
     with open("input/2018/day8-input.txt", "r") as file:
         data = file.read()
         return [int(x) for x in data.split(' ')]
+
 
 def part1(data):
     """
@@ -26,13 +28,13 @@ def part1(data):
             metadata_count = data.pop(0)
 
             for _ in range(0, metadata_count):
-                queue.insert(0, False);
+                queue.insert(0, False)
 
             for _ in range(0, child_count):
                 queue.insert(0, True)
         else:
             metadata += data.pop(0)
-    
+
     return metadata
 
 
@@ -62,7 +64,7 @@ def node_value(data):
     for m in data[index:index + metadata_count]:
         if m == 0:
             continue
-        
+
         if children:
             try:
                 value += children[m - 1]
@@ -75,7 +77,6 @@ def node_value(data):
     return (value, index)
 
 
-
 def part2(data):
     """
     >>> part2(read_input())
@@ -83,11 +84,12 @@ def part2(data):
     """
     return node_value(data)[0]
 
+
 def main():
     data = read_input()
     print(part1(data))
     print(part2(data))
 
+
 if __name__ == "__main__":
     main()
-    
