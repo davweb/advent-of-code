@@ -3,7 +3,7 @@
 INPUT = 347991
 
 
-def part1(input):
+def part1(data):
     """
     >>> part1(12)
     3
@@ -25,7 +25,7 @@ def part1(input):
 
     direction = 'right'
 
-    while i < input:
+    while i < data:
         i += 1
 
         if direction == 'right':
@@ -52,7 +52,7 @@ def part1(input):
     return abs(x) + abs(y)
 
 
-def part2(input):
+def part2(data):
     """
     >>> part2(140)
     142
@@ -81,7 +81,7 @@ def part2(input):
         except KeyError:
             return 0
 
-    while value < input:
+    while value < data:
         i += 1
 
         if direction == 'right':

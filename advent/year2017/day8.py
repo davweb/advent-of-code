@@ -16,9 +16,31 @@ def read_input():
     return data
 
 
+def compare(comparison, current, value):
+    if comparison == "==":
+        return current == value
+    if comparison == "!=":
+        return current != value
+    if comparison == ">":
+        return current > value
+    if comparison == "<":
+        return current < value
+    if comparison == ">=":
+        return current >= value
+    if comparison == "<=":
+        return current <= value
+
+    raise ValueError("Unknown comparison '%s'" % comparison)
+
+
 def part1and2(data):
     """
-    >>> part1and2([['b', 'inc1', 5, 'a', '>', 1], ['a', 'inc', 1, 'b', '<', 5], ['c', 'dec', -10, 'a', '>=', 1], ['c', 'inc', -20, 'c', '==', 10]])
+    >>> part1and2([
+    ...     ['b', 'inc1', 5, 'a', '>', 1],
+    ...     ['a', 'inc', 1, 'b', '<', 5],
+    ...     ['c', 'dec', -10, 'a', '>=', 1],
+    ...     ['c', 'inc', -20, 'c', '==', 10]
+    ... ])
     (1, 10)
     >>> part1and2(read_input())
     (4647, 5590)
@@ -30,22 +52,7 @@ def part1and2(data):
     for (target, op, amount, source, comparison, value) in data:
         current = values[source]
 
-        if comparison == "==":
-            result = current == value
-        elif comparison == "!=":
-            result = current != value
-        elif comparison == ">":
-            result = current > value
-        elif comparison == "<":
-            result = current < value
-        elif comparison == ">=":
-            result = current >= value
-        elif comparison == "<=":
-            result = current <= value
-        else:
-            raise ValueError("Unknown comparison '%s'" % comparison)
-
-        if result:
+        if compare(comparison, current, value):
             old = values[target]
 
             if op == "inc":

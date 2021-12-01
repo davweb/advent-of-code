@@ -1,6 +1,3 @@
-from enum import Enum
-
-
 def read_input():
     file = open('input/2017/day24-input.txt', 'r')
     data = []
@@ -92,12 +89,12 @@ def part2(data):
     1841
     """
 
-    def longest(old_chain, new_chain):
+    def longest_chain(old_chain, new_chain):
         old = len(old_chain)
         new = len(new_chain)
         return new > old or (new == old and weight(new_chain) > weight(old_chain))
 
-    chain = find_chain(0, data, longest)
+    chain = find_chain(0, data, longest_chain)
     return weight(chain)
 
 

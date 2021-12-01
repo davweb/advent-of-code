@@ -28,7 +28,7 @@ def part1(data):
     supported = set()
     names = set()
 
-    for (name, weight, supporting) in data:
+    for (name, _, supporting) in data:
         names.add(name)
         supported.update(supporting)
 
@@ -51,15 +51,15 @@ def part2(data):
             w += sum(total_weight(child) for child in children[name])
         return w
 
-    def odd_one_out(map):
-        singles = [value for (value, count) in Counter(map.values()).items() if count == 1]
+    def odd_one_out(weight_map):
+        singles = [value for (value, count) in Counter(weight_map.values()).items() if count == 1]
 
         if len(singles) != 1:
             return None
 
         single = singles.pop()
 
-        for name, value in map.items():
+        for name, value in weight_map.items():
             if value == single:
                 return name
 

@@ -25,13 +25,13 @@ def rotations(rule):
     """
 
     value = split_rule(rule)
-    rotations = []
+    result = []
 
     for _ in range(4):
-        rotations.append(value)
+        result.append(value)
         value = list(zip(*value[::-1]))
 
-    return (join_rule(rotation) for rotation in rotations)
+    return (join_rule(rotation) for rotation in result)
 
 
 def flips(rule):
@@ -44,12 +44,12 @@ def flips(rule):
 
     value = split_rule(rule)
 
-    flips = []
-    flips.append(value)
-    flips.append(reversed(value))
-    flips.append(reversed(row) for row in value)
+    result = []
+    result.append(value)
+    result.append(reversed(value))
+    result.append(reversed(row) for row in value)
 
-    return (join_rule(flip) for flip in flips)
+    return (join_rule(flip) for flip in result)
 
 
 def permutations(rule):

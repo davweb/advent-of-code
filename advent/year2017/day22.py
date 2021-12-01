@@ -29,31 +29,28 @@ def next_direction(direction, state):
     if state == State.FLAGGED:
         if direction == Direction.UP:
             return Direction.DOWN
-        elif direction == Direction.RIGHT:
+        if direction == Direction.RIGHT:
             return Direction.LEFT
-        elif direction == Direction.DOWN:
+        if direction == Direction.DOWN:
             return Direction.UP
-        else:
-            return Direction.RIGHT
-    elif state == State.INFECTED:
+        return Direction.RIGHT
+    if state == State.INFECTED:
         if direction == Direction.UP:
             return Direction.RIGHT
-        elif direction == Direction.RIGHT:
+        if direction == Direction.RIGHT:
             return Direction.DOWN
-        elif direction == Direction.DOWN:
+        if direction == Direction.DOWN:
             return Direction.LEFT
-        else:
-            return Direction.UP
-    elif state == State.CLEAN:
+        return Direction.UP
+    if state == State.CLEAN:
         if direction == Direction.UP:
             return Direction.LEFT
-        elif direction == Direction.LEFT:
+        if direction == Direction.LEFT:
             return Direction.DOWN
-        elif direction == Direction.DOWN:
+        if direction == Direction.DOWN:
             return Direction.RIGHT
-        else:
-            return Direction.UP
-    elif state == State.WEAKENED:
+        return Direction.UP
+    if state == State.WEAKENED:
         return direction
 
     raise ValueError("Invalid State '{}'".format(state))
@@ -98,8 +95,7 @@ def part1(data):
     def next_state(state):
         if state == State.INFECTED:
             return State.CLEAN
-        else:
-            return State.INFECTED
+        return State.INFECTED
 
     return process(data, next_state, 10000)
 
@@ -113,11 +109,11 @@ def part2(data):
     def next_state(state):
         if state == State.INFECTED:
             return State.FLAGGED
-        elif state == State.FLAGGED:
+        if state == State.FLAGGED:
             return State.CLEAN
-        elif state == State.CLEAN:
+        if state == State.CLEAN:
             return State.WEAKENED
-        elif state == State.WEAKENED:
+        if state == State.WEAKENED:
             return State.INFECTED
 
         raise ValueError("Invalid State '{}'".format(state))

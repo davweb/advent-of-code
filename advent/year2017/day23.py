@@ -1,6 +1,3 @@
-from enum import Enum
-
-
 def read_input():
     file = open('input/2017/day23-input.txt', 'r')
     data = []
@@ -21,7 +18,7 @@ def part1(data):
     count = 0
     index = 0
 
-    while index >= 0 and index < len(data):
+    while 0 <= index < len(data):
         (ins, x, y) = data[index]
 
         if y.isalpha():
