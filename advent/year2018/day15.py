@@ -317,7 +317,6 @@ class Board:
         while self.running:
             self.take_turn()
 
-
     def total_hp(self):
         return sum(self[unit_location].hp for unit_location in self.unit_locations())
 

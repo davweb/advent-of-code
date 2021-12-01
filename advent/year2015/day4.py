@@ -1,6 +1,7 @@
 import itertools
 from advent import md5
 
+
 def mine(key, prefix):
 
     for count in itertools.count(start=1):
