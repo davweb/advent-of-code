@@ -1,4 +1,4 @@
-import hashlib
+import _md5 
 import operator
 import functools
 
@@ -76,7 +76,7 @@ def md5(string):
     '098f6bcd4621d373cade4e832627b4f6'
     """
 
-    return hashlib.md5(string.encode('utf-8')).hexdigest()
+    return _md5.md5(string.encode('utf-8')).hexdigest()
 
 
 def taxicab_distance(a, b):

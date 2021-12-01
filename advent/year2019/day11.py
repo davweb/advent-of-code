@@ -2,7 +2,7 @@
 
 from advent.year2019.intcode import IntCode
 from collections import defaultdict
-from advent import bounds, md5
+from advent import bounds
 
 DIRECTIONS = [(0, -1), (1, 0), (0, 1), (-1, 0)]
 
@@ -54,6 +54,7 @@ def part1(code):
 
 def part2(code):
     """
+    >>> from advent import md5
     >>> md5(part2(read_input()))
     '02f9c4484ef489931028014595e96565'
     """

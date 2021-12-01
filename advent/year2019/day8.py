@@ -2,7 +2,6 @@
 
 from collections import defaultdict
 from operator import itemgetter
-from advent import md5
 
 
 def read_input():
@@ -78,6 +77,7 @@ def part1(input):
 
 def part2(code):
     """
+    >>> from advent import md5
     >>> md5(part2(read_input()))
     '70918ebfcb8099bc4cc51de972a09319'
     """

@@ -272,7 +272,7 @@ class Board:
 
         self.turns += 1
 
-    def play(self, debug=False):
+    def play(self):
         """
         >>> board = Board("#######\\n#.G...#\\n#...EG#\\n#.#.#G#\\n#..G#E#\\n#.....#\\n#######")
         >>> board.play()
@@ -315,13 +315,8 @@ class Board:
         self.running = True
 
         while self.running:
-            if debug:
-                print(self)
-
             self.take_turn()
 
-        if debug:
-            print(self)
 
     def total_hp(self):
         return sum(self[unit_location].hp for unit_location in self.unit_locations())
@@ -330,7 +325,7 @@ class Board:
         return self.turns * self.total_hp()
 
 
-def part1(data, debug=False):
+def part1(data):
     """
     >>> part1(read_input())
     184206
@@ -341,7 +336,7 @@ def part1(data, debug=False):
     return board.score()
 
 
-def part2(data, debug=False):
+def part2(data):
     """
     >>> part2(read_input())
     41804

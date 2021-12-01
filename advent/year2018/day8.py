@@ -1,7 +1,5 @@
 #!/usr/local/bin/python3
 
-from collections import defaultdict
-
 
 def read_input():
     with open("input/2018/day8-input.txt", "r") as file:

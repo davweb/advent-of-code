@@ -1,9 +1,5 @@
 #!/usr/local/bin/python3
 
-from collections import defaultdict
-from itertools import product
-from functools import lru_cache
-
 
 def part1(input):
     """

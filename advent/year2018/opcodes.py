@@ -102,7 +102,7 @@ def bori(registers, a, b, c):
     registers[c] = registers[a] | b
 
 
-def setr(registers, a, b, c):
+def setr(registers, a, _, c):
     """
     setr (set register) copies the contents of register A into register C. (Input B is ignored.)
 
@@ -115,7 +115,7 @@ def setr(registers, a, b, c):
     registers[c] = registers[a]
 
 
-def seti(registers, a, b, c):
+def seti(registers, a, _, c):
     """
     seti (set immediate) stores value A into register C. (Input B is ignored.)
 

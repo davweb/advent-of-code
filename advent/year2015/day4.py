@@ -1,13 +1,11 @@
-from _md5 import md5
 import itertools
-
+from advent import md5
 
 def mine(key, prefix):
 
     for count in itertools.count(start=1):
-        message = "{}{}".format(key, count).encode('utf-8')
-        hash = md5(message)
-        digest = hash.hexdigest()
+        message = "{}{}".format(key, count)
+        digest = md5(message)
 
         if digest.startswith(prefix):
             return count

@@ -4,7 +4,6 @@ from collections import defaultdict
 import enum
 from advent.year2019.intcode import IntCode
 from advent import bounds
-import sys
 
 
 def read_input():
@@ -13,7 +12,7 @@ def read_input():
 
 class Movement(enum.Enum):
 
-    def __new__(cls, *args, **kwds):
+    def __new__(cls):
         value = len(cls.__members__) + 1
         obj = object.__new__(cls)
         obj._value_ = value

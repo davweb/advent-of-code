@@ -2,7 +2,7 @@
 
 from advent.year2019.intcode import IntCode
 from collections import defaultdict
-from advent import bounds, md5
+from advent import md5
 import curses
 import time
 

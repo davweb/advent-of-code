@@ -1,7 +1,7 @@
 #!/usr/local/bin/python3
 
 import re
-from advent import bounds, md5
+from advent import bounds
 
 PATTERN = re.compile(r"position=<([- ]\d+), ([- ]\d+)> velocity=<([- ]\d+), ([- ]\d+)>")
 
@@ -94,6 +94,7 @@ def output(lights):
 
 def part1and2(lights):
     """
+    >>> from advent import md5
     >>> output = part1and2(read_input())
     >>> md5(output[0])
     'a72b6658dc84b74b1f1ecdfa0a2f98b9'

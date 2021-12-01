@@ -1,6 +1,5 @@
 #!/usr/local/bin/python3
 
-from collections import defaultdict
 import itertools
 from functools import total_ordering
 from enum import Enum
