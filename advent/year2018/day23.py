@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import re
-from advent import taxicab_distance
 
 PATTERN = re.compile(r"pos=<(-?\d+),(-?\d+),(-?\d+)>, r=(\d+)")
 
