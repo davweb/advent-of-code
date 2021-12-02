@@ -8,10 +8,10 @@ def read_input():
 
     for row in range(0, 128):
         seed = "%s-%d" % (INPUT, row)
-        hash = advent.knot_hash(seed)
-        hash = "".join("{0:08b}".format(value) for value in hash)
-        hash = [int(c) for c in hash]
-        data.append(hash)
+        hash_value = advent.knot_hash(seed)
+        hash_value = "".join("{0:08b}".format(value) for value in hash_value)
+        hash_value = [int(c) for c in hash_value]
+        data.append(hash_value)
 
     return data
 
@@ -23,10 +23,10 @@ def find_first(data):
     >>> find_first([[0, 0], [0, 0]])
     """
 
-    for y in range(0, len(data)):
-        for x in range(0, len(data[y])):
-            if data[y][x] == 1:
-                return (x, y)
+    for y_index, y_value in enumerate(data):
+        for x_index, x_value in enumerate(y_value):
+            if x_value == 1:
+                return (x_index, y_index)
 
     return None
 
