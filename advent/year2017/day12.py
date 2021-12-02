@@ -51,7 +51,7 @@ def part2(graph):
     nodes = set(graph.keys())
     count = 0
 
-    while (len(nodes) > 0):
+    while len(nodes) > 0:
         count += 1
         root = nodes.pop()
         found = find(graph, root)

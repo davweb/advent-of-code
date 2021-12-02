@@ -37,7 +37,7 @@ def move(direction, x, y):
 def valid_move(network, x, y):
     height = len(network)
     width = len(network[0])
-    return x >= 0 and x < width and y >= 0 and y < height and network[y][x] != ' '
+    return 0 <= x < width and 0 <= y < height and network[y][x] != ' '
 
 
 def visit(network):

@@ -16,18 +16,18 @@ def part1(data):
     position = 0
     skip = 0
     hash_size = 256
-    hash = list(range(hash_size))
+    hash_value = list(range(hash_size))
 
     for length in data:
         for i in range(length // 2):
             a = (position + i) % hash_size
             b = (position + length - i - 1) % hash_size
-            hash[a], hash[b] = hash[b], hash[a]
+            hash_value[a], hash_value[b] = hash_value[b], hash_value[a]
 
         position = (position + length + skip) % hash_size
         skip += 1
 
-    return hash[0] * hash[1]
+    return hash_value[0] * hash_value[1]
 
 
 def part2(data):
@@ -36,8 +36,8 @@ def part2(data):
     'd9a7de4a809c56bf3a9465cb84392c8e'
     """
 
-    hash = knot_hash(data)
-    return bytes_to_hex(hash)
+    hash_value = knot_hash(data)
+    return bytes_to_hex(hash_value)
 
 
 def main():

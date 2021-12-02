@@ -27,9 +27,9 @@ def part1(firewall):
 
 
 def clear(firewall, delay):
-    for depth, range in firewall.items():
+    for depth, range_value in firewall.items():
         turns = depth + delay
-        position = turns % (range * 2 - 2)
+        position = turns % (range_value * 2 - 2)
         if position == 0:
             return False
 
@@ -44,7 +44,7 @@ def part2(firewall):
 
     delay = 0
 
-    while(not clear(firewall, delay)):
+    while not clear(firewall, delay):
         delay += 1
 
     return delay

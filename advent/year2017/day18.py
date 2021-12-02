@@ -50,7 +50,7 @@ def part1(instructions):
     pointer = 0
     playing = None
 
-    while pointer >= 0 and pointer < len(instructions):
+    while 0 <= pointer < len(instructions):
         command, register, y = instructions[pointer]
         x = register_value(registers, register)
         y = register_value(registers, y)
