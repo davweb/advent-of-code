@@ -6,7 +6,7 @@ from collections import defaultdict
 PATTERN = re.compile(r"(\d+) <-> ((\d+, )*\d+)")
 
 def read_input():
-    with open("input/2021/day1-input.txt", "r") as file:
+    with open('input/2021/day1-input.txt') as file:
         #return [int(line) for line in file.readlines()]
         return file.read().split(",")
 
