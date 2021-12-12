@@ -26,6 +26,7 @@ def part1(data):
     0
     """
 
+    print(data)
     return 0
 
 
