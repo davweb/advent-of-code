@@ -8,17 +8,20 @@ PATTERN = re.compile(r"(\d+) <-> ((\d+, )*\d+)")
 def read_input():
     with open('input/2021/day1-input.txt') as file:
         #return [int(line) for line in file.readlines()]
-        return file.read().split(",")
+        #return file.read().split(",")
+        return 0
 
 
-def my_function():
-    """Calculate something
-
-    x>>> my_function(12)
-    2
-    x>>> my_function(14)
-    2
+def my_function(input):
     """
+    >>> my_function(12)
+    12
+    >>> my_function(14)
+    14
+    """
+
+    return input
+    
 
 def part1(data):
     """
@@ -26,8 +29,7 @@ def part1(data):
     0
     """
 
-    print(data)
-    return 0
+    return data
 
 
 def part2(data):
