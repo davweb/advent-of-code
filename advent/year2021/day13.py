@@ -65,8 +65,16 @@ def part1(data):
 
 def part2(data):
     """
-    >>> part2(read_input())
-    0
+    >>> expected_result = '\\n'.join([
+    ...    '███   ██  ███  █  █  ██  ███  █  █ █   ',
+    ...    '█  █ █  █ █  █ █  █ █  █ █  █ █ █  █   ',
+    ...    '█  █ █    █  █ ████ █  █ █  █ ██   █   ',
+    ...    '███  █    ███  █  █ ████ ███  █ █  █   ',
+    ...    '█    █  █ █    █  █ █  █ █ █  █ █  █   ',
+    ...    '█     ██  █    █  █ █  █ █  █ █  █ ████'
+    ... ])
+    >>> part2(read_input()) == expected_result
+    True
     """
 
     dots, folds = data
