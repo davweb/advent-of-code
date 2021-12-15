@@ -123,8 +123,8 @@ def part1(data):
 
 def part2(data):
     """
-    # >>> part2(read_input())
-    # 2926813379532
+    >>> part2(read_input())
+    2926813379532
     """
 
     substitutions, formula = data
