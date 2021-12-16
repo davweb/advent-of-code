@@ -55,11 +55,21 @@ def search(board):
             best_route = total_risk
             print(best_route)
 
-        if x < right:
-            moves.append(((x + 1, y), total_risk))
+        if x < y:
 
-        if y < right:
-            moves.append(((x, y + 1), total_risk))
+            if x < right:
+                moves.append(((x + 1, y), total_risk))
+
+            if y < right:
+                moves.appendleft(((x, y + 1), total_risk))
+
+        else:
+
+            if y < right:
+                moves.append(((x, y + 1), total_risk))
+
+            if x < right:
+                moves.appendleft(((x + 1, y), total_risk))
 
         # Going "backwards" is less likely to get to the exit so put those moves at the head of the list 
         # so they get tried later
@@ -108,7 +118,7 @@ def part2(data):
 
 def main():
     data = read_input()
-    #print(part1(data))
+    print(part1(data))
     print(part2(data))
 
 
