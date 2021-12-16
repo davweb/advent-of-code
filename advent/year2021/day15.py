@@ -96,7 +96,10 @@ def part2(data):
 
             for mx in range(5):
                 for value in old_row:
-                    new_row.append(value + mx + my)
+                    new_value = value + mx + my
+                    while new_value >= 10:
+                        new_value -= 9
+                    new_row.append(new_value)
 
             board.append(new_row)
 
