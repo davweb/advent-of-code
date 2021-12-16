@@ -3,16 +3,16 @@
 import re
 from collections import defaultdict
 
-PATTERN = re.compile(r"(\d+) <-> ((\d+, )*\d+)")
+PATTERN = re.compile(r'(\d+) <-> ((\d+, )*\d+)')
 
 def read_input():
-    with open('input/2021/day1-input.txt') as file:
+    with open('input/2021/day1-input.txt', encoding='utf8') as file:
         #return [int(line) for line in file.readlines()]
         #return file.read().split(",")
         return 0
 
 
-def my_function(input):
+def my_function(input_arg):
     """
     >>> my_function(12)
     12
@@ -20,8 +20,8 @@ def my_function(input):
     14
     """
 
-    return input
-    
+    return input_arg
+
 
 def part1(data):
     """
