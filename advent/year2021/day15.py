@@ -91,8 +91,9 @@ def part1(data):
 
 def part2(data):
     """
-    >>> part2(read_input())
-    2957
+    # Commenting out as this takes ~20 minutes to run
+    # >>> part2(read_input())
+    # 2957
     """
 
     board = []
