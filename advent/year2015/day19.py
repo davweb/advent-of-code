@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import re
+import string
 
 PATTERN = re.compile(r'(\w+) => (\w+)')
 
@@ -54,6 +55,36 @@ def part1(data):
     return len(molecules)
 
 
+
+def elements(substitutions):
+    """
+    >>> sorted(elements((('Al', 'ThF'), ('Al', 'ThRnFAr'))))
+    ['Al', 'Ar', 'F', 'Rn', 'Th']
+    """
+
+    elements = set()
+    after_elements = set()
+
+    for before, after in substitutions:
+        elements.add(before)
+        element = ''
+
+        for c in after:
+            if c in string.ascii_uppercase and element != '':
+                elements.add(element)
+                after_elements.add(element)
+                element = ''
+            
+            element += c
+            
+        if element != '':
+            elements.add(element)
+            after_elements.add(element)
+    
+    return elements - after_elements
+
+ 
+
 def reverse(substitutions, molecule, steps=0, state=None):
     """
     >>> reverse((('e', 'H'), ('e', 'O'), ('H', 'HO'), ('H', 'OH'), ('O', 'HH')), 'HOH')
@@ -69,7 +100,7 @@ def reverse(substitutions, molecule, steps=0, state=None):
             'seen': {}
         }
 
-    if molecule in state['seen'] and state['seen'][molecule] < steps:
+    if molecule in state['seen'] and state['seen'][molecule] <= steps:
         return
 
     state['seen'][molecule] = steps
@@ -93,6 +124,8 @@ def reverse(substitutions, molecule, steps=0, state=None):
             reverse(substitutions, new_molecule, steps + 1, state)
 
     return state['best']
+
+
 
 
 def part2(data):
