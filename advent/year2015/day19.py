@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 
 import re
-import string
+from collections import deque
+from random import shuffle
 
 PATTERN = re.compile(r'(\w+) => (\w+)')
 
 
 def read_input():
 
-    with open('input/2015/day19-input.txt') as file:
+    with open('input/2015/day19-input.txt', encoding='utf-8') as file:
         substitutions = []
 
         while True:
@@ -55,87 +56,67 @@ def part1(data):
     return len(molecules)
 
 
-
-def elements(substitutions):
+def reverse_engineer(substitutions, start_molecule):
     """
-    >>> sorted(elements((('Al', 'ThF'), ('Al', 'ThRnFAr'))))
-    ['Al', 'Ar', 'F', 'Rn', 'Th']
-    """
-
-    elements = set()
-    after_elements = set()
-
-    for before, after in substitutions:
-        elements.add(before)
-        element = ''
-
-        for c in after:
-            if c in string.ascii_uppercase and element != '':
-                elements.add(element)
-                after_elements.add(element)
-                element = ''
-            
-            element += c
-            
-        if element != '':
-            elements.add(element)
-            after_elements.add(element)
-    
-    return elements - after_elements
-
- 
-
-def reverse(substitutions, molecule, steps=0, state=None):
-    """
-    >>> reverse((('e', 'H'), ('e', 'O'), ('H', 'HO'), ('H', 'OH'), ('O', 'HH')), 'HOH')
+    >>> reverse_engineer([('e', 'H'), ('e', 'O'), ('H', 'HO'), ('H', 'OH'), ('O', 'HH')], 'HOH')
     3
-    >>> reverse((('e', 'H'), ('e', 'O'), ('H', 'HO'), ('H', 'OH'), ('O', 'HH')), 'HOHOHO')
+    >>> reverse_engineer([('e', 'H'), ('e', 'O'), ('H', 'HO'), ('H', 'OH'), ('O', 'HH')], 'HOHOHO')
     6
     """
 
-    if state is None:
-        state = {
-            'shortest': len(molecule),
-            'best': None,
-            'seen': {}
-        }
+    seen = {}
+    best = None
+    queue = deque()
+    queue.append((start_molecule, 0))
+    shortest = len(start_molecule)
 
-    if molecule in state['seen'] and state['seen'][molecule] <= steps:
-        return
+    while queue:
+        molecule, steps = queue.pop()
 
-    state['seen'][molecule] = steps
+        if best is not None and steps > best:
+            continue
 
-    if state['shortest'] is None or len(molecule) < state['shortest']:
-        state['shortest'] = len(molecule)
-        print(state['shortest'])
+        previous_steps = seen.get(molecule, None)
+        if previous_steps is not None and previous_steps <= steps:
+            continue
 
-    if molecule == 'e':
-        if state['best'] is None or steps < state['best']:
-            state['best'] = steps
+        seen[molecule] = steps
 
-        return state['best']
+        if shortest is None or len(molecule) < shortest:
+            shortest = len(molecule)
 
-    for before, after in substitutions:
-        for index in find_all(after, molecule):
-            new_molecule = molecule[:index] + before + molecule[index + len(after):]
+        if molecule == 'e':
+            if best is None or steps < best:
+                best = steps
+                # print("best so far", best)
 
-            if 'e' in molecule and len(molecule) > 1:
-                continue
-            reverse(substitutions, new_molecule, steps + 1, state)
+            continue
 
-    return state['best']
+        shuffle(substitutions)
 
+        for before, after in substitutions:
+            hits = list(find_all(after, molecule))
+            hits.reverse()
 
+            for index in hits:
+                new_molecule = molecule[:index] + before + molecule[index + len(after):]
+
+                if 'e' in molecule and len(molecule) > 1:
+                    continue
+
+                queue.append((new_molecule, steps + 1))
+
+    return best
 
 
 def part2(data):
     """
     # >>> part2(read_input())
-    # 0
+    # 195
     """
 
     substitutions, formula = data
-    return reverse(substitutions, formula)
+    return reverse_engineer(substitutions, formula)
 
 
 def main():
