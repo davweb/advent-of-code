@@ -2,12 +2,11 @@
 
 import re
 
-
 STACK_PATTERN = re.compile(r'^(\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   )')
 MOVE_PATTERN = re.compile(r'move (\d+) from (\d+) to (\d+)')
 
-def read_input():
 
+def read_input():
 
     with open('input/2022/day5-input.txt', encoding='utf8') as file:
         piles = []
@@ -47,6 +46,7 @@ def part1(data):
             stacks[dest - 1].append(stacks[source - 1].pop())
 
     return ''.join(stack[-1] for stack in stacks)
+
 
 def part2(data):
     """
