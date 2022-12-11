@@ -42,9 +42,8 @@ def part2(data):
 
 
 def main():
-    data = read_input()
-    print(part1(data))
-    print(part2(data))
+    print(part1(read_input()))
+    print(part2(read_input()))
 
 
 if __name__ == "__main__":
