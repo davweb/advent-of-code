@@ -8,6 +8,7 @@ PATTERN_RECT = re.compile(r'rect (\d+)x(\d+)')
 PATTERN_ROW = re.compile(r'rotate row y=(\d+) by (\d+)')
 PATTERN_COLUMN = re.compile(r'rotate column x=(\d+) by (\d+)')
 
+
 class Instruction(Enum):
     FILL = 1
     ROW = 2
@@ -97,6 +98,7 @@ def part1and2(data):
             screen.rotate_column(a, b)
 
     return f'{screen.count()}\n{screen}'
+
 
 def main():
     data = read_input()

@@ -43,7 +43,7 @@ def find_routes(input):
 
     shortest = None
     longest = None
-    queue = deque([((0,0), '')])
+    queue = deque([((0, 0), '')])
 
     while queue:
         (location, route) = queue.popleft()

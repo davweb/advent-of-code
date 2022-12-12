@@ -50,8 +50,8 @@ def second_elf_party(size):
         ring.pop()
         ring.rotate(- move - 1)
 
-
     return ring.pop()
+
 
 def part1(data):
     """

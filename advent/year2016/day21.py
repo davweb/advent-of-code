@@ -6,14 +6,15 @@ ROTATE = re.compile(r'rotate based on position of letter ([a-z])')
 MOVE = re.compile(r'move position (\d+) to position (\d+)')
 SWAP = re.compile(r'swap position (\d+) with position (\d+)')
 SWAP_LETTER = re.compile(r'swap letter ([a-z]) with letter ([a-z])')
-ROTATE_LEFT = re.compile('rotate left (\d+) steps?')
-ROTATE_RIGHT = re.compile('rotate right (\d+) steps?')
-REVERSE = re.compile('reverse positions (\d+) through (\d+)')
+ROTATE_LEFT = re.compile('rotate left (\\d+) steps?')
+ROTATE_RIGHT = re.compile('rotate right (\\d+) steps?')
+REVERSE = re.compile('reverse positions (\\d+) through (\\d+)')
+
 
 def read_input():
     with open('input/2016/day21-input.txt', encoding='utf8') as file:
-        #return [int(line) for line in file.readlines()]
-        #return file.read().split(",")
+        # return [int(line) for line in file.readlines()]
+        # return file.read().split(",")
         return [line.strip() for line in file]
 
 
@@ -91,17 +92,17 @@ def scramble(instructions, password):
             end = int(match.group(2))
             password = move(password, start, end)
 
-        elif match:= SWAP.match(instruction):
+        elif match := SWAP.match(instruction):
             first = int(match.group(1))
             second = int(match.group(2))
             password = swap(password, first, second)
 
-        elif match:= SWAP_LETTER.match(instruction):
+        elif match := SWAP_LETTER.match(instruction):
             first = match.group(1)
             second = match.group(2)
             password = swap(password, password.index(first), password.index(second))
 
-        elif match:= REVERSE.match(instruction):
+        elif match := REVERSE.match(instruction):
             first = int(match.group(1))
             second = int(match.group(2))
             password = reverse_part(password, first, second)
@@ -152,17 +153,17 @@ def unscramble(instructions, password):
             end = int(match.group(2))
             password = move(password, end, start)
 
-        elif match:= SWAP.match(instruction):
+        elif match := SWAP.match(instruction):
             first = int(match.group(1))
             second = int(match.group(2))
             password = swap(password, first, second)
 
-        elif match:= SWAP_LETTER.match(instruction):
+        elif match := SWAP_LETTER.match(instruction):
             first = match.group(1)
             second = match.group(2)
             password = swap(password, password.index(first), password.index(second))
 
-        elif match:= REVERSE.match(instruction):
+        elif match := REVERSE.match(instruction):
             first = int(match.group(1))
             second = int(match.group(2))
             password = reverse_part(password, first, second)

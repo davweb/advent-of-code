@@ -4,11 +4,12 @@ import re
 
 PATTERN = re.compile(r'Disc #(\d+) has (\d+) positions; at time=0, it is at position (\d+)')
 
+
 def read_input():
     output = []
 
     with open('input/2016/day16-input.txt', encoding='utf8') as file:
-        while match:= PATTERN.match(file.readline()):
+        while match := PATTERN.match(file.readline()):
             output.append([int(x) for x in match.groups()])
 
     return output

@@ -18,7 +18,6 @@ def next_line(line):
     # Only its left tile is a trap.
     # Only its right tile is a trap.
 
-
     output = ''
     line = f'{line}{SAFE}'
     left = False

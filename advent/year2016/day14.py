@@ -48,6 +48,7 @@ def hashes(salt):
         yield (i, md5(f'{salt}{i}'))
         i += 1
 
+
 def stretched_hashes(salt):
     """
     >>> next(stretched_hashes('abc'))

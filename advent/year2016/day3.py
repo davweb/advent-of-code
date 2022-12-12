@@ -11,7 +11,7 @@ def transform_input(data):
     [[101, 102, 103], [201, 202, 203], [301, 303, 303]]
     """
 
-    triangles = [[],[],[]]
+    triangles = [[], [], []]
 
     for row in data:
         for value, triangle in zip(row, triangles):

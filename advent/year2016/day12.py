@@ -7,7 +7,7 @@ def read_input():
 
 
 def run(lines, a=0, b=0, c=0, d=0):
-    register = { 'a': a, 'b': b, 'c': c, 'd': d }
+    register = {'a': a, 'b': b, 'c': c, 'd': d}
     index = 0
     end = len(lines)
 
@@ -57,7 +57,7 @@ def part2(data):
     9227663
     """
 
-    registers = run(lines=data, c = 1)
+    registers = run(lines=data, c=1)
     return registers['a']
 
 

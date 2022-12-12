@@ -5,10 +5,11 @@ from collections import deque
 
 PATTERN = re.compile(r'(\d+) <-> ((\d+, )*\d+)')
 
+
 def read_input():
     with open('input/2021/day1-input.txt', encoding='utf8') as file:
-        #return [int(line) for line in file.readlines()]
-        #return file.read().split(",")
+        # return [int(line) for line in file.readlines()]
+        # return file.read().split(",")
         return 0
 
 
@@ -45,13 +46,13 @@ def is_wall(x, y, seed):
     True
     """
 
-    return count_bits(x*x + 3*x + 2*x*y + y + y*y + seed) % 2 == 1
+    return count_bits(x * x + 3 * x + 2 * x * y + y + y * y + seed) % 2 == 1
 
 
 def moves(location, seed):
     (x, y) = location
 
-    for (nx, ny) in ((x - 1 , y), (x + 1 , y), (x, y - 1), (x, y + 1)):
+    for (nx, ny) in ((x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)):
         if nx < 0 or ny < 0:
             continue
 

@@ -6,6 +6,7 @@ from collections import Counter
 PATTERN = re.compile(r'(\S+)-(\d+)\[(\w+)\]')
 OFFSET = ord('a')
 
+
 def read_input():
     data = []
 

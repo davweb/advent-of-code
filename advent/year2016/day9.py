@@ -2,11 +2,13 @@
 
 from enum import Enum
 
+
 class State(Enum):
     NORMAL = 1
     READING_LENGTH = 2
     READING_MULTIPLE = 3
     READING_SECTION = 4
+
 
 def read_input():
     with open('input/2016/day9-input.txt', encoding='utf8') as file:
@@ -68,7 +70,6 @@ def decode(value):
                 multiple += c
 
     return output
-
 
 
 def extract(value):

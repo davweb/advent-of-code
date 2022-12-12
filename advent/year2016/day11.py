@@ -77,12 +77,12 @@ class Building:
             new_floors.append(self.elevator + 1)
 
         # No point moving down if all the floors below are empty
-        if self.elevator > 0 and  any(other_floor != () for other_floor in self.floors[0:self.elevator]):
+        if self.elevator > 0 and any(other_floor != () for other_floor in self.floors[0:self.elevator]):
             new_floors.append(self.elevator - 1)
 
         passengers = [(chip,) for chip in self.floors[self.elevator]]
 
-         # You can't get in a position where an illegal pair in the lift leads to a valid state
+        # You can't get in a position where an illegal pair in the lift leads to a valid state
         passengers += list(itertools.combinations(self.floors[self.elevator], 2))
 
         for new_floor in new_floors:
@@ -96,7 +96,6 @@ class Building:
                     possible_moves.append(new_building)
 
         return possible_moves
-
 
     def is_valid(self):
         """
@@ -118,11 +117,10 @@ class Building:
 
             generators = [chip.element_id for chip in floor if chip.kind == GENERATOR]
 
-            if generators and any (chip.kind == MICROCHIP and chip.element_id not in generators for chip in floor):
+            if generators and any(chip.kind == MICROCHIP and chip.element_id not in generators for chip in floor):
                 return False
 
         return True
-
 
     def finished(self):
         """
@@ -248,6 +246,7 @@ def part2():
 def main():
     print(part1())
     print(part2())
+
 
 if __name__ == "__main__":
     main()

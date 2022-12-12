@@ -5,6 +5,7 @@ import re
 PATTERN_BOT = re.compile(r'bot (\d+) gives low to (output|bot) (\d+) and high to (output|bot) (\d+)')
 PATTERN_VALUE = re.compile(r'value (\d+) goes to bot (\d+)')
 
+
 def read_input():
     output = []
 
@@ -66,7 +67,7 @@ class Bot:
                 raise ValueError(destination)
 
     def __process(self):
-        if len(self.values) != 2 or self.low is  None or self.high is None:
+        if len(self.values) != 2 or self.low is None or self.high is None:
             return
 
         self.values = sorted(self.values)
