@@ -12,7 +12,7 @@ def read_input():
 
 class Movement(enum.Enum):
 
-    def __new__(cls):
+    def __new__(cls, *args, **kwds):
         value = len(cls.__members__) + 1
         obj = object.__new__(cls)
         obj._value_ = value

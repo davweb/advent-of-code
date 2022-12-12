@@ -23,11 +23,17 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
-      - name: Install nose, numpy and regex
-        run: python -m pip install --upgrade pip nose2 numpy regex
+      - name: Install pip and pip-tools
+        run: python -m pip install --upgrade pip pip-tools
+
+      - name: Generate requirements.txt file
+        run: pip-compile requirements.in
+
+      - name: Install dependencies
+        run: pip-sync
 
       - name: Execute tests
-        run: nose2 --verbose
+        run: pytest
 
