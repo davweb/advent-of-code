@@ -121,7 +121,7 @@ def part1and2(lights):
         light.back()
     seconds -= 1
 
-    return(output(lights), seconds)
+    return (output(lights), seconds)
 
 
 def main():

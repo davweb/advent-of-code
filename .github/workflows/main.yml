@@ -37,3 +37,6 @@ jobs:
       - name: Execute tests
         run: pytest
 
+      - name: Check formatting
+        run: autopep8 --aggressive --aggressive --max-line-length 120 --diff --recursive --exit-code advent
+

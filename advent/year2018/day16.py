@@ -91,7 +91,7 @@ def part2(data):
     op_map = {}
 
     while sum(len(matches) for matches in match_map.values()) > 0:
-        # Find the first id that maps to only one function
+        #  Find the first id that maps to only one function
         op_id, op = next(iter((key, next(iter(matches))) for key, matches in match_map.items() if len(matches) == 1))
 
         # record the mapping found

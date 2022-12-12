@@ -58,7 +58,7 @@ def parse_regex(regex):
     brackets = 0
 
     for index, c in enumerate(regex):
-        # We need to ignore | inside brackets
+        #  We need to ignore | inside brackets
         if c == '(':
             brackets += 1
         elif c == ')':
@@ -80,8 +80,8 @@ def parse_regex(regex):
     group = []
     i = 0
 
-    # Go through the regex, processing expressions in brackets recursively
-    while(i < len(regex)):
+    #  Go through the regex, processing expressions in brackets recursively
+    while (i < len(regex)):
         c = regex[i]
 
         if c in ('N', 'S', 'E', 'W'):

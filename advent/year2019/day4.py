@@ -22,7 +22,7 @@ def digits(n):
 
     result = []
 
-    while(n > 0):
+    while (n > 0):
         digit = n % 10
         n //= 10
         result.append(digit)

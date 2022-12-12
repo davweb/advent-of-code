@@ -78,7 +78,7 @@ def calculate_happiness(rules, add_me):
     if add_me:
         names.add("Me")
 
-    # Assume change is > 0
+    #  Assume change is > 0
     max_happiness = 0
 
     for table in looped_permutations(names):

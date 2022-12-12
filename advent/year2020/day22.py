@@ -73,9 +73,9 @@ def combat(deck_one, deck_two):
 
     # This also handles the repeat case
     if len(deck_one) == 0:
-        return(2, deck_two)
+        return (2, deck_two)
     else:
-        return(1, deck_one)
+        return (1, deck_one)
 
 
 def part2(data):

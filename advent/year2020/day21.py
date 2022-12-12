@@ -79,7 +79,7 @@ def part2(data):
     allergen_key = {}
 
     while sum(len(ingredients) for ingredients in allergen_map.values()) > 0:
-        # Find the first rule that maps to only one ingredient
+        #  Find the first rule that maps to only one ingredient
         allergen, ingredient = next(iter((allergen, next(iter(ingredients)))
                                     for allergen, ingredients in allergen_map.items() if len(ingredients) == 1))
 

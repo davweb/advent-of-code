@@ -46,7 +46,7 @@ def calculate_group(group):
     231
     """
 
-    for(c, op) in (('+', operator.add), (('*'), operator.mul)):
+    for (c, op) in (('+', operator.add), (('*'), operator.mul)):
         while c in group:
             i = group.index(c)
             group[i - 1:i + 2] = [op(group[i - 1], group[i + 1])]

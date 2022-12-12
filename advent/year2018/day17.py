@@ -190,7 +190,7 @@ class Slice:
                     while self.grid.get((i, y)) != Block.CLAY:
                         self.grid[(i, y)] = Block.WATER
 
-                        # if we can pour down then stop spreading and go down
+                        #  if we can pour down then stop spreading and go down
                         if self.grid.get((i, y + 1)) is None:
                             action_queue.append((Action.POUR, (i, y + 1)))
                             poured = True
@@ -205,7 +205,7 @@ class Slice:
 
                     limit[direction] = i
 
-                # We've hit clay both sides
+                #  We've hit clay both sides
                 if not poured:
                     # Mark still water
                     for still in range(limit[Direction.LEFT] + 1, limit[Direction.RIGHT]):

@@ -68,7 +68,7 @@ class Box:
 
         remaining = []
 
-        # split this box into 27 boxes so we can leave out the overlap
+        #  split this box into 27 boxes so we can leave out the overlap
         for rx1, rx2 in ((self.x1, ox1 - 1), (ox1, ox2), (ox2 + 1, self.x2)):
             for ry1, ry2 in ((self.y1, oy1 - 1), (oy1, oy2), (oy2 + 1, self.y2)):
                 for rz1, rz2 in ((self.z1, oz1 - 1), (oz1, oz2), (oz2 + 1, self.z2)):

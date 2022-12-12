@@ -44,7 +44,7 @@ def read_input():
 
         file.readline()
         notes = [Note(line) for line in file.readlines()]
-        return(state, notes)
+        return (state, notes)
 
 
 def next_generation(state, notes):

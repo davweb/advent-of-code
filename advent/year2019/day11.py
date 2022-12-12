@@ -40,7 +40,7 @@ def paint(code, painted=[]):
         move = DIRECTIONS[direction]
         point = (point[0] + move[0], point[1] + move[1])
 
-    return(hull)
+    return (hull)
 
 
 def part1(code):

@@ -22,7 +22,7 @@ def most_common(data, index):
     elif ones < middle:
         common = '0'
     else:
-        # None means 1 and 0 most equally common
+        #  None means 1 and 0 most equally common
         common = None
 
     return common

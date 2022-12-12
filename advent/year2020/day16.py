@@ -71,7 +71,7 @@ def part2(data):
 
     column_matches = {}
 
-    # Assume every column is valid for field
+    #  Assume every column is valid for field
     for rule_name in rules.keys():
         column_matches[rule_name] = set(range(0, len(my_ticket)))
 
@@ -85,7 +85,7 @@ def part2(data):
     field_map = {}
 
     while sum(len(columns) for columns in column_matches.values()) > 0:
-        # Find the first rule that maps to only one column
+        #  Find the first rule that maps to only one column
         rule_name, column = next(iter((rule, next(iter(columns)))
                                  for rule, columns in column_matches.items() if len(columns) == 1))
 

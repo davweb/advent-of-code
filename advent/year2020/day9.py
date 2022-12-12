@@ -15,7 +15,7 @@ def validate_stream(window, stream):
     """
 
     previous = stream[0:window]
-    del(stream[0:window])
+    del (stream[0:window])
 
     for number in stream:
         valid_numbers = [sum(x) for x in combinations(previous, 2)]

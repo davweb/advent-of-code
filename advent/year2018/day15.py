@@ -228,7 +228,7 @@ class Board:
             adjacents = self.adjacents(location)
             targets = self.targets(location)
 
-            # If there are no targets the battle is over
+            #  If there are no targets the battle is over
             if not targets:
                 self.running = False
                 return
@@ -250,7 +250,7 @@ class Board:
                         self[location] = None
                         location = step
 
-            # attack if we can
+            #  attack if we can
             attack_target = None
             attack_location = None
 
