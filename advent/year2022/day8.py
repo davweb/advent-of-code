@@ -65,15 +65,15 @@ def scenic_score(data):
     for (x, y) in numpy.ndindex(trees.shape):
         height = trees[x, y]
 
-        # 0 - 1 = -1 which confuses the slices
-        # but score will be 0 so fine to skip
+        #  0 - 1 = -1 which confuses the slices
+        #  but score will be 0 so fine to skip
         if x == 0 or y == 0:
             continue
 
         score = count_visible(height, trees[x, y - 1::-1]) \
-                * count_visible(height, trees[x, y + 1:]) \
-                * count_visible(height, trees[x - 1::-1, y]) \
-                * count_visible(height, trees[x + 1:, y])
+            * count_visible(height, trees[x, y + 1:]) \
+            * count_visible(height, trees[x - 1::-1, y]) \
+            * count_visible(height, trees[x + 1:, y])
 
         best = max(best, score)
 

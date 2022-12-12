@@ -2,7 +2,8 @@
 
 import re
 
-STACK_PATTERN = re.compile(r'^(\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   )')
+STACK_PATTERN = re.compile(
+    r'^(\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   )')
 MOVE_PATTERN = re.compile(r'move (\d+) from (\d+) to (\d+)')
 
 
@@ -22,7 +23,7 @@ def read_input():
                 stack.pop()
             stacks.append(stack)
 
-        # Skip blank line
+        #  Skip blank line
         file.readline()
 
         moves = []

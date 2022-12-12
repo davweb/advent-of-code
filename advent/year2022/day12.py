@@ -25,9 +25,9 @@ def parse_map(text):
 
         for y, char in enumerate(line):
             if char == 'S':
-                start = (x,y)
+                start = (x, y)
             if char == 'E':
-                end = (x,y)
+                end = (x, y)
 
     return (output, start, end)
 
