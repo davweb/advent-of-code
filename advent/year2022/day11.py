@@ -1,3 +1,4 @@
+# pylint: disable=too-many-arguments,too-many-instance-attributes
 # -*- coding: utf-8 -*-
 
 import re
@@ -16,9 +17,10 @@ class Monkey:
     all = {}
     test_divisor = None
 
-    def calculate_test_divisor():
+    @classmethod
+    def calculate_test_divisor(cls):
         test_values = [monkey.test_value for monkey in Monkey.all.values()]
-        return math.lcm(*test_values)
+        Monkey.test_divisor = math.lcm(*test_values)
 
     def __init__(self, monkey_id, items, action, action_value, test_value, test_true, test_false):
         self.monkey_id = monkey_id
@@ -31,16 +33,13 @@ class Monkey:
         self.inspections = 0
 
         Monkey.all[monkey_id] = self
-        Monkey.test_divisor = Monkey.calculate_test_divisor()
-
-    def __repr__(self):
-        return f"Monkey({self.monkey_id}, {self.items}, '{self.action}', {self.action_value}, {self.test_value}, {self.test_true}, {self.test_false})"
+        Monkey.calculate_test_divisor()
 
     def __lt__(self, other):
         if self.inspections == other.inspections:
             return self.monkey_id < other.monkey_id
-        else:
-            return self.inspections < other.inspections
+
+        return self.inspections < other.inspections
 
     def inspect(self, worry_divider=None):
         for item in self.items:

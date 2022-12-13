@@ -27,8 +27,8 @@ def pull_rope(head, tail):
 
     if mx > 1 or my > 1 or (mx + my) > 2:
         return (step(head[0], tail[0]), step(head[1], tail[1]))
-    else:
-        return tail
+
+    return tail
 
 
 def move(head, direction):

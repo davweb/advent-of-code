@@ -1,3 +1,4 @@
+# pylint: disable=line-too-long
 # -*- coding: utf-8 -*-
 
 def read_input(filename='input/2022/day10-input.txt'):

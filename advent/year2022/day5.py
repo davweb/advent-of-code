@@ -2,8 +2,7 @@
 
 import re
 
-STACK_PATTERN = re.compile(
-    r'^(\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   ) (\[[A-Z]\]|   )')
+STACK_PATTERN = re.compile(r'^(\[[A-Z]\]|   )' + r' (\[[A-Z]\]|   )' * 8)
 MOVE_PATTERN = re.compile(r'move (\d+) from (\d+) to (\d+)')
 
 

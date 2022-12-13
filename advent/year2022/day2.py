@@ -1,3 +1,4 @@
+# pylint: disable=used-before-assignment
 # -*- coding: utf-8 -*-
 
 from enum import Enum
