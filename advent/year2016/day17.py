@@ -22,7 +22,7 @@ def doors(route):
             yield direction
 
 
-def find_routes(input):
+def find_routes(value):
     """
     >>> shortest, longest = find_routes('ihgpwlah')
     >>> shortest
@@ -57,7 +57,7 @@ def find_routes(input):
 
             continue
 
-        for direction, dx, dy in doors(input + route):
+        for direction, dx, dy in doors(value + route):
             dx += location[0]
             dy += location[1]
 

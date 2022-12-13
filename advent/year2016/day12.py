@@ -6,8 +6,8 @@ def read_input():
         return [line.strip().split() for line in file.readlines()]
 
 
-def run(lines, a=0, b=0, c=0, d=0):
-    register = {'a': a, 'b': b, 'c': c, 'd': d}
+def run(lines, c=0):
+    register = {'a': 0, 'b': 0, 'c': c, 'd': 0}
     index = 0
     end = len(lines)
 

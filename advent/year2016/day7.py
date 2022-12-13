@@ -71,7 +71,7 @@ def supports_ssl(address):
 
         a, b = b, c
 
-    return True if accessors.intersection(blocks) else False
+    return bool(accessors.intersection(blocks))
 
 
 def part1(data):

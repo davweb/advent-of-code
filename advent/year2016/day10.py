@@ -30,7 +30,7 @@ class Bot:
     outputs = {}
 
     @classmethod
-    def get(_, bot_id):
+    def get(cls, bot_id):
         if bot_id in Bot.all_bots:
             return Bot.all_bots[bot_id]
 
@@ -57,7 +57,7 @@ class Bot:
         self.__process()
 
     @classmethod
-    def __send(_, destination, destination_id, value):
+    def __send(cls, destination, destination_id, value):
         match destination:
             case 'output':
                 Bot.outputs[destination_id] = value
@@ -75,7 +75,7 @@ class Bot:
         Bot.__send(self.high, self.high_id, self.values[1])
 
     @classmethod
-    def find_by_values(_, *values):
+    def find_by_values(cls, *values):
         for bot_id, bot in Bot.all_bots.items():
             if all(v in bot.values for v in values):
                 return bot_id

@@ -31,8 +31,8 @@ class Chip:
     def __lt__(self, other):
         if self.kind == other.kind:
             return self.element_id < other.element_id
-        else:
-            return self.kind < other.kind
+
+        return self.kind < other.kind
 
 
 class Building:
@@ -135,7 +135,7 @@ class Building:
         False
         """
 
-        return self.floors[0] == () and self.floors[1] == () and self.floors[2] == ()
+        return not (self.floors[0] or self.floors[1] or self.floors[2])
 
     def __eq__(self, other):
         """

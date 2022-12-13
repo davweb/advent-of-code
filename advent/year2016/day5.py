@@ -5,7 +5,7 @@ from advent import md5
 INPUT = 'cxdnnyjw'
 
 
-def find_password(input):
+def find_password(value):
     """
     >>> find_password('abc')
     '18f47a30'
@@ -15,11 +15,11 @@ def find_password(input):
     index = 0
 
     while True:
-        hash = md5(input + str(index))
+        hash_value = md5(value + str(index))
         index += 1
 
-        if hash.startswith('00000'):
-            password += hash[5]
+        if hash_value.startswith('00000'):
+            password += hash_value[5]
 
             if len(password) == 8:
                 break
@@ -27,7 +27,7 @@ def find_password(input):
     return password
 
 
-def find_other_password(input):
+def find_other_password(value):
     """
     >>> find_other_password('abc')
     '05ace8e3'
@@ -37,14 +37,14 @@ def find_other_password(input):
     index = 0
 
     while True:
-        hash = md5(input + str(index))
+        hash_value = md5(value + str(index))
         index += 1
 
-        if hash.startswith('00000') and hash[5].isdigit():
-            place = int(hash[5])
+        if hash_value.startswith('00000') and hash_value[5].isdigit():
+            place = int(hash_value[5])
 
             if place < 8 and password[place] is None:
-                password[place] = hash[6]
+                password[place] = hash_value[6]
 
                 if all(x is not None for x in password):
                     break

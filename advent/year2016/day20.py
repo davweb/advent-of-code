@@ -33,8 +33,8 @@ class Range():
     def __lt__(self, other):
         if self.lower == other.lower:
             return self.upper < other.upper
-        else:
-            return self.lower < other.lower
+
+        return self.lower < other.lower
 
     def __repr__(self):
         return f'Range({self.lower}, {self.upper})'

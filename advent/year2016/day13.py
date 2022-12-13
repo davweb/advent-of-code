@@ -1,16 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import re
 from collections import deque
-
-PATTERN = re.compile(r'(\d+) <-> ((\d+, )*\d+)')
-
-
-def read_input():
-    with open('input/2021/day1-input.txt', encoding='utf8') as file:
-        # return [int(line) for line in file.readlines()]
-        # return file.read().split(",")
-        return 0
 
 
 def count_bits(num):
@@ -118,18 +108,18 @@ def count_locations(seed):
     return len(visited)
 
 
-def part1(data):
+def part1():
     """
-    >>> part1(read_input())
+    >>> part1()
     86
     """
 
     return find_route((31, 39), 1364)
 
 
-def part2(data):
+def part2():
     """
-    >>> part2(read_input())
+    >>> part2()
     127
     """
 
@@ -137,9 +127,8 @@ def part2(data):
 
 
 def main():
-    data = read_input()
-    print(part1(data))
-    print(part2(data))
+    print(part1())
+    print(part2())
 
 
 if __name__ == "__main__":

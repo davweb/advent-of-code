@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import numpy
 import re
 from enum import Enum
+import numpy
 
 PATTERN_RECT = re.compile(r'rect (\d+)x(\d+)')
 PATTERN_ROW = re.compile(r'rotate row y=(\d+) by (\d+)')

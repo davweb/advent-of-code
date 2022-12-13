@@ -16,14 +16,14 @@ def moves(data):
     [(1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (5, -1), (5, -2), (5, -3), (6, -3), (7, -3)]
     """
 
-    moves = ((0, 1), (1, 0), (0, -1), (-1, 0))
+    MOVES = ((0, 1), (1, 0), (0, -1), (-1, 0))
     direction = 0
     x, y = 0, 0
 
     for (turn, distance) in data:
         direction += -1 if turn == 'L' else 1
         direction %= 4
-        move = moves[direction]
+        move = MOVES[direction]
 
         for _ in range(distance):
             x += move[0]

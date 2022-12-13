@@ -25,28 +25,28 @@ def checksum(data):
     '100'
     """
 
-    checksum = data
+    output = data
 
     while True:
-        pairs = [checksum[i:i + 2] for i in range(0, len(checksum), 2)]
-        checksum = ''.join('1' if pair[0] == pair[1] else '0' for pair in pairs)
+        pairs = [output[i:i + 2] for i in range(0, len(output), 2)]
+        output = ''.join('1' if pair[0] == pair[1] else '0' for pair in pairs)
 
-        if len(checksum) % 2 == 1:
+        if len(output) % 2 == 1:
             break
 
-    return checksum
+    return output
 
 
-def fill(input, size):
+def fill(value, size):
     """
     >>> fill('10000', 20)
     '01100'
     """
 
-    while len(input) < size:
-        input = dragon(input)
+    while len(value) < size:
+        value = dragon(value)
 
-    return checksum(input[0:size])
+    return checksum(value[0:size])
 
 
 def part1(data):

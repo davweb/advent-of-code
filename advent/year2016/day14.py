@@ -67,7 +67,7 @@ def stretched_hashes(salt):
         i += 1
 
 
-def pad_hashes(salt, hash_stream):
+def pad_hashes(hash_stream):
     queue = []
 
     for pair in hash_stream:
@@ -98,7 +98,7 @@ def part1(data):
     16106
     """
 
-    return nth_item(pad_hashes(data, hashes(data)), 63)
+    return nth_item(pad_hashes(hashes(data)), 63)
 
 
 def part2(data):
@@ -107,7 +107,7 @@ def part2(data):
     22423
     """
 
-    return nth_item(pad_hashes(data, stretched_hashes(data)), 63)
+    return nth_item(pad_hashes(stretched_hashes(data)), 63)
 
 
 def main():
