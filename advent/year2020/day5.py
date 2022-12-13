@@ -1,9 +1,11 @@
+# -*- coding: utf-8 -*-
+
 def read_input():
-    file = open('input/2020/day5-input.txt', 'r')
-    return [line.strip() for line in file]
+    with open('input/2020/day5-input.txt', encoding='utf8') as file:
+        return [line.strip() for line in file]
 
 
-def split(range, upper):
+def split(size, upper):
     """
     >>> split((0, 127), False)
     (0, 63)
@@ -27,13 +29,13 @@ def split(range, upper):
     (5, 5)
     """
 
-    start, end = range
+    start, end = size
     length = (end - start + 1) // 2
 
     if upper:
         return (start + length, end)
-    else:
-        return (start, end - length)
+
+    return (start, end - length)
 
 
 def seat_id(directions):

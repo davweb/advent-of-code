@@ -1,17 +1,11 @@
 # -*- coding: utf-8 -*-
 
-import re
-from collections import defaultdict
-
-PATTERN = re.compile(r"(\d+) <-> ((\d+, )*\d+)")
-
 
 def read_input():
-    file = open("input/2020/day13-input.txt", "r")
-
-    depart = int(file.readline())
-    buses = [int(bus) if bus != 'x' else None for bus in file.readline().split(',')]
-    return (depart, buses)
+    with open('input/2020/day13-input.txt', encoding='utf8') as file:
+        depart = int(file.readline())
+        buses = [int(bus) if bus != 'x' else None for bus in file.readline().split(',')]
+        return (depart, buses)
 
 
 def cadence(a, b, required_gap, start):

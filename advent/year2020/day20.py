@@ -117,14 +117,14 @@ class Tile:
 
         if side == Side.TOP:
             return self.rows()[0]
-        elif side == Side.BOTTOM:
+        if side == Side.BOTTOM:
             return self.rows()[-1]
-        elif side == Side.LEFT:
+        if side == Side.LEFT:
             return "".join(row[0] for row in self.rows())
-        elif side == Side.RIGHT:
+        if side == Side.RIGHT:
             return "".join(row[-1] for row in self.rows())
-        else:
-            raise ValueError("Unknown side '{}'".format(side))
+
+        raise ValueError("Unknown side '{}'".format(side))
 
     def matches(self, side, other):
         """

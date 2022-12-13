@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -
 
 def read_input():
-    file = open('input/2020/day17-input.txt', 'r')
-    return file.read()
+    with open('input/2020/day17-input.txt', encoding='utf8') as file:
+        return file.read()
 
 
 class Dimension:
@@ -36,7 +36,7 @@ class Dimension:
         for dx in (-1, 0, 1):
             for dy in (-1, 0, 1):
                 for dz in (-1, 0, 1):
-                    if (dx == dy == dz == 0):
+                    if dx == dy == dz == 0:
                         continue
 
                     yield (x + dx, y + dy, z + dz)
@@ -105,7 +105,7 @@ class FourDimension(Dimension):
             for dy in (-1, 0, 1):
                 for dz in (-1, 0, 1):
                     for dw in (-1, 0, 1):
-                        if (dx == dy == dz == dw == 0):
+                        if dx == dy == dz == dw == 0:
                             continue
 
                         yield (x + dx, y + dy, z + dz, w + dw)

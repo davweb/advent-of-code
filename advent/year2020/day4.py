@@ -1,4 +1,5 @@
-#!/usr/local/bin/python3
+# pylint: disable=too-many-return-statements
+# -*- coding: utf-8 -*-
 
 import re
 from itertools import chain
@@ -11,18 +12,18 @@ HGT_PATTERN = re.compile(r"^(\d+)(cm|in)$")
 
 
 def read_input():
-    file = open('input/2020/day4-input.txt', 'r')
     passports = []
     passport = []
 
-    for line in chain(file, ['']):
-        line = line.strip()
+    with open('input/2020/day4-input.txt', encoding='utf8') as file:
+        for line in chain(file, ['']):
+            line = line.strip()
 
-        if line == '':
-            passports.append(dict(item.split(':') for item in passport))
-            passport = []
-        else:
-            passport.extend(line.split())
+            if line == '':
+                passports.append(dict(item.split(':') for item in passport))
+                passport = []
+            else:
+                passport.extend(line.split())
 
     return passports
 

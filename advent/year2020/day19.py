@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from abc import ABC, abstractmethod
 import regex as re
 
 
@@ -66,7 +67,7 @@ class RuleBook:
             rule.reset()
 
 
-class Rule:
+class Rule(ABC):
     def __init__(self, rulebook):
         self.rulebook = rulebook
         self.value = None
@@ -81,6 +82,10 @@ class Rule:
             self.value = self.resolve()
 
         return self.value
+
+    @abstractmethod
+    def resolve(self):
+        pass
 
     def __str__(self):
         return self.get_value()
@@ -143,10 +148,10 @@ class DoubleOrRule(CombiningRule):
 
 
 def read_input():
-    file = open('input/2020/day19-input.txt', 'r')
-    text = file.read()
-    rules = RuleBook(text)
-    return (rules, MESSAGE_PATTERN.findall(text))
+    with open('input/2020/day19-input.txt', encoding='utf8') as file:
+        text = file.read()
+        rules = RuleBook(text)
+        return (rules, MESSAGE_PATTERN.findall(text))
 
 
 def part1(data):

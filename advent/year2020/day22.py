@@ -2,20 +2,21 @@
 
 
 def read_input():
-    file = open("input/2020/day22-input.txt", "r")
-    text = file.read()
     data = []
 
-    for player in text.split("\n\n"):
-        cards = []
+    with open('input/2020/day22-input.txt', encoding='utf8') as file:
+        text = file.read()
 
-        for line in player.split("\n"):
-            if line.startswith("Player") or line == "":
-                continue
+        for player in text.split("\n\n"):
+            cards = []
 
-            cards.append(int(line))
+            for line in player.split("\n"):
+                if line.startswith("Player") or line == "":
+                    continue
 
-        data.append(cards)
+                cards.append(int(line))
+
+            data.append(cards)
 
     return data
 
@@ -74,8 +75,8 @@ def combat(deck_one, deck_two):
     # This also handles the repeat case
     if len(deck_one) == 0:
         return (2, deck_two)
-    else:
-        return (1, deck_one)
+
+    return (1, deck_one)
 
 
 def part2(data):

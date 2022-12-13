@@ -1,18 +1,20 @@
-#!/usr/local/bin/python3
+# -*- coding: utf-8 -*-
 
 import itertools
 from math import prod
 
 
 def read_input():
-    file = open('input/2020/day1-input.txt', 'r')
-    return [int(line) for line in file.readlines()]
+    with open('input/2020/day1-input.txt', encoding='utf8') as file:
+        return [int(line) for line in file]
 
 
 def search(data, size):
     for t in itertools.combinations(data, size):
         if sum(t) == 2020:
             return prod(t)
+
+    raise ValueError()
 
 
 def part1(data):

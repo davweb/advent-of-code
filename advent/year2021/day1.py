@@ -1,5 +1,4 @@
-#!/usr/local/bin/python3
-
+# -*- coding: utf-8 -*-
 
 def read_input():
     with open('input/2021/day1-input.txt', encoding='utf8') as file:

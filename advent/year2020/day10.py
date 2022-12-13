@@ -1,9 +1,11 @@
+# -*- coding: utf-8 -*-
+
 from collections import defaultdict
 
 
 def read_input():
-    file = open('input/2020/day10-input.txt', 'r')
-    return tidy([int(line.strip()) for line in file.readlines()])
+    with open('input/2020/day10-input.txt', encoding='utf8') as file:
+        return tidy([int(line.strip()) for line in file.readlines()])
 
 
 def tidy(adapters):
@@ -18,7 +20,8 @@ def part1(adapters):
     """
     >>> part1(tidy([16, 10, 15, 5, 1, 11, 7, 19, 6, 12, 4]))
     35
-    >>> part1(tidy([28, 33, 18, 42, 31, 14, 46, 20, 48, 47, 24, 23, 49, 45, 19, 38, 39, 11, 1, 32, 25, 35, 8, 17, 7, 9, 4, 2, 34, 10, 3]))
+    >>> part1(tidy([28, 33, 18, 42, 31, 14, 46, 20, 48, 47, 24, 23, 49, 45, \\
+    ...    19, 38, 39, 11, 1, 32, 25, 35, 8, 17, 7, 9, 4, 2, 34, 10, 3]))
     220
     >>> part1(read_input())
     2775
@@ -38,7 +41,8 @@ def part2(adapters):
     """
     >>> part2(tidy([16, 10, 15, 5, 1, 11, 7, 19, 6, 12, 4]))
     8
-    >>> part2(tidy([28, 33, 18, 42, 31, 14, 46, 20, 48, 47, 24, 23, 49, 45, 19, 38, 39, 11, 1, 32, 25, 35, 8, 17, 7, 9, 4, 2, 34, 10, 3]))
+    >>> part2(tidy([28, 33, 18, 42, 31, 14, 46, 20, 48, 47, 24, 23, 49, 45, \\
+    ...     19, 38, 39, 11, 1, 32, 25, 35, 8, 17, 7, 9, 4, 2, 34, 10, 3]))
     19208
     >>> part2(read_input())
     518344341716992
@@ -47,6 +51,7 @@ def part2(adapters):
     routes = {}
     routes[0] = 1
     adapters.insert(0, 0)
+    adapter = None
 
     for adapter in adapters[1:]:
         routes[adapter] = sum(routes[parent] for parent in adapters if 1 <= adapter - parent <= 3)

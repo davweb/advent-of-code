@@ -7,38 +7,38 @@ RULE_PATTERN = re.compile(r"(.*): (\d+)-(\d+) or (\d+)-(\d+)")
 
 
 def read_input():
-    file = open("input/2020/day16-input.txt", "r")
-    (rule_definitions, my_ticket_list, other_ticket_list) = file.read().split("\n\n")
+    with open('input/2020/day16-input.txt', encoding='utf8') as file:
+        (rule_definitions, my_ticket_list, other_ticket_list) = file.read().split("\n\n")
 
-    rules = {}
+        rules = {}
 
-    for groups in RULE_PATTERN.findall(rule_definitions):
-        rules[groups[0]] = ((int(groups[1]), int(groups[2])), (int(groups[3]), int(groups[4])))
+        for groups in RULE_PATTERN.findall(rule_definitions):
+            rules[groups[0]] = ((int(groups[1]), int(groups[2])), (int(groups[3]), int(groups[4])))
 
-    my_ticket = [int(i) for i in my_ticket_list.split("\n")[1].strip().split(",")]
+        my_ticket = [int(i) for i in my_ticket_list.split("\n")[1].strip().split(",")]
 
-    tickets = []
+        tickets = []
 
-    for ticket in other_ticket_list.strip().split("\n")[1:]:
-        tickets.append([int(i) for i in ticket.strip().split(",")])
+        for ticket in other_ticket_list.strip().split("\n")[1:]:
+            tickets.append([int(i) for i in ticket.strip().split(",")])
 
-    return rules, my_ticket, tickets
+        return rules, my_ticket, tickets
 
 
 def error_rate(ticket, rules):
     rate = 0
 
     for field in ticket:
-        valid = False
+        is_valid = False
 
         for rule in rules.values():
             (from_a, to_a), (from_b, to_b) = rule
 
             if (from_a <= field <= to_a) or (from_b <= field <= to_b):
-                valid = True
+                is_valid = True
                 break
 
-        if not valid:
+        if not is_valid:
             rate += field
 
     return rate

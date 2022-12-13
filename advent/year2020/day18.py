@@ -4,9 +4,9 @@ import operator
 
 
 def read_input():
-    file = open('input/2020/day18-input.txt', 'r')
-    return [[int(v) if v not in ('+', '*', '(', ')') else v for v in line.strip() if v != ' ']
-            for line in file.readlines()]
+    with open('input/2020/day18-input.txt', encoding='utf8') as file:
+        return [[int(v) if v not in ('+', '*', '(', ')') else v for v in line.strip() if v != ' ']
+                for line in file]
 
 
 def calculate(line):
