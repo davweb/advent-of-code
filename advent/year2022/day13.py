@@ -7,10 +7,7 @@ from itertools import zip_longest
 
 def read_input():
     with open('input/2022/day13-input.txt', encoding='utf8') as file:
-        for line in file:
-            if line.strip() == "":
-                continue
-            yield literal_eval(line)
+        return [literal_eval(line) for line in file if line.strip()]
 
 
 def cmp(a, b):
@@ -76,6 +73,7 @@ def part1(data):
     """
 
     result = 0
+    data = iter(data)
 
     for (index, a) in enumerate(data, start=1):
         b = next(data)
@@ -102,8 +100,9 @@ def part2(data):
 
 
 def main():
-    print(part1(read_input()))
-    print(part2(read_input()))
+    data = read_input()
+    print(part1(data))
+    print(part2(data))
 
 
 if __name__ == "__main__":
