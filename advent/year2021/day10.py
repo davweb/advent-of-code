@@ -17,7 +17,7 @@ REMAINING_SCORE = {
 
 
 def read_input():
-    with open("input/2021/day10-input.txt", "r") as file:
+    with open('input/2021/day10-input.txt', encoding='utf8') as file:
         return [line.strip() for line in file.readlines()]
 
 

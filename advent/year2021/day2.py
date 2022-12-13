@@ -7,13 +7,13 @@ PATTERN = re.compile(r"(up|down|forward) (\d+)")
 
 
 def read_input():
-    file = open("input/2021/day2-input.txt", "r")
     data = []
 
-    for line in file:
-        result = PATTERN.match(line)
-        direction, distance = result.group(1, 2)
-        data.append((direction, int(distance)))
+    with open('input/2021/day2-input.txt', encoding='utf8') as file:
+        for line in file:
+            result = PATTERN.match(line)
+            direction, distance = result.group(1, 2)
+            data.append((direction, int(distance)))
 
     return data
 

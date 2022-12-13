@@ -2,8 +2,8 @@
 
 
 def read_input():
-    file = open("input/2021/day3-input.txt", "r")
-    return [line.strip() for line in file.readlines()]
+    with open('input/2021/day3-input.txt', encoding='utf8') as file:
+        return [line.strip() for line in file]
 
 
 def most_common(data, index):

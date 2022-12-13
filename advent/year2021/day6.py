@@ -4,7 +4,7 @@ from functools import cache
 
 
 def read_input():
-    with open("input/2021/day6-input.txt", "r") as file:
+    with open('input/2021/day6-input.txt', encoding='utf8') as file:
         return [int(fish) for fish in file.read().split(',')]
 
 

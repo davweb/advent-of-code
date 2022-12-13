@@ -7,13 +7,13 @@ PATTERN = re.compile(r"(\d+),(\d+) -> (\d+),(\d+)")
 
 
 def read_input():
-    file = open("input/2021/day5-input.txt", "r")
     data = []
 
-    for line in file:
-        result = PATTERN.match(line)
-        x1, y1, x2, y2 = result.group(1, 2, 3, 4)
-        data.append(((int(x1), int(y1)), (int(x2), int(y2))))
+    with open('input/2021/day5-input.txt', encoding='utf8') as file:
+        for line in file:
+            result = PATTERN.match(line)
+            x1, y1, x2, y2 = result.group(1, 2, 3, 4)
+            data.append(((int(x1), int(y1)), (int(x2), int(y2))))
 
     return data
 

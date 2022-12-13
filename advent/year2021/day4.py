@@ -51,14 +51,14 @@ class BingoCard:
         return any(len(line) == 0 for line in self.rows + self.columns)
 
     def __repr__(self):
-        return "\n".join("{:2d} {:2d} {:2d} {:2d} {:2d}".format(*row) for row in self.rows)
+        return '\n'.join(' '.join(f'{cell:2d}' for cell in row) for row in self.rows)
 
     def remaining(self):
         return sum(self.values)
 
 
 def read_input():
-    with open('input/2021/day4-input.txt') as file:
+    with open('input/2021/day4-input.txt', encoding='utf8') as file:
         move_list = file.readline()
         card_numbers = file.read()
 

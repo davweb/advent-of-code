@@ -4,7 +4,7 @@ from collections import defaultdict
 
 
 def read_input():
-    with open('input/2021/day12-input.txt') as file:
+    with open('input/2021/day12-input.txt', encoding='utf8') as file:
         return [line.strip().split('-') for line in file.readlines()]
 
 

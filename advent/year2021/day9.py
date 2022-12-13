@@ -4,8 +4,8 @@ from math import prod
 
 
 def read_input():
-    with open("input/2021/day9-input.txt", "r") as file:
-        return [[int(height) for height in line.strip()] for line in file.readlines()]
+    with open('input/2021/day9-input.txt', encoding='utf8') as file:
+        return [[int(height) for height in line.strip()] for line in file]
 
 
 def find_low_points(data):
@@ -18,10 +18,10 @@ def find_low_points(data):
             if x < 99 and data[x + 1][y] <= height:
                 continue
 
-            if y > 0 and data[x][y - 1] <= height:
+            if y > 0 and row[y - 1] <= height:
                 continue
 
-            if y < 99 and data[x][y + 1] <= height:
+            if y < 99 and row[y + 1] <= height:
                 continue
 
             yield (x, y)

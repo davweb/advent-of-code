@@ -9,7 +9,7 @@ PATTERN = re.compile(r'([A-Z]{2}) -> ([A-Z])')
 
 def read_input():
 
-    with open('input/2021/day14-input.txt') as file:
+    with open('input/2021/day14-input.txt', encoding='utf8') as file:
         formula = file.readline().strip()
 
         # # blank line
@@ -17,7 +17,7 @@ def read_input():
 
         substitutions = {}
 
-        for line in file.readlines():
+        for line in file:
             match = PATTERN.match(line)
 
             if match:

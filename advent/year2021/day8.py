@@ -20,8 +20,8 @@ NUMBERS = {
 def read_input():
     data = []
 
-    with open("input/2021/day8-input.txt", "r") as file:
-        for line in file.readlines():
+    with open('input/2021/day8-input.txt', encoding='utf8') as file:
+        for line in file:
             inputs, outputs = line.split(' | ')
             data.append((inputs.split(), outputs.split()))
 

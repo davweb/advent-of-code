@@ -2,7 +2,7 @@
 
 
 def read_input():
-    with open('input/2021/day11-input.txt') as file:
+    with open('input/2021/day11-input.txt', encoding='utf8') as file:
         return [[int(c) for c in line.strip()] for line in file.readlines()]
 
 
@@ -31,7 +31,6 @@ def take_turn(octopuses):
         for y, row in enumerate(octopuses):
             for x, value in enumerate(row):
                 point = (x, y)
-                value = octopuses[y][x]
 
                 if value > 9 and point not in flashed:
                     flash = point

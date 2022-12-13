@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from ast import literal_eval
 from itertools import permutations
 
 
@@ -23,7 +24,7 @@ class SnailfishNumber:
     def __init__(self, value=None, is_left=None, left=None, right=None):
         if value is not None:
             if isinstance(value, str):
-                value = eval(value)
+                value = literal_eval(value)
 
             if not isinstance(value, list):
                 raise ValueError(f'Not a list: {value}')

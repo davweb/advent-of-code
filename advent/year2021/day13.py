@@ -8,7 +8,7 @@ FOLD_PATTERN = re.compile(r'fold along (x|y)=(\d+)')
 
 def read_input():
 
-    with open('input/2021/day13-input.txt') as file:
+    with open('input/2021/day13-input.txt', encoding='utf8') as file:
         dots = []
         folds = []
 
