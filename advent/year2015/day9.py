@@ -8,13 +8,12 @@ PATTERN = re.compile(r"(\w+) to (\w+) = (\d+)")
 
 
 def read_input():
-    file = open("input/2015/day9-input.txt", "r")
     data = []
-
-    for line in file:
-        result = PATTERN.match(line)
-        from_name, to_name, distance = result.group(1, 2, 3)
-        data.append((from_name, to_name, int(distance)))
+    with open('input/2015/day9-input.txt', encoding='utf8') as file:
+        for line in file:
+            result = PATTERN.match(line)
+            from_name, to_name, distance = result.group(1, 2, 3)
+            data.append((from_name, to_name, int(distance)))
 
     return data
 
@@ -66,8 +65,8 @@ def determine_distance(data, operator):
 
         if len(routes) == 0:
             return None
-        else:
-            return operator(routes)
+
+        return operator(routes)
 
     return calculate_distance(0, None, places)
 

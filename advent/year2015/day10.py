@@ -13,7 +13,7 @@ def read_elements():
 
     elements = {}
 
-    with open('input/2015/day10-elements.txt') as csvfile:
+    with open('input/2015/day10-elements.txt', encoding='utf8') as csvfile:
         element_reader = csv.reader(csvfile)
 
         for line in element_reader:
@@ -51,13 +51,13 @@ def look_and_say(string, iterations):
 
         for c in string:
             if previous is not None and previous != c:
-                result = "{}{}{}".format(result, count, previous)
+                result = f'{result}{count}{previous}'
                 count = 0
 
             previous = c
             count += 1
 
-        string = "{}{}{}".format(result, count, previous)
+        string = f'{result}{count}{previous}'
 
     return string
 
@@ -128,7 +128,7 @@ def part1(data):
     329356
     """
 
-    return len(look_and_say(INPUT, 40))
+    return len(look_and_say(data, 40))
 
 
 def part2(data):
@@ -137,7 +137,7 @@ def part2(data):
     4666278
     """
 
-    return recursive_look_and_say(INPUT, 50)
+    return recursive_look_and_say(data, 50)
 
 
 def main():

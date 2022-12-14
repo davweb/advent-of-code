@@ -8,13 +8,13 @@ PATTERN = re.compile(r"(toggle|turn on|turn off) (\d+),(\d+) through (\d+),(\d+)
 
 
 def read_input():
-    file = open("input/2015/day6-input.txt", "r")
     data = []
 
-    for line in file:
-        result = PATTERN.match(line)
-        action, from_x, from_y, to_x, to_y = result.group(1, 2, 3, 4, 5)
-        data.append((action, int(from_x), int(from_y), int(to_x), int(to_y)))
+    with open('input/2015/day6-input.txt', encoding='utf8') as file:
+        for line in file:
+            result = PATTERN.match(line)
+            action, from_x, from_y, to_x, to_y = result.group(1, 2, 3, 4, 5)
+            data.append((action, int(from_x), int(from_y), int(to_x), int(to_y)))
 
     return data
 

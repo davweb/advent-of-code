@@ -4,36 +4,36 @@ import json
 
 
 def read_input():
-    with open('input/2015/day12-input.txt') as file:
+    with open('input/2015/day12-input.txt', encoding='utf8') as file:
         return json.loads(file.read())
 
 
-def sum_json(json):
+def sum_json(json_value):
 
-    if isinstance(json, int):
-        return json
+    if isinstance(json_value, int):
+        return json_value
 
-    if isinstance(json, list):
-        return sum(sum_json(item) for item in json)
+    if isinstance(json_value, list):
+        return sum(sum_json(item) for item in json_value)
 
-    if isinstance(json, dict):
-        return sum(sum_json(item) for item in json.values())
+    if isinstance(json_value, dict):
+        return sum(sum_json(item) for item in json_value.values())
 
     return 0
 
 
-def sum_json_no_red(json):
+def sum_json_no_red(json_value):
 
-    if isinstance(json, int):
-        return json
+    if isinstance(json_value, int):
+        return json_value
 
-    if isinstance(json, list):
-        return sum(sum_json_no_red(item) for item in json)
+    if isinstance(json_value, list):
+        return sum(sum_json_no_red(item) for item in json_value)
 
-    if isinstance(json, dict):
-        if 'red' in json.values():
+    if isinstance(json_value, dict):
+        if 'red' in json_value.values():
             return 0
-        return sum(sum_json_no_red(item) for item in json.values())
+        return sum(sum_json_no_red(item) for item in json_value.values())
 
     return 0
 

@@ -9,8 +9,8 @@ PATTERN = re.compile(r"(\w+) would (lose|gain) (\d+) happiness units by sitting 
 def read_input():
     results = []
 
-    with open('input/2015/day13-input.txt') as file:
-        for line in file.readlines():
+    with open('input/2015/day13-input.txt', encoding='utf8') as file:
+        for line in file:
             match = PATTERN.match(line)
             name, difference, score, other = match.group(1, 2, 3, 4)
             score = int(score)

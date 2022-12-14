@@ -2,8 +2,8 @@ from collections import Counter
 
 
 def read_input():
-    file = open('input/2015/day5-input.txt', 'r')
-    return [line for line in file.readlines()]
+    with open('input/2015/day5-input.txt', encoding='utf8') as file:
+        return list(file)
 
 
 def has_repeated_character(string):

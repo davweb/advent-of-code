@@ -9,8 +9,8 @@ PATTERN = re.compile(r"(\w+): capacity (-?\d+), durability (-?\d+), flavor (-?\d
 def read_input():
     results = []
 
-    with open('input/2015/day15-input.txt') as file:
-        for line in file.readlines():
+    with open('input/2015/day15-input.txt', encoding='utf8') as file:
+        for line in file:
             match = PATTERN.match(line)
             name, capacity, durability, flavor, texture, calories, = match.group(1, 2, 3, 4, 5, 6)
             results.append((name, int(capacity), int(durability), int(flavor), int(texture), int(calories)))

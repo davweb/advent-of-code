@@ -1,6 +1,6 @@
 def read_input():
-    file = open('input/2015/day3-input.txt', 'r')
-    return file.read()
+    with open('input/2015/day3-input.txt', encoding='utf8') as file:
+        return file.read()
 
 
 def move(location, direction):

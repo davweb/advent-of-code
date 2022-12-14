@@ -1,6 +1,6 @@
-import _md5
 import operator
 import functools
+import _md5
 
 KNOT_HASH_SIZE = 256
 KNOT_SLICE_SIZE = 16
@@ -20,7 +20,7 @@ def bytes_to_hex(list_of_bytes):
     return "".join("{:02x}".format(i) for i in list_of_bytes)
 
 
-def knot_hash(input):
+def knot_hash(value):
     """
     >>> bytes_to_hex(knot_hash(""))
     'a2582a3a0e66e6e86e3812dcb672a272'
@@ -32,26 +32,26 @@ def knot_hash(input):
     '63960835bcdc130f0b66d7ff4f6a5a8e'
     """
 
-    input_list = [ord(i) for i in input]
+    input_list = [ord(i) for i in value]
     input_list += [17, 31, 73, 47, 23]
     input_list *= 64
 
     position = 0
     skip = 0
-    hash = list(range(KNOT_HASH_SIZE))
+    hash_value = list(range(KNOT_HASH_SIZE))
 
     for length in input_list:
         for i in range(length // 2):
             a = (position + i) % KNOT_HASH_SIZE
             b = (position + length - i - 1) % KNOT_HASH_SIZE
-            hash[a], hash[b] = hash[b], hash[a]
+            hash_value[a], hash_value[b] = hash_value[b], hash_value[a]
 
         position = (position + length + skip) % KNOT_HASH_SIZE
         skip += 1
 
-    hash = [functools.reduce(operator.xor, hash[i:i + KNOT_SLICE_SIZE])
-            for i in range(0, KNOT_HASH_SIZE, KNOT_SLICE_SIZE)]
-    return hash
+    hash_value = [functools.reduce(operator.xor, hash_value[i:i + KNOT_SLICE_SIZE])
+                  for i in range(0, KNOT_HASH_SIZE, KNOT_SLICE_SIZE)]
+    return hash_value
 
 
 def bounds(points):

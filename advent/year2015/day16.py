@@ -22,8 +22,8 @@ TAPE = {
 def read_input():
     results = []
 
-    with open('input/2015/day16-input.txt') as file:
-        for line in file.readlines():
+    with open('input/2015/day16-input.txt', encoding='utf8') as file:
+        for line in file:
             match = PATTERN.match(line)
             sue, name_one, count_one, name_two, count_two, name_three, count_three = match.group(1, 2, 3, 4, 5, 6, 7)
             results.append((

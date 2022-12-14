@@ -49,8 +49,8 @@ def increment_password(password):
 
     if last_char == 'z':
         return increment_password(remainder) + 'a'
-    else:
-        return remainder + chr(ord(last_char) + 1)
+
+    return remainder + chr(ord(last_char) + 1)
 
 
 def next_password(password):

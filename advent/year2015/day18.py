@@ -5,10 +5,8 @@ from functools import cache
 
 
 def read_input():
-    results = []
-
-    with open('input/2015/day18-input.txt') as file:
-        return [line.strip() for line in file.readlines()]
+    with open('input/2015/day18-input.txt', encoding='utf8') as file:
+        return [line.strip() for line in file]
 
 
 @cache

@@ -49,9 +49,9 @@ PATTERN = re.compile(r'(.*): (\d+)')
 
 def read_input():
 
-    with open('input/2015/day21-input.txt') as file:
+    with open('input/2015/day21-input.txt', encoding='utf8') as file:
 
-        for line in file.readlines():
+        for line in file:
             match = PATTERN.match(line)
 
             if match:

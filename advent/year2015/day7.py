@@ -12,8 +12,8 @@ NUMBER_PATTERN = re.compile(r"([a-z]{1,2}|\d+) -> ([a-z]{1,2})")
 
 
 def read_input():
-    file = open("input/2015/day7-input.txt", "r")
-    return [line.strip() for line in file.readlines()]
+    with open('input/2015/day7-input.txt', encoding='utf8') as file:
+        return [line.strip() for line in file]
 
 
 def process(data):
@@ -89,7 +89,7 @@ def part2(data):
     """
 
     override = part1(data)
-    data.append("{} -> b".format(override))
+    data.append(f'{override} -> b')
     return process(data)
 
 

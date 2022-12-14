@@ -2,10 +2,8 @@
 
 
 def read_input():
-    results = []
-
-    with open('input/2015/day17-input.txt') as file:
-        return [int(line) for line in file.readlines()]
+    with open('input/2015/day17-input.txt', encoding='utf8') as file:
+        return [int(line) for line in file]
 
 
 def pour(pots, remaining, path=None, matches=None):

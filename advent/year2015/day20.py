@@ -77,16 +77,15 @@ def part1(data):
 
     house = 0
     presents = 0
-
-    max = 0
+    maximum = 0
 
     while presents < data:
         house += 1
         presents = presents_for_house(house)
 
-        if presents > max:
-            max = presents
-            print(max)
+        if presents > maximum:
+            maximum = presents
+            print(maximum)
 
     return house
 

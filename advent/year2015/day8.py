@@ -6,8 +6,8 @@ ESCAPE_PATTERN = re.compile(r'(\\(x[0-9a-f]{2}|\\|"))')
 
 
 def read_input():
-    file = open("input/2015/day8-input.txt", "r")
-    return [line.strip() for line in file.readlines()]
+    with open('input/2015/day8-input.txt', encoding='utf8') as file:
+        return [line.strip() for line in file]
 
 
 def storage_size(string):

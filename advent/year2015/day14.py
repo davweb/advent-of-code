@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=too-many-instance-attributes
 
 import re
 
@@ -10,8 +11,8 @@ DURATION = 2503
 def read_input():
     results = []
 
-    with open('input/2015/day14-input.txt') as file:
-        for line in file.readlines():
+    with open('input/2015/day14-input.txt', encoding='utf8') as file:
+        for line in file:
             match = PATTERN.match(line)
             name, speed, fly, rest = match.group(1, 2, 3, 4)
             results.append((name, int(speed), int(fly), int(rest)))
@@ -56,20 +57,20 @@ def distance(duration, speed, fly, rest):
     """
 
     time = 0
-    distance = 0
+    travelled = 0
     flying = True
 
     while time < duration:
         if flying:
             flight_time = min(fly, duration - time)
-            distance += speed * flight_time
+            travelled += speed * flight_time
             time += fly
         else:
             time += rest
 
         flying = not flying
 
-    return distance
+    return travelled
 
 
 def part1(data):

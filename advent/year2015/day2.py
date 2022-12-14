@@ -3,8 +3,8 @@ import math
 
 
 def read_input():
-    file = open('input/2015/day2-input.txt', 'r')
-    return [[int(side) for side in line.split('x')] for line in file.readlines()]
+    with open('input/2015/day2-input.txt', encoding='utf8') as file:
+        return [[int(side) for side in line.split('x')] for line in file]
 
 
 def wrapping(lengths):

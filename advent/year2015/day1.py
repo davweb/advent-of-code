@@ -2,8 +2,8 @@
 
 
 def read_input():
-    file = open('input/2015/day1-input.txt', 'r')
-    return file.read()
+    with open('input/2015/day1-input.txt', encoding='utf8') as file:
+        return file.read()
 
 
 def part1(data):
