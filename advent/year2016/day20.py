@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from advent import Range
 
 def read_input():
     output = []
@@ -9,35 +10,6 @@ def read_input():
             output.append((int(lower), int(upper)))
 
     return output
-
-
-class Range():
-    def __init__(self, lower, upper):
-        if lower >= upper:
-            raise ValueError
-
-        self.lower = lower
-        self.upper = upper
-
-    def size(self):
-        return self.upper - self.lower + 1
-
-    def overlaps(self, other):
-        return self.lower <= other.lower <= self.upper \
-            or self.lower <= other.upper <= self.upper
-
-    def merge(self, other):
-        self.lower = min(self.lower, other.lower)
-        self.upper = max(self.upper, other.upper)
-
-    def __lt__(self, other):
-        if self.lower == other.lower:
-            return self.upper < other.upper
-
-        return self.lower < other.lower
-
-    def __repr__(self):
-        return f'Range({self.lower}, {self.upper})'
 
 
 def part1(data):
@@ -61,21 +33,8 @@ def part2(data):
     101
     """
 
-    ranges = sorted(Range(lower, upper) for lower, upper in data)
-
-    lower_range = ranges.pop(0)
-    merged = [lower_range]
-
-    while ranges:
-        upper_range = ranges.pop(0)
-
-        if lower_range.overlaps(upper_range):
-            lower_range.merge(upper_range)
-        else:
-            lower_range = upper_range
-            merged.append(lower_range)
-
-    return 4294967296 - sum(range.size() for range in merged)
+    ranges = Range.combine(Range(lower, upper) for lower, upper in data)
+    return 4294967296 - sum(range.size() for range in ranges)
 
 
 def main():
