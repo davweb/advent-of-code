@@ -93,7 +93,7 @@ def taxicab_distance(a, b):
     return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
 
-class Range():
+class Span():
     @classmethod
     def combine(cls, ranges):
         ranges = sorted(ranges)
@@ -118,12 +118,25 @@ class Range():
         self.lower = lower
         self.upper = upper
 
-    def size(self):
+    def __contains__(self, item):
+        """
+        >>> span = Span(3, 5)
+        >>> 1 in span
+        False
+        >>> 3 in span
+        True
+        >>> 5 in span
+        True
+        >>> 6 in span
+        False
+        """
+        return self.lower <= item <= self.upper
+
+    def __len__(self):
         return self.upper - self.lower + 1
 
     def overlaps(self, other):
-        return self.lower <= other.lower <= self.upper \
-            or self.lower <= other.upper <= self.upper
+        return other.lower in self or other.upper in self
 
     def merge(self, other):
         self.lower = min(self.lower, other.lower)
@@ -135,5 +148,11 @@ class Range():
 
         return self.lower < other.lower
 
+    def __hash__(self):
+        return hash((self.lower, self.upper))
+
+    def __iter__(self):
+        return iter(range(self.lower, self.upper + 1))
+
     def __repr__(self):
-        return f'Range({self.lower}, {self.upper})'
+        return f'Span({self.lower}, {self.upper})'

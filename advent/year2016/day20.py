@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from advent import Range
+from advent import Span
 
 def read_input():
     output = []
@@ -33,8 +33,8 @@ def part2(data):
     101
     """
 
-    ranges = Range.combine(Range(lower, upper) for lower, upper in data)
-    return 4294967296 - sum(range.size() for range in ranges)
+    ranges = Span.combine(Span(lower, upper) for lower, upper in data)
+    return 4294967296 - sum(len(span) for span in ranges)
 
 
 def main():

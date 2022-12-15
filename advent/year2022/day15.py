@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import re
-from advent import taxicab_distance, Range
+from advent import taxicab_distance, Span
 
 PATTERN = re.compile(r'Sensor at x=(-?\d+), y=(-?\d+): closest beacon is at x=(-?\d+), y=(-?\d+)')
 
@@ -24,11 +24,11 @@ def overlap_with_row(sensor, beacon, row):
     >>> overlap_with_row((8,7), (2,10), 17)
     >>> overlap_with_row((8,7), (2,10), -3)
     >>> overlap_with_row((8,7), (2,10), 16)
-    Range(8, 8)
+    Span(8, 8)
     >>> overlap_with_row((8,7), (2,10), 1)
-    Range(5, 11)
+    Span(5, 11)
     >>> overlap_with_row((8,7), (2,10), 7)
-    Range(-1, 17)
+    Span(-1, 17)
     """
 
     x = sensor[0]
@@ -39,7 +39,7 @@ def overlap_with_row(sensor, beacon, row):
     if overlap < 0:
         return None
 
-    return Range(x - overlap, x + overlap)
+    return Span(x - overlap, x + overlap)
 
 
 def overlaps_with_row(data, y):
@@ -49,7 +49,7 @@ def overlaps_with_row(data, y):
         if overlap := overlap_with_row(sensor, beacon, y):
             overlaps.append(overlap)
 
-    return Range.combine(overlaps)
+    return Span.combine(overlaps)
 
 
 def exclude_row(data , y):
@@ -59,9 +59,9 @@ def exclude_row(data , y):
     26
     """
 
-    ranges = overlaps_with_row(data, y)
+    spans = overlaps_with_row(data, y)
     row_beacons = set(beacon[0] for _, beacon in data if beacon[1] == y)
-    return sum(range.size() for range in ranges) - len(row_beacons)
+    return sum(len(span) for span in spans) - len(row_beacons)
 
 
 def find_beacon(data, max_value):
