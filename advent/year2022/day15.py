@@ -52,7 +52,7 @@ def overlaps_with_row(data, y):
     return Span.combine(overlaps)
 
 
-def exclude_row(data , y):
+def exclude_row(data, y):
     """
     >>> data = read_input(filename='input/2022/day15-test.txt')
     >>> exclude_row(data, 10)

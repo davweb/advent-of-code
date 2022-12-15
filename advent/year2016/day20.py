@@ -2,6 +2,7 @@
 
 from advent import Span
 
+
 def read_input():
     output = []
     with open('input/2016/day20-input.txt', encoding='utf8') as file:
