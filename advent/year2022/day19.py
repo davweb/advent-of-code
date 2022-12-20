@@ -51,7 +51,6 @@ class Calvacade:
             return
 
         self.seen[key] = minutes
-        # priority = robots[0] * -100000000 + totals[0] * -1000000 + robots[1] * -10000 + totals[1] * -100
         priority = (invert(robots), invert(totals))
         heappush(self.queue, (priority, robots, totals, minutes))
 
@@ -102,7 +101,7 @@ def process(
             # if all(cost <= total for cost, total in zip(robot_cost, totals)):
             # unrolled to:
             if robot_cost[0] <= totals[0] and robot_cost[1] <= totals[1] and robot_cost[2] <= totals[2] and robot_cost[3] <= totals[3]:
-                #new_totals = tuple(total - cost for total, cost in zip(updated_totals, robot_cost))
+                # new_totals = tuple(total - cost for total, cost in zip(updated_totals, robot_cost))
                 # unrolled to
                 new_totals = (
                     updated_totals[0] - robot_cost[0],
