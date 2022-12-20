@@ -1,5 +1,5 @@
+# pylint: disable=line-too-long,too-many-arguments,too-many-locals
 # -*- coding: utf-8 -*-
-# pylint: disable=line-too-long,too-many-arguments,too-many-locals
 
 from heapq import heappush, heappop
 import re
