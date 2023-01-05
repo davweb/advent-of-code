@@ -1,12 +1,8 @@
-def read_input():
-    return read_file('input/2017/day19-input.txt')
-
-
-def read_file(filename):
+def read_input(filename='input/2017/day19-input.txt'):
     network = []
 
-    for line in open(filename, 'r'):  # .readlines():
-        network.append(line)
+    with open(filename, encoding='utf8') as file:
+        network = file.readlines()
 
     return network
 
@@ -42,7 +38,7 @@ def valid_move(network, x, y):
 
 def visit(network):
     """
-    >>> sample = read_file('input/2017/day19-sample.txt')
+    >>> sample = read_input('input/2017/day19-sample.txt')
     >>> visit(sample)
     (38, ['A', 'B', 'C', 'D', 'E', 'F'])
     """

@@ -8,8 +8,8 @@ LINE_SIZE = 16
 
 
 def read_input():
-    file = open('input/2017/day16-input.txt', 'r')
-    return parse_dance(file.read())
+    with open('input/2017/day16-input.txt', encoding='utf8') as file:
+        return parse_dance(file.read())
 
 
 def parse_dance(dance):
@@ -29,7 +29,7 @@ def match(line):
     if partner:
         return ('partner', partner.group(1, 2))
 
-    raise Exception("Did not match line '{}'".format(line))
+    raise ValueError(f'Did not match line "{line}"')
 
 
 def dance_move(line, step):
@@ -47,9 +47,9 @@ def dance_move(line, step):
         b = line.index(y)
         line[a], line[b] = line[b], line[a]
     else:
-        raise Exception("Did not match move '{}'".format(move))
+        raise ValueError(f'Did not match move "{move}"')
 
-    return "".join(line)
+    return ''.join(line)
 
 
 def create_line(line_size):

@@ -7,9 +7,9 @@ def read_input():
     data = []
 
     for row in range(0, 128):
-        seed = "%s-%d" % (INPUT, row)
+        seed = f'{INPUT}-{row}'
         hash_value = advent.knot_hash(seed)
-        hash_value = "".join("{0:08b}".format(value) for value in hash_value)
+        hash_value = ''.join(f'{value:08b}' for value in hash_value)
         hash_value = [int(c) for c in hash_value]
         data.append(hash_value)
 

@@ -15,8 +15,8 @@ STATE_PATTERN = re.compile(
 
 
 def read_input():
-    file = open('input/2017/day25-input.txt', 'r')
-    contents = file.read()
+    with open('input/2017/day25-input.txt', encoding='utf8') as file:
+        contents = file.read()
 
     match = INITIAL_STATE_PATTERN.search(contents)
     initial_state = match.group(1)

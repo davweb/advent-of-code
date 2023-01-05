@@ -5,13 +5,13 @@ PATTERN = re.compile("([a-z]+) (inc|dec) (-?\\d+) if ([a-z]+) ([<>=!]+) (-?\\d+)
 
 
 def read_input():
-    file = open('input/2017/day8-input.txt', 'r')
     data = []
 
-    for line in file:
-        result = PATTERN.match(line)
-        target, op, amount, source, comparison, value = result.group(1, 2, 3, 4, 5, 6)
-        data.append((target, op, int(amount), source, comparison, int(value)))
+    with open('input/2017/day8-input.txt', encoding='utf8') as file:
+        for line in file:
+            result = PATTERN.match(line)
+            target, op, amount, source, comparison, value = result.group(1, 2, 3, 4, 5, 6)
+            data.append((target, op, int(amount), source, comparison, int(value)))
 
     return data
 
@@ -30,7 +30,7 @@ def compare(comparison, current, value):
     if comparison == "<=":
         return current <= value
 
-    raise ValueError("Unknown comparison '%s'" % comparison)
+    raise ValueError(f'Unknown comparison "{comparison}"')
 
 
 def part1and2(data):
@@ -47,7 +47,7 @@ def part1and2(data):
     """
 
     values = defaultdict(int)
-    maxval = None
+    max_val = None
 
     for (target, op, amount, source, comparison, value) in data:
         current = values[source]
@@ -60,13 +60,13 @@ def part1and2(data):
             elif op == "dec":
                 old -= amount
             else:
-                raise ValueError("Unknown operator: %s" % op)
+                raise ValueError(f'Unknown operator: {op}')
 
             values[target] = old
-            if maxval is None or maxval < old:
-                maxval = old
+            if max_val is None or max_val < old:
+                max_val = old
 
-    return (max(values.values())), maxval
+    return (max(values.values())), max_val
 
 
 def main():

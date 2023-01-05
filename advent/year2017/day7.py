@@ -7,14 +7,14 @@ PATTERN = re.compile("([a-z]+) \\((\\d+)\\)( -> ([a-z, ]+))?")
 
 
 def read_input():
-    file = open('input/2017/day7-input.txt', 'r')
     data = []
 
-    for line in file:
-        result = PATTERN.match(line)
-        name, weight, supporting = result.group(1, 2, 4)
-        supporting = [] if supporting is None else supporting.split(', ')
-        data.append((name, int(weight), supporting))
+    with open('input/2017/day7-input.txt', encoding='utf8') as file:
+        for line in file:
+            result = PATTERN.match(line)
+            name, weight, supporting = result.group(1, 2, 4)
+            supporting = [] if supporting is None else supporting.split(', ')
+            data.append((name, int(weight), supporting))
 
     return data
 

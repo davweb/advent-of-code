@@ -6,17 +6,16 @@ PATTERN = re.compile(r"(\d+) <-> ((\d+, )*\d+)")
 
 def read_input():
     graph = defaultdict(set)
-    file = open('input/2017/day12-input.txt', 'r')
+    with open('input/2017/day12-input.txt', encoding='utf8') as file:
+        for line in file:
+            result = PATTERN.match(line)
+            source, targets = result.group(1, 2)
+            source = int(source)
+            targets = [int(target) for target in targets.split(", ")]
 
-    for line in file.readlines():
-        result = PATTERN.match(line)
-        source, targets = result.group(1, 2)
-        source = int(source)
-        targets = [int(target) for target in targets.split(", ")]
-
-        for target in targets:
-            graph[source].add(target)
-            graph[target].add(source)
+            for target in targets:
+                graph[source].add(target)
+                graph[target].add(source)
 
     return graph
 

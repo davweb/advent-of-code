@@ -1,10 +1,10 @@
 def read_input():
-    file = open('input/2017/day24-input.txt', 'r')
     data = []
 
-    for line in file:
-        values = line.strip().split('/')
-        data.append((int(values[0]), int(values[1])))
+    with open('input/2017/day24-input.txt', encoding='utf8') as file:
+        for line in file:
+            values = line.strip().split('/')
+            data.append((int(values[0]), int(values[1])))
 
     return data
 

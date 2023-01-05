@@ -1,9 +1,9 @@
 def read_input():
-    file = open('input/2017/day23-input.txt', 'r')
     data = []
 
-    for line in file:
-        data.append(line.strip().split())
+    with open('input/2017/day23-input.txt', encoding='utf8') as file:
+        for line in file:
+            data.append(line.strip().split())
 
     return data
 

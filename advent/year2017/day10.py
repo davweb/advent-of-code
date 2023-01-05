@@ -2,8 +2,8 @@ from advent import knot_hash, bytes_to_hex
 
 
 def read_input():
-    file = open('input/2017/day10-input.txt', 'r')
-    return file.read()
+    with open('input/2017/day10-input.txt', encoding='utf8') as file:
+        return file.read()
 
 
 def part1(data):

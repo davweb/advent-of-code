@@ -70,22 +70,21 @@ def permutations(rule):
 def read_input():
     rules = {}
 
-    for line in open('input/2017/day21-input.txt', 'r'):
-        (rule, result) = line.strip().split(' => ')
+    with open('input/2017/day21-input.txt', encoding='utf8') as file:
+        for line in file:
+            (rule, result) = line.strip().split(' => ')
 
-        for permutation in permutations(rule):
-            rules[permutation] = result
+            for permutation in permutations(rule):
+                rules[permutation] = result
 
     return rules
 
 
 def process(rules, steps):
     pattern = ".#.\n..#\n###"
-    step = 0
 
     # Break the pattern into blocks
-    while step < steps:
-        step += 1
+    for _ in range(steps):
         lines = pattern.split()
 
         if len(lines) % 2 == 0:

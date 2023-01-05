@@ -1,8 +1,8 @@
 #!/usr/local/bin/python3
 
 def read_input():
-    file = open('input/2017/day4-input.txt', 'r')
-    return [line.split() for line in file]
+    with open('input/2017/day4-input.txt', encoding='utf8') as file:
+        return [line.split() for line in file]
 
 
 def part1(data):

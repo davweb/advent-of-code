@@ -2,8 +2,8 @@ from collections import defaultdict
 
 
 def read_input():
-    file = open('input/2017/day18-input.txt', 'r')
-    return parse_input(file.readlines())
+    with open('input/2017/day18-input.txt', encoding='utf8') as file:
+        return parse_input(file.readlines())
 
 
 def parse_input(data):
@@ -19,7 +19,7 @@ def parse_input(data):
         elif command in ['set', 'add', 'mul', 'mod', 'jgz']:
             y = line[2]
         else:
-            raise Exception("Unknown instruction: {}".format(command))
+            raise Exception(f'Unknown instruction: {command}')
 
         instructions.append((command, x, y))
 
@@ -73,7 +73,7 @@ def part1(instructions):
             if x > 0:
                 step = y
         else:
-            raise Exception("Unknown instruction {}".format(command))
+            raise ValueError(f'Unknown instruction {command}')
 
         pointer += step
 
@@ -101,44 +101,43 @@ def part2(instructions):
     first = True
     count = 0
 
-    while sum(len(q) for q in all_queues) > 0 or first:
+    while any(all_queues) or first:
         registers = all_registers[program]
-        pointer = all_pointers[program]
         queue = all_queues[program]
         other_queue = all_queues[1 - program]
 
-        command, register, y = instructions[pointer]
+        command, register, y = instructions[all_pointers[program]]
         x = register_value(registers, register)
         y = register_value(registers, y)
 
         step = 1
 
-        if command == "snd":
-            first = False
-            other_queue.append(x)
-            if program == 1:
-                count += 1
-        elif command == "set":
-            registers[register] = y
-        elif command == "add":
-            registers[register] = x + y
-        elif command == "mul":
-            registers[register] = x * y
-        elif command == "mod":
-            registers[register] = x % y
-        elif command == "rcv":
-            if len(queue) == 0:
-                program = 1 - program
-                step = 0
-            else:
-                registers[register] = queue.pop(0)
-        elif command == "jgz":
-            if x > 0:
-                step = y
-        else:
-            raise Exception("Unknown instruction {}".format(command))
+        match command:
+            case "snd":
+                first = False
+                other_queue.append(x)
+                if program == 1:
+                    count += 1
+            case "set":
+                registers[register] = y
+            case "add":
+                registers[register] = x + y
+            case "mul":
+                registers[register] = x * y
+            case "mod":
+                registers[register] = x % y
+            case "rcv":
+                if len(queue) == 0:
+                    program = 1 - program
+                    step = 0
+                else:
+                    registers[register] = queue.pop(0)
+            case "jgz":
+                if x > 0:
+                    step = y
+            case _:
+                raise Exception(f'Unknown instruction {command}')
 
-        pointer += step
         all_pointers[program] += step
 
     return count

@@ -8,11 +8,12 @@ def read_input():
     data = []
     index = 0
 
-    for line in open('input/2017/day20-input.txt', 'r'):
-        result = PATTERN.match(line)
-        values = [int(v) for v in result.groups()]
-        data.append((index, (values[0:3], values[3:6], values[6:9])))
-        index += 1
+    with open('input/2017/day20-input.txt', encoding='utf8') as file:
+        for line in file:
+            result = PATTERN.match(line)
+            values = [int(v) for v in result.groups()]
+            data.append((index, (values[0:3], values[3:6], values[6:9])))
+            index += 1
 
     return dict(data)
 

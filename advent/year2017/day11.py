@@ -10,8 +10,8 @@ DIRECTIONS = {
 
 
 def read_input():
-    file = open('input/2017/day11-input.txt', 'r')
-    return file.read().split(',')
+    with open('input/2017/day11-input.txt', encoding='utf8') as file:
+        return file.read().split(',')
 
 
 def distance_home(x, y):

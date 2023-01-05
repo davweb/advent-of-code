@@ -1,8 +1,8 @@
 #!/usr/local/bin/python3
 
 def read_input():
-    file = open('input/2017/day6-input.txt', 'r')
-    return [int(bank) for bank in file.read().split()]
+    with open('input/2017/day6-input.txt', encoding='utf8') as file:
+        return [int(bank) for bank in file.read().split()]
 
 
 def fullest_bank(banks):

@@ -4,8 +4,8 @@ import itertools
 
 
 def read_input():
-    file = open('input/2017/day2-input.txt', 'r')
-    return [[int(x) for x in row.split("\t")] for row in file]
+    with open('input/2017/day2-input.txt', encoding='utf8') as file:
+        return [[int(x) for x in row.split("\t")] for row in file]
 
 
 def part1(data):

@@ -16,45 +16,50 @@ class Direction(Enum):
 
 
 def read_input():
-    file = open('input/2017/day22-input.txt', 'r')
     data = []
 
-    for line in file:
-        data.append([State.INFECTED if c == '#' else State.CLEAN for c in line.strip()])
+    with open('input/2017/day22-input.txt', encoding='utf8') as file:
+        for line in file:
+            data.append([State.INFECTED if c == '#' else State.CLEAN for c in line.strip()])
 
     return data
 
 
 def next_direction(direction, state):
-    if state == State.FLAGGED:
-        if direction == Direction.UP:
-            return Direction.DOWN
-        if direction == Direction.RIGHT:
-            return Direction.LEFT
-        if direction == Direction.DOWN:
-            return Direction.UP
-        return Direction.RIGHT
-    if state == State.INFECTED:
-        if direction == Direction.UP:
-            return Direction.RIGHT
-        if direction == Direction.RIGHT:
-            return Direction.DOWN
-        if direction == Direction.DOWN:
-            return Direction.LEFT
-        return Direction.UP
-    if state == State.CLEAN:
-        if direction == Direction.UP:
-            return Direction.LEFT
-        if direction == Direction.LEFT:
-            return Direction.DOWN
-        if direction == Direction.DOWN:
-            return Direction.RIGHT
-        return Direction.UP
-    if state == State.WEAKENED:
-        return direction
+    match state:
+        case State.FLAGGED:
+            if direction == Direction.UP:
+                result = Direction.DOWN
+            elif direction == Direction.RIGHT:
+                result = Direction.LEFT
+            elif direction == Direction.DOWN:
+                result = Direction.UP
+            else:
+                result = Direction.RIGHT
+        case State.INFECTED:
+            if direction == Direction.UP:
+                result = Direction.RIGHT
+            elif direction == Direction.RIGHT:
+                result = Direction.DOWN
+            elif direction == Direction.DOWN:
+                result = Direction.LEFT
+            else:
+                return Direction.UP
+        case State.CLEAN:
+            if direction == Direction.UP:
+                result = Direction.LEFT
+            elif direction == Direction.LEFT:
+                result = Direction.DOWN
+            elif direction == Direction.DOWN:
+                result = Direction.RIGHT
+            else:
+                result = Direction.UP
+        case State.WEAKENED:
+            result = direction
+        case _:
+            raise ValueError(f'Invalid State "{state}"')
 
-    raise ValueError("Invalid State '{}'".format(state))
-
+    return result
 
 def process(data, state_processor, bursts):
     grid = {}
@@ -116,7 +121,7 @@ def part2(data):
         if state == State.WEAKENED:
             return State.INFECTED
 
-        raise ValueError("Invalid State '{}'".format(state))
+        raise ValueError(f'Invalid State "{state}"')
 
     return process(data, next_state, 10000000)
 

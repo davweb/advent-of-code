@@ -5,13 +5,13 @@ PATTERN = re.compile("(\\d+): (\\d+)")
 
 def read_input():
     firewall = {}
-    file = open('input/2017/day13-input.txt', 'r')
 
-    for line in file.readlines():
-        result = PATTERN.match(line)
-        layer, depth = result.group(1, 2)
-        layer = int(layer)
-        firewall[layer] = int(depth)
+    with open('input/2017/day13-input.txt', encoding='utf8') as file:
+        for line in file:
+            result = PATTERN.match(line)
+            layer, depth = result.group(1, 2)
+            layer = int(layer)
+            firewall[layer] = int(depth)
 
     return firewall
 
