@@ -61,6 +61,7 @@ def next_direction(direction, state):
 
     return result
 
+
 def process(data, state_processor, bursts):
     grid = {}
 
