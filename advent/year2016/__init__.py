@@ -65,12 +65,13 @@ def run_assembunny(lines, a=0, c=0):
     82
     """
 
+    output = []
     register = {'a': a, 'b': 0, 'c': c, 'd': 0}
 
     index = 0
     end = len(lines)
 
-    while index < end:
+    while index < end and len(output) < 10:
         if detect_multiply(lines, index, register):
             index += 6
             continue
@@ -111,9 +112,11 @@ def run_assembunny(lines, a=0, c=0):
                             raise ValueError(change_line)
 
                     change_line[0] = change_instruction
+            case 'out', name, _:
+                output.append(register[name])
             case _:
                 raise ValueError(line)
 
         index += jump
 
-    return register['a']
+    return output if output else register['a']
