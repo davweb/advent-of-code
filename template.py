@@ -2,11 +2,13 @@
 
 import re
 from collections import defaultdict
+from itertools import combinations
+import numpy
 
 PATTERN = re.compile(r'(\d+) <-> ((\d+, )*\d+)')
 
-def read_input():
-    with open('input/2021/day1-input.txt', encoding='utf8') as file:
+def read_input(filename='input/2016/day1-input.txt'):
+    with open(filename, encoding='utf8') as file:
         #return [int(line) for line in file.readlines()]
         #return file.read().split(",")
         return 0
