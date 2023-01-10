@@ -4,7 +4,8 @@ from advent.year2019.intcode import IntCode
 
 
 def read_input():
-    return [int(code) for code in open('input/2019/day5-input.txt', 'r').read().split(',')]
+    with open('input/2019/day5-input.txt', encoding='utf8') as file:
+        return [int(code) for code in file.read().split(',')]
 
 
 def part1(data):

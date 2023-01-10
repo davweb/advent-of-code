@@ -22,7 +22,7 @@ class Moon:
             self.velocity = velocity
 
     def __repr__(self):
-        return "Moon(position={0}, velocity={1})".format(self.position, self.velocity)
+        return f'Moon(position={self.position}, velocity={self.velocity})'
 
     def move(self):
         """
@@ -85,10 +85,11 @@ def closer(a, b):
 
     if a > b:
         return -1
-    elif a < b:
+
+    if a < b:
         return 1
-    else:
-        return 0
+
+    return 0
 
 
 def simulate(moons, steps):

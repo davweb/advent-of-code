@@ -5,8 +5,8 @@ from advent import taxicab_distance
 
 
 def read_input():
-    file = open('input/2019/day3-input.txt', 'r')
-    return [line.split(',') for line in file.readlines()]
+    with open('input/2019/day3-input.txt', encoding='utf8') as file:
+        return [line.split(',') for line in file]
 
 
 def steps(start, instruction):
@@ -22,7 +22,7 @@ def steps(start, instruction):
     >>> list(steps((9, 9), "X1"))
     Traceback (most recent call last):
         ...
-    ValueError: invalid direction 'X'
+    ValueError: invalid direction "X"
     """
 
     (x, y) = start
@@ -31,14 +31,14 @@ def steps(start, instruction):
 
     if direction == "U":
         return ((x, i) for i in range(y + 1, y + distance + 1))
-    elif direction == "D":
+    if direction == "D":
         return ((x, i) for i in range(y - 1, y - distance - 1, -1))
-    elif direction == "R":
+    if direction == "R":
         return ((i, y) for i in range(x + 1, x + distance + 1))
-    elif direction == "L":
+    if direction == "L":
         return ((i, y) for i in range(x - 1, x - distance - 1, -1))
-    else:
-        raise ValueError("invalid direction '{}'".format(direction))
+
+    raise ValueError(f'invalid direction "{direction}"')
 
 
 def process_instructions(data):
@@ -69,9 +69,9 @@ def part1and2(data):
     for wire in data:
         wire_grid = process_instructions(wire)
 
-        for location in wire_grid:
+        for location, value in wire_grid.items():
             grid[location] += 1
-            length[location] += wire_grid[location]
+            length[location] += value
 
     min_dist = min(taxicab_distance((0, 0), item[0]) for item in grid.items() if item[1] == 2)
     min_length = min(length[item[0]] for item in grid.items() if item[1] == 2)

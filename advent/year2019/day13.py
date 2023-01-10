@@ -1,14 +1,17 @@
-#!/usr/local/bin/python3
+# -*- coding: utf-8 -*-
+# pylint: disable=too-many-branches, invalid-sequence-index
 
-from advent.year2019.intcode import IntCode
 from collections import defaultdict
-from advent import md5
 import curses
 import time
+from advent.year2019.intcode import IntCode
+
+SHAPES = (' ', '█', '▓', '▔', '•')
 
 
 def read_input():
-    return [int(code) for code in open('input/2019/day13-input.txt', 'r').read().split(',')]
+    with open('input/2019/day13-input.txt', encoding='utf-8') as file:
+        return [int(code) for code in file.read().split(',')]
 
 
 def part1(code):
@@ -30,7 +33,7 @@ def part1(code):
         square = i.execute()
         screen[(x, y)] = square
 
-    return sum(1 for key in screen.keys() if screen[key] == 2)
+    return sum(value == 2 for value in screen.values())
 
 
 def part2(code, draw):
@@ -39,7 +42,6 @@ def part2(code, draw):
     14747
     """
 
-    code[0] == 2
     score = 0
     i = IntCode(code, memory_size=10000)
     screen = defaultdict(int)
@@ -92,11 +94,11 @@ def part2(code, draw):
         screen[(x, y)] = square
 
         if draw:
-            pixel = [" ", "█", "▓", "▔", "•"][square]
+            pixel = SHAPES[square]
             stdscr.addch(y, x, pixel)
             stdscr.refresh()
 
-            if (square == 3 or square == 4):
+            if square in (3, 4):
                 time.sleep(0.007)
 
     if draw:

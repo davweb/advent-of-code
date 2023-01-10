@@ -22,12 +22,13 @@ class ParameterMode(IntEnum):
 
 class IntCode:
 
-    def __init__(self, code, input=None, memory_size=2048):
+    def __init__(self, code, input_value=None, memory_size=2048):
         self.memory = [0] * memory_size
         self.memory[:len(code)] = code
-        self.input = [] if input is None else input
+        self.input = [] if input_value is None else input_value
         self.index = 0
         self.relative_base = 0
+        self.parameter_modes = None
 
     def generate_parameter_modes(self, op_code):
         """
@@ -79,14 +80,15 @@ class IntCode:
         self.index += 1
         parameter_mode = next(self.parameter_modes)
 
-        if parameter_mode == ParameterMode.POSITION:
-            return self.memory[parameter_value]
-        elif parameter_mode == ParameterMode.IMMEDIATE:
-            return parameter_value
-        elif parameter_mode == ParameterMode.RELATIVE:
-            return self.memory[parameter_value + self.relative_base]
-        else:
-            raise ValueError("Invalid parameter mode '{}'".format(parameter_mode))
+        match parameter_mode:
+            case ParameterMode.POSITION:
+                return self.memory[parameter_value]
+            case ParameterMode.IMMEDIATE:
+                return parameter_value
+            case ParameterMode.RELATIVE:
+                return self.memory[parameter_value + self.relative_base]
+            case _:
+                raise ValueError(f'Invalid parameter mode "{parameter_mode}"')
 
     def set_next_parameter(self, parameter_value):
         destination_index = self.memory[self.index]
@@ -99,7 +101,7 @@ class IntCode:
         elif parameter_mode == ParameterMode.RELATIVE:
             self.memory[destination_index + self.relative_base] = parameter_value
         else:
-            raise ValueError("Invalid parameter mode '{}'".format(parameter_mode))
+            raise ValueError(f'Invalid parameter mode "{parameter_mode}"')
 
     def next_input(self):
         """"
@@ -112,20 +114,20 @@ class IntCode:
         """
         try:
             return self.input.pop(0)
-        except IndexError:
-            raise ValueError("Not enough input values")
+        except IndexError as exc:
+            raise ValueError("Not enough input values") from exc
 
-    def add_input(self, *input):
-        self.input += input
+    def add_input(self, *input_value):
+        self.input += input_value
 
-    def run(self, input=None):
+    def run(self, input_value=None):
         """
         >>> IntCode([109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99]).run()
         [109, 1, 204, -1, 1001, 100, 1, 100, 1008, 100, 16, 101, 1006, 101, 0, 99]
         """
 
-        if input is not None:
-            self.input += input
+        if input_value is not None:
+            self.input += input_value
 
         output = []
 
@@ -137,12 +139,12 @@ class IntCode:
 
         return output
 
-    def execute(self, input=None):
+    def execute(self, input_value=None):
         """
         >>> IntCode([87]).execute([])
         Traceback (most recent call last):
             ...
-        ValueError: Invalid op code '87'
+        ValueError: Invalid op code "87"
         >>> IntCode([1, 0, 0, 0, 4, 0, 99]).execute([])
         2
         >>> IntCode([2, 3, 0, 3, 4, 3, 99]).execute([])
@@ -180,58 +182,58 @@ class IntCode:
         >>> IntCode([1102,34915192,34915192,7,4,7,99,0]).execute()
         1219070632396864
         """
-        if input is not None:
-            self.input += input
+        if input_value is not None:
+            self.input += input_value
 
         while True:
-            op_code = self.next_instruction()
+            match self.next_instruction():
 
-            if op_code == OpCode.ADD:
-                left = self.get_next_parameter()
-                right = self.get_next_parameter()
-                self.set_next_parameter(left + right)
+                case OpCode.ADD:
+                    left = self.get_next_parameter()
+                    right = self.get_next_parameter()
+                    self.set_next_parameter(left + right)
 
-            elif op_code == OpCode.MULTIPLY:
-                left = self.get_next_parameter()
-                right = self.get_next_parameter()
-                self.set_next_parameter(left * right)
+                case OpCode.MULTIPLY:
+                    left = self.get_next_parameter()
+                    right = self.get_next_parameter()
+                    self.set_next_parameter(left * right)
 
-            elif op_code == OpCode.SAVE:
-                value = self.next_input()
-                self.set_next_parameter(value)
+                case OpCode.SAVE:
+                    value = self.next_input()
+                    self.set_next_parameter(value)
 
-            elif op_code == OpCode.OUTPUT:
-                return self.get_next_parameter()
+                case OpCode.OUTPUT:
+                    return self.get_next_parameter()
 
-            elif op_code == OpCode.JUMP_IF_TRUE:
-                conditional = self.get_next_parameter()
-                destination_index = self.get_next_parameter()
+                case OpCode.JUMP_IF_TRUE:
+                    conditional = self.get_next_parameter()
+                    destination_index = self.get_next_parameter()
 
-                if conditional != 0:
-                    self.index = destination_index
+                    if conditional != 0:
+                        self.index = destination_index
 
-            elif op_code == OpCode.JUMP_IF_FALSE:
-                conditional = self.get_next_parameter()
-                destination_index = self.get_next_parameter()
+                case OpCode.JUMP_IF_FALSE:
+                    conditional = self.get_next_parameter()
+                    destination_index = self.get_next_parameter()
 
-                if conditional == 0:
-                    self.index = destination_index
+                    if conditional == 0:
+                        self.index = destination_index
 
-            elif op_code == OpCode.LESS_THAN:
-                first = self.get_next_parameter()
-                second = self.get_next_parameter()
-                self.set_next_parameter(int(first < second))
+                case OpCode.LESS_THAN:
+                    first = self.get_next_parameter()
+                    second = self.get_next_parameter()
+                    self.set_next_parameter(int(first < second))
 
-            elif op_code == OpCode.EQUAL_TO:
-                first = self.get_next_parameter()
-                second = self.get_next_parameter()
-                self.set_next_parameter(int(first == second))
+                case OpCode.EQUAL_TO:
+                    first = self.get_next_parameter()
+                    second = self.get_next_parameter()
+                    self.set_next_parameter(int(first == second))
 
-            elif op_code == OpCode.RELATIVE_BASE:
-                self.relative_base += self.get_next_parameter()
+                case OpCode.RELATIVE_BASE:
+                    self.relative_base += self.get_next_parameter()
 
-            elif op_code == OpCode.EXIT:
-                return None
+                case OpCode.EXIT:
+                    return None
 
-            else:
-                raise ValueError("Invalid op code '{}'".format(op_code))
+                case op_code:
+                    raise ValueError(f'Invalid op code "{op_code}"')

@@ -5,14 +5,15 @@ from advent.year2019.intcode import IntCode
 
 
 def read_input():
-    return [int(code) for code in open('input/2019/day2-input.txt', 'r').read().split(',')]
+    with open('input/2019/day2-input.txt', encoding='utf8') as file:
+        return [int(code) for code in file.read().split(',')]
 
 
 def execute(data, noun, verb):
-    input = data.copy()
-    input[1] = noun
-    input[2] = verb
-    i = IntCode(input)
+    input_value = data.copy()
+    input_value[1] = noun
+    input_value[2] = verb
+    i = IntCode(input_value)
     i.execute()
     return i.memory[0]
 

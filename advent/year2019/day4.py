@@ -1,12 +1,14 @@
 #!/usr/local/bin/python3
 
+INPUT = (245182, 790572)
+
 
 def digits(n):
     """
     >>> digits(0)
     Traceback (most recent call last):
         ...
-    ValueError: '0' is not a positive integer
+    ValueError: "0" is not a positive integer
     >>> digits(1)
     [1]
     >>> digits(12)
@@ -18,11 +20,11 @@ def digits(n):
     """
 
     if n < 1:
-        raise ValueError("'{}' is not a positive integer".format(n))
+        raise ValueError(f'"{n}" is not a positive integer')
 
     result = []
 
-    while (n > 0):
+    while n > 0:
         digit = n % 10
         n //= 10
         result.append(digit)
@@ -104,26 +106,25 @@ def has_pair_of_digits(n):
 
 def part1(data):
     """
-    >>> part1(range(245182, 790572))
+    >>> part1(INPUT)
     1099
     """
 
-    return len([x for x in data if has_adjacent_digits(x) and has_never_decreasing_digits(x)])
+    return sum(has_adjacent_digits(x) and has_never_decreasing_digits(x) for x in range(*data))
 
 
 def part2(data):
     """
-    >>> part2(range(245182, 790572))
+    >>> part2(INPUT)
     710
     """
 
-    return len([x for x in data if has_pair_of_digits(x) and has_never_decreasing_digits(x)])
+    return sum(has_pair_of_digits(x) and has_never_decreasing_digits(x) for x in range(*data))
 
 
 def main():
-    input = (245182, 790572)
-    part1(range(*input))
-    part2(range(*input))
+    print(part1(INPUT))
+    print(part2(INPUT))
 
 
 if __name__ == "__main__":

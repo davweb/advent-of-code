@@ -4,12 +4,12 @@ from collections import defaultdict
 
 
 def read_input():
-    file = open("input/2019/day6-input.txt", "r")
     orbits = []
 
-    for line in file.readlines():
-        (x, y) = line.strip().split(")")[:2]
-        orbits.append((x, y))
+    with open('input/2019/day6-input.txt', encoding='utf8') as file:
+        for line in file:
+            (x, y) = line.strip().split(")")[:2]
+            orbits.append((x, y))
 
     return orbits
 
@@ -78,7 +78,7 @@ def part2(orbits):
                 new_route = route + [n]
                 queue.append(new_route)
 
-    raise Exception("Failed to find {}".format(end))
+    raise ValueError(f'Failed to find {end}')
 
 
 def main():

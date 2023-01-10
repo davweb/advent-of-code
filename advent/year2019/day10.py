@@ -5,7 +5,7 @@ import math
 
 
 def read_input():
-    with open('input/2019/day10-input.txt', 'r') as file:
+    with open('input/2019/day10-input.txt', encoding='utf-8') as file:
         data = [[cell == "#" for cell in line.strip()] for line in file.readlines()]
         return set((x, y) for (x, y) in itertools.product(range(0, len(data[0])), range(0, len(data))) if data[y][x])
 
@@ -32,7 +32,7 @@ def path(start, end):
     (ex, ey) = end
     dx = ex - x
     dy = ey - y
-    path = []
+    path_list = []
 
     if dx == 0 and dy == 0:
         pass
@@ -43,7 +43,7 @@ def path(start, end):
             my = dy * mx / dx
             if my.is_integer():
                 my = int(my)
-                path.append((x + mx, y + my))
+                path_list.append((x + mx, y + my))
     else:
         r = range(1, dy) if dy > 0 else range(-1, dy, -1)
 
@@ -52,9 +52,9 @@ def path(start, end):
 
             if mx.is_integer():
                 mx = int(mx)
-                path.append((x + mx, y + my))
+                path_list.append((x + mx, y + my))
 
-    return path
+    return path_list
 
 
 def can_see(asteroid, asteroids):

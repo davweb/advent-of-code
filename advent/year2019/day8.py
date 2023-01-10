@@ -5,11 +5,11 @@ from operator import itemgetter
 
 
 def read_input():
-    with open('input/2019/day8-input.txt', 'r') as file:
+    with open('input/2019/day8-input.txt', encoding='utf-8') as file:
         return [int(digit) for digit in file.read()]
 
 
-def count_pixels(input, width, height):
+def count_pixels(input_value, width, height):
     """
     >>> data = (0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 0)
     >>> count = count_pixels(data, 3, 2)
@@ -30,7 +30,7 @@ def count_pixels(input, width, height):
     index = 0
     layer = 0
 
-    for digit in input:
+    for digit in input_value:
         count[digit][layer] += 1
 
         index += 1
@@ -41,13 +41,13 @@ def count_pixels(input, width, height):
 
 
 def image(data, width, height):
-    image = [[2 for x in range(0, width)] for y in range(0, height)]
+    pixels = [[2 for x in range(0, width)] for y in range(0, height)]
     x = 0
     y = 0
 
     for pixel in data:
-        if image[y][x] == 2:
-            image[y][x] = pixel
+        if pixels[y][x] == 2:
+            pixels[y][x] = pixel
 
         x += 1
         if x >= width:
@@ -57,32 +57,32 @@ def image(data, width, height):
             if y >= height:
                 y = 0
 
-    return "\n".join("".join("█" if pixel else " " for pixel in row) for row in image)
+    return "\n".join("".join("█" if pixel else " " for pixel in row) for row in pixels)
 
 
 def key_for_smallest_value(some_dict):
     return min(some_dict.items(), key=itemgetter(1))[0]
 
 
-def part1(input):
+def part1(data):
     """
     >>> part1(read_input())
     1965
     """
 
-    count = count_pixels(input, 25, 6)
+    count = count_pixels(data, 25, 6)
     layer = key_for_smallest_value(count[0])
     return count[1][layer] * count[2][layer]
 
 
-def part2(code):
+def part2(data):
     """
     >>> from advent import md5
     >>> md5(part2(read_input()))
     '70918ebfcb8099bc4cc51de972a09319'
     """
 
-    return image(code, 25, 6)
+    return image(data, 25, 6)
 
 
 def main():

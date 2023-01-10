@@ -4,7 +4,8 @@ import functools
 
 
 def read_input():
-    return [int(code) for code in open('input/2019/day16-input.txt', 'r').read()]
+    with open('input/2019/day16-input.txt', encoding='utf-8') as file:
+        return file.read()
 
 # def pattern(element_no):
 #     """
@@ -56,23 +57,23 @@ def pattern_series(element_no, size):
         modifier = - modifier
 
 
-def transform(input):
+def transform(input_value):
     output = []
-    length = len(input)
+    length = len(input_value)
 
     for i in range(0, length):
-        value = sum(modifier * sum(input[start:end]) for (modifier, start, end) in pattern_series(i, length))
+        value = sum(modifier * sum(input_value[start:end]) for (modifier, start, end) in pattern_series(i, length))
         output.append(abs(value) % 10)
 
     return output
 
 
-def sum_input(input, start, end, cache):
+def sum_input(input_value, start, end, cache):
     if start == end:
         return 0
 
     if end - start == 1:
-        return input[start]
+        return input_value[start]
 
     key = (start, end)
 
@@ -80,29 +81,29 @@ def sum_input(input, start, end, cache):
         return cache[key]
     except KeyError:
         middle = start + (end - start) // 2
-        value = sum_input(input, start, middle, cache) + sum_input(input, middle, end, cache)
+        value = sum_input(input_value, start, middle, cache) + sum_input(input_value, middle, end, cache)
         cache[key] = value
         return value
 
 
-def transform_cache(input):
+def transform_cache(input_value):
     print(".")
     output = []
-    length = len(input)
+    length = len(input_value)
     cache = {}
 
     for i in range(0, length):
         value = 0
 
         for (modifier, start, end) in pattern_series(i, length):
-            value += modifier * sum_input(input, start, end, cache)
+            value += modifier * sum_input(input_value, start, end, cache)
 
         output.append(abs(value) % 10)
 
     return output
 
 
-def fft(input):
+def fft(input_value):
     """
     >>> fft('12345678')
     '48226158'
@@ -114,12 +115,12 @@ def fft(input):
     '01029498'
     """
 
-    input = [int(code) for code in input]
-    output = transform(input)
+    input_value = [int(code) for code in input_value]
+    output = transform(input_value)
     return "".join(str(i) for i in output)
 
 
-def part1(input):
+def part1(data):
     """
     >>> part1('80871224585914546619083218645595')
     '24176176'
@@ -127,12 +128,12 @@ def part1(input):
     >>> part1(read_input())
     '15841929'
     """
-    input = [int(code) for code in input]
-    output = functools.reduce(lambda a, b: transform(a), [input] + list(range(0, 100)))
+    data = [int(code) for code in data]
+    output = functools.reduce(lambda a, b: transform(a), [data] + list(range(0, 100)))
     return "".join(str(i) for i in output[:8])
 
 
-def part2(input):
+def part2(data):
     """
     # >>> part2('80871224585914546619083218645595')
     '24176176'
@@ -141,16 +142,16 @@ def part2(input):
     '15841929'
     """
 
-    input = [int(code) for code in input]
-    output = functools.reduce(lambda a, b: transform_cache(a), [input] + list(range(0, 100)))
+    data = [int(code) for code in data]
+    output = functools.reduce(lambda a, b: transform_cache(a), [data] + list(range(0, 100)))
     return "".join(str(i) for i in output[:8])
 
 
 def main():
-    input = read_input()
-    print(len(input))
-    print(part1(input))
-    print(part2(input * 100))
+    data = read_input()
+    print(len(data))
+    print(part1(data))
+    print(part2(data * 100))
 
 
 if __name__ == "__main__":

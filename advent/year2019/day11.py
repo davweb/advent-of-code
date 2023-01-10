@@ -1,17 +1,21 @@
 #!/usr/local/bin/python3
 
-from advent.year2019.intcode import IntCode
 from collections import defaultdict
 from advent import bounds
+from advent.year2019.intcode import IntCode
 
 DIRECTIONS = [(0, -1), (1, 0), (0, 1), (-1, 0)]
 
 
 def read_input():
-    return [int(code) for code in open('input/2019/day11-input.txt', 'r').read().split(',')]
+    with open('input/2019/day11-input.txt', encoding='utf-8') as file:
+        return [int(code) for code in file.read().split(',')]
 
 
-def paint(code, painted=[]):
+def paint(code, painted=None):
+    if painted is None:
+        painted = []
+
     hull = defaultdict(int)
 
     for point in painted:
@@ -23,15 +27,15 @@ def paint(code, painted=[]):
     point = (0, 0)
 
     while True:
-        input = [hull[point]]
+        input_value = [hull[point]]
 
-        paint = robot.execute(input)
+        paint_result = robot.execute(input_value)
 
-        if paint is None:
+        if paint_result is None:
             break
 
         turn = robot.execute()
-        hull[point] = paint
+        hull[point] = paint_result
 
         if turn == 0:
             turn = -1
@@ -40,7 +44,7 @@ def paint(code, painted=[]):
         move = DIRECTIONS[direction]
         point = (point[0] + move[0], point[1] + move[1])
 
-    return (hull)
+    return hull
 
 
 def part1(code):
@@ -61,7 +65,7 @@ def part2(code):
 
     hull = paint(code, [(0, 0)])
 
-    points = [point for point in hull.keys() if hull[point]]
+    points = [point for point, value in hull.items() if value]
 
     (left, top), (right, bottom) = bounds(points)
     output = []

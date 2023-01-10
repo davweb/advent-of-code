@@ -1,8 +1,8 @@
 #!/usr/local/bin/python3
 
 def read_input():
-    file = open('input/2019/day1-input.txt', 'r')
-    return [int(line) for line in file.readlines()]
+    with open('input/2019/day1-input.txt', encoding='utf8') as file:
+        return [int(line) for line in file]
 
 
 def calculate_fuel(mass):
@@ -22,7 +22,11 @@ def calculate_fuel(mass):
 
 
 def calculate_all_fuel(mass):
-    """So, for each module mass, calculate its fuel and add it to the total. Then, treat the fuel amount you just calculated as the input mass and repeat the process, continuing until a fuel requirement is zero or negative.
+    """
+    So, for each module mass, calculate its fuel and add it to the total.
+    Then, treat the fuel amount you just calculated as the input mass and
+    repeat the process, continuing until a fuel requirement is zero or
+    negative.
 
     >>> calculate_all_fuel(14)
     2
