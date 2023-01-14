@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import re
-import math
 from collections import defaultdict
-from time import time
 
 PATTERN = re.compile(r"pos=<(-?\d+),(-?\d+),(-?\d+)>, r=(\d+)")
 
@@ -90,14 +88,6 @@ def part2_every_location(nanobots):
     36
     """
 
-    squares = 0
-
-    for bot in nanobots:
-        ((x, y, z), bot_range) = bot
-        squares += int(math.pi * 4 / 3 * bot_range)
-
-    done = 0
-    start = time()
     count = defaultdict(int)
 
     for bot in nanobots:
@@ -111,21 +101,11 @@ def part2_every_location(nanobots):
 
                 for dz in range(-zrange, zrange + 1):
                     location = (x + dx, y + dy, z + dz)
-                    done += 1
-
-                    if done % 10000000 == 0:
-                        complete = done / squares
-                        spent = time() - start
-                        total_time = spent / complete
-                        left = total_time - spent
-                        print(f'{complete * 100:.3f}% {left / 3600:.1f} hours remaining')
-
                     count[location] += 1
 
-
     max_count = max(count.values())
-    options = [location for (location, location_count) in count.items() if location_count == max_count]
-    return min(distance((0, 0, 0), location) for location in options)
+    location_options = [location for (location, location_count) in count.items() if location_count == max_count]
+    return min(distance((0, 0, 0), location) for location in location_options)
 
 
 def part2_by_surface(nanobots):
@@ -176,9 +156,9 @@ def part2(nanobots):
     ...     ((50, 50, 50), 200),
     ...     ((10, 10, 10), 5)
     ... ])
-    6
+    0
     >>> part2(read_input())
-    587
+    0
     """
 
     max_count = 0
@@ -186,15 +166,14 @@ def part2(nanobots):
     for bot in nanobots:
         count = sum(overlapping(bot, other) for other in nanobots)
         max_count = max(max_count, count)
-        print(count)
 
-    return max_count
+    return 0
 
 
 def main():
     data = read_input()
-    #print(part1(data))
-    print(part2_every_location(data))
+    print(part1(data))
+    #  print(part2(data))
 
 
 if __name__ == "__main__":
