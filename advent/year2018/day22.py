@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=too-many-locals
+# pylint: disable=too-many-locals
 
 from enum import Enum
 
