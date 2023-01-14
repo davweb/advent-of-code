@@ -7,17 +7,17 @@ PATTERN = re.compile(r"Step (\w) must be finished before step (\w) can begin.")
 
 
 def read_input():
-    file = open("input/2018/day7-input.txt", "r")
 
     pre_reqs = defaultdict(set)
+    with open('input/2018/day7-input.txt', encoding='utf8') as file:
 
-    for line in file.readlines():
-        match = PATTERN.match(line)
-        (first, second) = (match.group(1), match.group(2))
+        for line in file:
+            match = PATTERN.match(line)
+            (first, second) = (match.group(1), match.group(2))
 
-        pre_reqs[second].add(first)
-        # Make sure all steps have an entry in the map even if they have no dependencies
-        pre_reqs[first]
+            pre_reqs[second].add(first)
+            # Make sure all steps have an entry in the map even if they have no dependencies
+            _ = pre_reqs[first]
 
     return pre_reqs
 
@@ -32,9 +32,9 @@ def part1(pre_reqs):
     order = []
 
     while pre_reqs:
-        next = min(step for step in pre_reqs.keys() if len(pre_reqs[step] - set(order)) == 0)
-        order.append(next)
-        del pre_reqs[next]
+        next_item = min(step for step in pre_reqs.keys() if len(pre_reqs[step] - set(order)) == 0)
+        order.append(next_item)
+        del pre_reqs[next_item]
 
     return "".join(order)
 

@@ -5,8 +5,8 @@ import itertools
 
 
 def read_input():
-    file = open('input/2018/day2-input.txt', 'r')
-    return list(line.strip() for line in file.readlines())
+    with open('input/2018/day2-input.txt', encoding='utf8') as file:
+        return [line.strip() for line in file]
 
 
 def count_letters(label):
@@ -66,7 +66,7 @@ def different_letter_count(first, second):
     """
 
     if len(first) != len(second):
-        raise ValueError('labels are not the same length "{}", "{}"'.format(first, second))
+        raise ValueError(f'labels are not the same length "{first}", "{second}"')
 
     return sum(a != b for (a, b) in zip(first, second))
 
@@ -98,6 +98,8 @@ def part2(data):
     for (first, second) in itertools.product(data, data):
         if different_letter_count(first, second) == 1:
             return "".join(a for (a, b) in zip(first, second) if a == b)
+
+    raise ValueError()
 
 
 def main():

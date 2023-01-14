@@ -1,8 +1,8 @@
 #!/usr/local/bin/python3
 
 def read_input():
-    file = open('input/2018/day15-input.txt', 'r')
-    return file.read()
+    with open('input/2018/day15-input.txt', encoding='utf-8') as file:
+        return file.read()
 
 
 class Unit:
@@ -51,6 +51,7 @@ class Board:
         self.board = {}
         self.turns = 0
         self.dead_elves = 0
+        self.running = False
 
         x = 0
         y = 0
@@ -66,7 +67,7 @@ class Board:
                 elif cell == '.':
                     value = None
                 else:
-                    raise ValueError("Invalid Board cell '{}'".format(cell))
+                    raise ValueError(f"Invalid Board cell '{cell}'")
 
                 self.board[Location(x, y)] = value
 
@@ -76,7 +77,7 @@ class Board:
     def __str__(self):
         output = []
 
-        output.append("Turn {}".format(self.turns))
+        output.append(f"Turn {self.turns}")
         output.append("")
 
         for y in range(0, self.height):
@@ -89,7 +90,7 @@ class Board:
                 if isinstance(cell, Unit):
                     char = 'E' if cell.elf else 'G'
                     row.append(char)
-                    units.append('{}({})'.format(char, cell.hp))
+                    units.append(f'{char}({cell.hp})')
                 elif cell is None:
                     row.append('.')
                 else:
@@ -98,7 +99,7 @@ class Board:
             output.append("".join(row) + " " + " ".join(units))
 
         output.append("")
-        output.append("HP {} - Score {} - Dead Elves {}".format(self.total_hp(), self.score(), self.dead_elves))
+        output.append(f"HP {self.total_hp()} - Score {self.score()} - Dead Elves {self.dead_elves}")
 
         return "\n".join(output)
 
@@ -123,11 +124,11 @@ class Board:
 
         targets = []
 
-        for location in self.filled_locations():
-            value = self[location]
+        for target_location in self.filled_locations():
+            value = self[target_location]
 
             if isinstance(value, Unit) and value.elf == find_elf:
-                targets.append(location)
+                targets.append(target_location)
 
         return targets
 
@@ -245,7 +246,7 @@ class Board:
                 if moves:
                     distance, step = moves[0]
 
-                    if (distance > 0):
+                    if distance > 0:
                         self[step] = unit
                         self[location] = None
                         location = step
@@ -294,7 +295,8 @@ class Board:
         >>> board.play()
         >>> board.score()
         28944
-        >>> board = Board("#########\\n#G......#\\n#.E.#...#\\n#..##..G#\\n#...##..#\\n#...#...#\\n#.G...G.#\\n#.....G.#\\n#########")
+        >>> board = Board("#########\\n#G......#\\n#.E.#...#\\n#..##..G#\\n#...##..#\\n"
+        ...     + "#...#...#\\n#.G...G.#\\n#.....G.#\\n#########")
         >>> board.play()
         >>> board.score()
         18740
@@ -304,7 +306,8 @@ class Board:
         4988
         >>> board.dead_elves
         0
-        >>> board = Board("#########\\n#G......#\\n#.E.#...#\\n#..##..G#\\n#...##..#\\n#...#...#\\n#.G...G.#\\n#.....G.#\\n#########", 34)
+        >>> board = Board("#########\\n#G......#\\n#.E.#...#\\n#..##..G#\\n#...##..#\\n"
+        ...     + "#...#...#\\n#.G...G.#\\n#.....G.#\\n#########", 34)
         >>> board.play()
         >>> board.score()
         1140
@@ -364,7 +367,7 @@ def main():
     data = read_input()
 
     print(part1(data))
-    print(part2(data, True))
+    print(part2(data))
 
 
 if __name__ == "__main__":

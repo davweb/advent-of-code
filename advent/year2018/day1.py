@@ -5,8 +5,8 @@ import itertools
 
 
 def read_input():
-    file = open('input/2018/day1-input.txt', 'r')
-    return [int(line) for line in file.readlines()]
+    with open('input/2018/day1-input.txt', encoding='utf-8') as file:
+        return [int(line) for line in file]
 
 
 def calculate_frequency(data):
@@ -57,6 +57,8 @@ def find_repeat(data):
             return value
 
         value += increment
+
+    raise ValueError('No repeat found')
 
 
 def part1(data):

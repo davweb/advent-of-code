@@ -7,8 +7,8 @@ class Acre(Enum):
 
 
 def read_input():
-    file = open('input/2018/day18-input.txt', 'r')
-    return file.read()
+    with open('input/2018/day18-input.txt', encoding='utf-8') as file:
+        return file.read()
 
 
 class Forest:
@@ -28,7 +28,7 @@ class Forest:
                 elif cell == '.':
                     acre = None
                 else:
-                    raise ValueError("Invalid Forest acre '{}'".format(cell))
+                    raise ValueError(f"Invalid Forest acre '{cell}'")
 
                 self.set(x, y, acre)
 
@@ -96,7 +96,8 @@ class Forest:
 
     def resource_value(self):
         """
-        >>> forest = Forest(".#.#...|#.\\n.....#|##|\\n.|..|...#.\\n..|#.....#\\n#.#|||#|#|\\n...#.||...\\n.|....|...\\n||...#|.#|\\n|.||||..|.\\n...#.|..|.")
+        >>> forest = Forest(".#.#...|#.\\n.....#|##|\\n.|..|...#.\\n..|#.....#\\n#.#|||#|#|\\n"
+        ...     + "...#.||...\\n.|....|...\\n||...#|.#|\\n|.||||..|.\\n...#.|..|.")
         >>> forest.run(10)
         >>> forest.resource_value()
         1147
@@ -145,14 +146,14 @@ def part2(data):
     start = None
 
     while True:
-        map = str(forest)
+        map_value = str(forest)
 
-        if map in seen:
+        if map_value in seen:
 
             if start is None:
                 start = forest.minute
                 seen = set()
-                seen.add(map)
+                seen.add(map_value)
             else:
                 end = forest.minute
                 loop = end - start
@@ -160,7 +161,7 @@ def part2(data):
                 forest.run(end + delta)
                 return forest.resource_value()
 
-        seen.add(map)
+        seen.add(map_value)
         forest.process()
 
 

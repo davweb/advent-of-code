@@ -2,7 +2,8 @@
 
 import re
 from collections import defaultdict
-from advent.year2018.opcodes import addr, addi, mulr, muli, banr, bani, borr, bori, setr, seti, gtir, gtri, gtrr, eqir, eqri, eqrr
+from advent.year2018.opcodes import addr, addi, mulr, muli, banr, bani, borr, \
+    bori, setr, seti, gtir, gtri, gtrr, eqir, eqri, eqrr
 
 INSTRUCTION_PATTERN = re.compile(
     r"Before: \[(\d+), (\d+), (\d+), (\d+)\]\n"
@@ -11,8 +12,8 @@ INSTRUCTION_PATTERN = re.compile(
 
 
 def read_input():
-    file = open('input/2018/day16-input.txt', 'r')
-    text = file.read()
+    with open('input/2018/day16-input.txt', encoding='utf-8') as file:
+        text = file.read()
 
     (samples, listing) = text.split("\n\n\n\n")
 
@@ -81,9 +82,8 @@ def part2(data):
     samples, code = data
     match_map = defaultdict(set)
 
-    for (before, instruction, after) in samples:
-        (op_id, a, b, c) = instruction
-        matches = op_matches(before, after, a, b, c)
+    for (before, (op_id, *arguments), after) in samples:
+        matches = op_matches(before, after, *arguments)
 
         for match in matches:
             match_map[op_id].add(match)
@@ -105,8 +105,8 @@ def part2(data):
     registers = [0, 0, 0, 0]
 
     for instruction in code:
-        op_id, a, b, c = instruction
-        op_map[op_id](registers, a, b, c)
+        op_id, *arguments = instruction
+        op_map[op_id](registers, *arguments)
 
     return registers[0]
 

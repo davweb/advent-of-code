@@ -2,7 +2,7 @@
 
 
 def read_input():
-    with open("input/2018/day8-input.txt", "r") as file:
+    with open('input/2018/day8-input.txt', encoding='utf-8') as file:
         data = file.read()
         return [int(x) for x in data.split(' ')]
 

@@ -7,12 +7,12 @@ from advent import bounds, taxicab_distance
 
 
 def read_input():
-    file = open("input/2018/day6-input.txt", "r")
     points = []
 
-    for line in file.readlines():
-        (x, y) = line.split(",")[:2]
-        points.append((int(x), int(y)))
+    with open('input/2018/day6-input.txt', encoding='utf8') as file:
+        for line in file:
+            (x, y) = line.split(',')[:2]
+            points.append((int(x), int(y)))
 
     return points
 
@@ -78,7 +78,7 @@ def part2(points, progress=False):
             count += 1
 
             if count % increment == 0:
-                print("{:3.0f}%".format(count / pc), end="\r", file=sys.stderr)
+                print(f'{count / pc:3.0f}%', end='\r', file=sys.stderr)
 
         distance = 0
 

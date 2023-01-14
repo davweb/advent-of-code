@@ -4,8 +4,8 @@ import string
 
 
 def read_input():
-    file = open('input/2018/day5-input.txt', 'r')
-    return file.read()
+    with open('input/2018/day5-input.txt', encoding='utf8') as file:
+        return file.read()
 
 
 def reduce(polymer):

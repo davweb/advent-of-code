@@ -20,7 +20,7 @@ class Claim:
 
         match = PATTERN.match(definition)
         if not match:
-            raise ValueError("Invalid defintion '{}'".format(definition))
+            raise ValueError(f"Invalid defintion '{definition}'")
         self.id = int(match.group(1))
         self.x = int(match.group(2))
         self.y = int(match.group(3))
@@ -48,8 +48,8 @@ class Claim:
 
 
 def read_input():
-    file = open('input/2018/day3-input.txt', 'r')
-    return [Claim(line) for line in file.readlines()]
+    with open('input/2018/day3-input.txt', encoding='utf8') as file:
+        return [Claim(line) for line in file]
 
 
 def part1(claims):
@@ -88,6 +88,8 @@ def part2(claims):
 
         if winner:
             return claim.id
+
+    raise ValueError()
 
 
 def main():

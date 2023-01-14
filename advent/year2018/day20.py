@@ -2,8 +2,8 @@
 
 
 def read_input():
-    file = open("input/2018/day20-input.txt", "r")
-    return file.read().strip()
+    with open("input/2018/day20-input.txt", encoding='utf-8') as file:
+        return file.read().strip()
 
 
 def count_doors(regex):
@@ -24,17 +24,18 @@ def count_doors(regex):
     group = [0]
 
     for i in regex:
-        if i in ('N', 'S', 'E', 'W'):
-            group[-1] += 1
-        elif i == '(':
-            groups.append(group)
-            group = [0]
-        elif i == '|':
-            group.append(0)
-        elif i == ')':
-            length = 0 if min(group) == 0 else max(group)
-            group = groups.pop()
-            group[-1] += length
+        match i:
+            case 'N' | 'S' | 'E' | 'W':
+                group[-1] += 1
+            case '(':
+                groups.append(group)
+                group = [0]
+            case '|':
+                group.append(0)
+            case ')':
+                length = 0 if min(group) == 0 else max(group)
+                group = groups.pop()
+                group[-1] += length
 
     return group[0]
 
@@ -59,12 +60,14 @@ def parse_regex(regex):
 
     for index, c in enumerate(regex):
         #  We need to ignore | inside brackets
-        if c == '(':
-            brackets += 1
-        elif c == ')':
-            brackets -= 1
-        elif c == '|' and brackets == 0:
-            or_indexes.append(index)
+        match c:
+            case '(':
+                brackets += 1
+            case ')':
+                brackets -= 1
+            case '|':
+                if brackets == 0:
+                    or_indexes.append(index)
 
     if or_indexes:
         start = 0
@@ -81,29 +84,30 @@ def parse_regex(regex):
     i = 0
 
     #  Go through the regex, processing expressions in brackets recursively
-    while (i < len(regex)):
+    while i < len(regex):
         c = regex[i]
 
-        if c in ('N', 'S', 'E', 'W'):
-            group.append(c)
-            i += 1
-        elif c == '(':
-            brackets = 1
-            j = i + 1
+        match c:
+            case 'N' | 'S' | 'E' | 'W':
+                group.append(c)
+                i += 1
+            case '(':
+                brackets = 1
+                j = i + 1
 
-            while brackets > 0:
-                c = regex[j]
-                j += 1
+                while brackets > 0:
+                    c = regex[j]
+                    j += 1
 
-                if c == '(':
-                    brackets += 1
-                elif c == ')':
-                    brackets -= 1
+                    if c == '(':
+                        brackets += 1
+                    elif c == ')':
+                        brackets -= 1
 
-            group.append(parse_regex(regex[i + 1:j - 1]))
-            i = j
-        else:
-            i += 1
+                group.append(parse_regex(regex[i + 1:j - 1]))
+                i = j
+            case _:
+                i += 1
 
     return group[0] if len(group) == 1 else group
 

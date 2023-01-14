@@ -87,7 +87,7 @@ def part1(serial_number):
             max_power = grid_power
             max_cell = cell
 
-    return (max_cell)
+    return max_cell
 
 
 def part2(serial_number, progress=False):
@@ -96,7 +96,7 @@ def part2(serial_number, progress=False):
 
     for size in range(1, 301):
         if progress:
-            print("{:3.0f}%".format(size / 3), end="\r")
+            print(f"{size / 3:3.0f}%", end="\r")
 
         for cell in product(range(1, 302 - size), range(1, 302 - size)):
             grid_power = calc_grid_power(serial_number, cell, size)
@@ -112,7 +112,7 @@ def part2(serial_number, progress=False):
 def main():
     # Serial number is 9005
     print(part1(9005))
-    print(part2(9005), True)
+    print(part2(9005, True))
 
 
 if __name__ == "__main__":

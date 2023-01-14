@@ -22,7 +22,7 @@ class Note:
 
         match = NOTE_PATTERN.match(definition)
         if not match:
-            raise ValueError("Invalid defintion '{}'".format(definition))
+            raise ValueError(f"Invalid defintion '{definition}'")
         self.pattern = [pot == "#" for pot in match.group(1)]
         self.grows = match.group(2) == "#"
 
@@ -34,7 +34,7 @@ class Note:
 
 
 def read_input():
-    with open('input/2018/day12-input.txt', 'r') as file:
+    with open('input/2018/day12-input.txt', encoding='utf-8') as file:
         match = STATE_PATTERN.match(file.readline())
 
         state = defaultdict(bool)

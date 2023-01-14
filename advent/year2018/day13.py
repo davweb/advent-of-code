@@ -53,8 +53,8 @@ class Cart:
 
         try:
             self.direction = Cart.DIRECTION_MAP[direction]
-        except KeyError:
-            raise ValueError("Invalid direction '{}'".format(direction))
+        except KeyError as exc:
+            raise ValueError(f"Invalid direction '{direction}'") from exc
 
     def __repr__(self):
         return "Cart(position={position}, direction={direction}, turn={turn})".format(**self.__dict__)
@@ -118,20 +118,11 @@ class Cart:
 
 
 def read_input():
-    with open('input/2018/day13-input.txt', 'r') as file:
-        data = [[cell for cell in line] for line in file.readlines()]
+    with open('input/2018/day13-input.txt', encoding='utf-8') as file:
+        data = [list(line) for line in file]
 
     # Swap x and y before returning
     return list(zip(*data))
-
-
-def print_map(map):
-    for y in range(0, len(map[0])):
-        row = ''
-        for x in range(0, len(map)):
-            row += map[x][y]
-
-        print(row)
 
 
 def get_carts(tunnels):
@@ -140,11 +131,7 @@ def get_carts(tunnels):
     for (x, y) in itertools.product(range(0, len(tunnels)), range(0, len(tunnels[0]))):
         cell = tunnels[x][y]
 
-        if cell == "^" or cell == "v":
-            tunnels[x][y] == "|"
-        elif cell == "<" or cell == ">":
-            tunnels[x][y] == "-"
-        else:
+        if cell not in ("^", "v", "<", ">"):
             continue
 
         carts.append(Cart((x, y), cell, tunnels))
@@ -207,9 +194,9 @@ def part2(tunnels):
 
 
 def main():
-    map = read_input()
-    print(part1(map))
-    print(part2(map))
+    data = read_input()
+    print(part1(data))
+    print(part2(data))
 
 
 if __name__ == "__main__":

@@ -15,12 +15,12 @@ class Light:
         >>> Light("a")
         Traceback (most recent call last):
         ...
-        ValueError: Invalid defintion 'a'
+        ValueError: Invalid definition 'a'
         """
 
         match = PATTERN.match(definition)
         if not match:
-            raise ValueError("Invalid defintion '{}'".format(definition))
+            raise ValueError(f"Invalid definition '{definition}'")
         self.x = int(match.group(1))
         self.y = int(match.group(2))
         self.dx = int(match.group(3))
@@ -59,8 +59,8 @@ class Light:
 
 
 def read_input():
-    file = open('input/2018/day10-input.txt', 'r')
-    return [Light(line) for line in file.readlines()]
+    with open('input/2018/day10-input.txt', encoding='utf-8') as file:
+        return [Light(line) for line in file]
 
 
 def area(points):
@@ -76,7 +76,7 @@ def area(points):
 
 def output(lights):
     (left, top), (right, bottom) = bounds([light.point() for light in lights])
-    output = []
+    output_value = []
 
     for y in range(top, bottom + 1):
         line = []
@@ -87,9 +87,9 @@ def output(lights):
             else:
                 line.append(" ")
 
-        output.append("".join(line))
+        output_value.append("".join(line))
 
-    return "\n".join(output)
+    return "\n".join(output_value)
 
 
 def part1and2(lights):
@@ -126,7 +126,8 @@ def part1and2(lights):
 
 def main():
     lights = read_input()
-    print("{}\n{}".format(*part1and2(lights)))
+    result = part1and2(lights)
+    print(f"{result[0]}\n{result[1]}")
 
 
 if __name__ == "__main__":

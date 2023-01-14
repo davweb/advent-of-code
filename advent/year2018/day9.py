@@ -126,7 +126,7 @@ class Marble:
         return self.next
 
     def __repr__(self):
-        return 'Marble({})'.format(self.value)
+        return f'Marble({self.value})'
 
 
 def play_new(players, last_marble, progress=False):
@@ -154,7 +154,7 @@ def play_new(players, last_marble, progress=False):
 
     for marble in range(2, last_marble + 1):
         if progress and (marble % inc == 0):
-            print("{:3.0f}%".format(marble / last_marble * 100), end="\r", file=sys.stderr)
+            print(f"{marble / last_marble * 100:3.0f}%", end="\r", file=sys.stderr)
 
         player = (player + 1) % players
 

@@ -26,8 +26,8 @@ VERTICAL_PATTERN = re.compile(r"x=(\d+), y=(\d+)..(\d+)")
 
 
 def read_input():
-    file = open('input/2018/day17-input.txt', 'r')
-    return file.read()
+    with open('input/2018/day17-input.txt', encoding='utf-8') as file:
+        return file.read()
 
 
 class Slice:
@@ -69,10 +69,10 @@ class Slice:
                 self.grid[(x, y)] = Block.CLAY
 
         # pad X to show water flow to the side of the clay
-        self.min_x = min(x for (x, y) in self.grid.keys()) - 3
-        self.max_x = max(x for (x, y) in self.grid.keys()) + 3
-        self.min_y = min(y for (x, y) in self.grid.keys())
-        self.max_y = max(y for (x, y) in self.grid.keys())
+        self.min_x = min(x for (x, y) in self.grid) - 3
+        self.max_x = max(x for (x, y) in self.grid) + 3
+        self.min_y = min(y for (x, y) in self.grid)
+        self.max_y = max(y for (x, y) in self.grid)
 
     def count_blocks(self, block_type):
         return sum(1 for ((x, y), block) in self.grid.items() if block == block_type and y >= self.min_y)
@@ -216,7 +216,7 @@ class Slice:
                     action_queue.append((Action.SPREAD, (x, y - 1)))
 
     def __str__(self):
-        output = ['     {}'.format(self.min_x)]
+        output = [f'     {self.min_x}']
 
         for y in range(self.min_y, self.max_y + 1):
             row = []
@@ -229,7 +229,7 @@ class Slice:
                 else:
                     row.append(block.value)
 
-            output.append("{:4d} {}".format(y, "".join(row)))
+            output.append(f"{y:4d} {''.join(row)}")
 
         return "\n".join(output)
 
@@ -240,9 +240,9 @@ def part1(data):
     31861
     """
 
-    slice = Slice(data)
-    slice.start_water()
-    return slice.count_blocks(Block.WATER) + slice.count_blocks(Block.STILL_WATER)
+    slice_value = Slice(data)
+    slice_value.start_water()
+    return slice_value.count_blocks(Block.WATER) + slice_value.count_blocks(Block.STILL_WATER)
 
 
 def part2(data):
@@ -251,9 +251,9 @@ def part2(data):
     26030
     """
 
-    slice = Slice(data)
-    slice.start_water()
-    return slice.count_blocks(Block.STILL_WATER)
+    slice_value = Slice(data)
+    slice_value.start_water()
+    return slice_value.count_blocks(Block.STILL_WATER)
 
 
 def main():

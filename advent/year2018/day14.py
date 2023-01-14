@@ -1,7 +1,7 @@
 #!/usr/local/bin/python3
 
 
-def part1(input):
+def part1(data):
     """
     >>> part1(5)
     '0124515891'
@@ -16,17 +16,17 @@ def part1(input):
     elves = [0, 1]
     recipes = [3, 7]
 
-    while len(recipes) < input + 10:
+    while len(recipes) < data + 10:
         total = sum(recipes[elf] for elf in elves)
         recipes += [int(digit) for digit in str(total)]
 
-        for i in range(0, len(elves)):
+        for i, _ in enumerate(elves):
             elves[i] = (elves[i] + recipes[elves[i]] + 1) % len(recipes)
 
-    return "".join(str(i) for i in recipes[input:input + 10])
+    return "".join(str(i) for i in recipes[data:data + 10])
 
 
-def part2(input):
+def part2(data):
     """
     >>> part2("01245")
     5
@@ -40,7 +40,7 @@ def part2(input):
     20185425
     """
 
-    end = [int(i) for i in input]
+    end = [int(i) for i in data]
     size = len(end)
     tail = [-1] * size
     elves = [0, 1]

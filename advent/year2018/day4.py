@@ -29,7 +29,7 @@ class Event:
         match = PATTERN.match(definition)
 
         if not match:
-            raise ValueError("Invalid defintion '{}'".format(definition))
+            raise ValueError(f"Invalid defintion '{definition}'")
 
         self.datetime = datetime.strptime(match.group(1), "%Y-%m-%d %H:%M")
         self.guard_id = int(match.group(3)) if match.group(3) else None
@@ -71,8 +71,8 @@ class Event:
 
 
 def read_input():
-    file = open('input/2018/day4-input.txt', 'r')
-    return sorted(Event(line) for line in file.readlines())
+    with open('input/2018/day4-input.txt', encoding='utf8') as file:
+        return sorted(Event(line) for line in file)
 
 
 def key_for_largest_value(some_dict):

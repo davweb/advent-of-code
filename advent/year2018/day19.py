@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
 import re
-import advent.year2018.opcodes as opcodes
+from advent.year2018 import opcodes
 
 POINTER_PATTERN = re.compile(r"#ip (\d)")
 INSTRUCTION_PATTERN = re.compile(r"([a-z]{4}) (\d+) (\d+) (\d+)")
 
 
 def read_input():
-    file = open('input/2018/day19-input.txt', 'r')
-    text = file.read()
+    with open('input/2018/day19-input.txt', encoding='utf-8') as file:
+        text = file.read()
 
     match = POINTER_PATTERN.match(text)
     register = int(match.group(1))
@@ -23,8 +23,9 @@ def read_input():
 
 
 def part1(data):
-    """
-    >>> part1((0, [['seti', 5, 0, 1], ['seti', 6, 0, 2], ['addi', 0, 1, 0], ['addr', 1, 2, 3], ['setr', 1, 0, 0], ['seti', 8, 0, 4], ['seti', 9, 0, 5]]))
+    r"""
+    >>> part1((0, [['seti', 5, 0, 1], ['seti', 6, 0, 2], ['addi', 0, 1, 0], ['addr', 1, 2, 3],
+    ...    ['setr', 1, 0, 0], ['seti', 8, 0, 4], ['seti', 9, 0, 5]]))
     6
     >>> part1(read_input())
     1848

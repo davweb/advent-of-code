@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=too-many-locals
 
 from enum import Enum
 
@@ -98,10 +99,9 @@ def part2(depth, target):
     max_y = target[1] + padding
 
     queue = []
-    location = (0, 0)
-    tool = Tool.TORCH
-    queue = [(location, tool)]
-    time = {(location, tool): 0}
+    pair = ((0, 0), Tool.TORCH)
+    queue = [pair]
+    time = {pair: 0}
 
     while queue:
         pair = queue.pop(0)
@@ -123,7 +123,7 @@ def part2(depth, target):
                 queue.append(new_pair)
 
         for option in Tool:
-            if option == tool or option == BANNED_TOOL[location_type]:
+            if option in (tool, BANNED_TOOL[location_type]):
                 continue
 
             option_time = location_time + 7
