@@ -52,6 +52,12 @@ def overlapping(bot_one, bot_two):
     return journey <= bot_one[1] + bot_two[1]
 
 
+def surface(radius):
+    for dx in range(radius):
+        for dy in range(radius - dx):
+            yield dx, dy, radius - dx - dy
+
+
 def part1(nanobots):
     """
     >>> part1([
@@ -125,23 +131,20 @@ def part2_by_surface(nanobots):
     min_distance = None
 
     for bot_location, bot_range in nanobots:
-        for dx in range(0, bot_range):
-            for dy in range(0, bot_range - dx):
-                delta = (dx, dy, bot_range - dx - dy)
+        for delta in surface(bot_range):
+            for location in options(bot_location, delta):
+                count = 0
 
-                for location in options(bot_location, delta):
-                    count = 0
+                for other, other_range in nanobots:
+                    if distance(location, other) <= other_range:
+                        count += 1
 
-                    for other, other_range in nanobots:
-                        if distance(location, other) <= other_range:
-                            count += 1
+                if count >= max_count:
+                    max_count = count
+                    home_distance = distance(location, (0, 0, 0))
 
-                    if count >= max_count:
-                        max_count = count
-                        home_distance = distance(location, (0, 0, 0))
-
-                        if min_distance is None or min_distance > home_distance:
-                            min_distance = home_distance
+                    if min_distance is None or min_distance > home_distance:
+                        min_distance = home_distance
 
     return home_distance
 
