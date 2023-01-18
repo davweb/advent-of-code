@@ -6,8 +6,8 @@ INNER_PATTERN = re.compile(r"(\d+) ([a-z ]+) bag")
 
 
 def read_input():
-    file = open('input/2020/day7-input.txt', 'r')
-    return parse(file.read())
+    with open('input/2020/day7-input.txt', encoding='utf-8') as file:
+        return parse(file.read())
 
 
 def parse(text):
@@ -21,7 +21,7 @@ def parse(text):
     return bags
 
 
-def part1(bags):
+def part1(data):
     """
     >>> part1(read_input())
     254
@@ -29,7 +29,7 @@ def part1(bags):
 
     reverse = defaultdict(list)
 
-    for colour, bags in bags.items():
+    for colour, bags in data.items():
         for (_, bag) in bags:
             reverse[bag].append(colour)
 
@@ -53,7 +53,14 @@ def bag_count(bags, bag_colour):
 
 def part2(bags):
     """
-    >>> data = parse("light red bags contain 1 bright white bag, 2 muted yellow bags.\\ndark orange bags contain 3 bright white bags, 4 muted yellow bags.\\nbright white bags contain 1 shiny gold bag.\\nmuted yellow bags contain 2 shiny gold bags, 9 faded blue bags.\\nshiny gold bags contain 1 dark olive bag, 2 vibrant plum bags.\\ndark olive bags contain 3 faded blue bags, 4 dotted black bags.\\nvibrant plum bags contain 5 faded blue bags, 6 dotted black bags.\\nfaded blue bags contain no other bags.\\ndotted black bags contain no other bags.")
+    >>> data = parse("light red bags contain 1 bright white bag, 2 muted yellow bags.\\n" +
+    ...     "dark orange bags contain 3 bright white bags, 4 muted yellow bags.\\n" +
+    ...     "bright white bags contain 1 shiny gold bag.\\n" +
+    ...     "muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.\\n" +
+    ...     "shiny gold bags contain 1 dark olive bag, 2 vibrant plum bags.\\n" +
+    ...     "dark olive bags contain 3 faded blue bags, 4 dotted black bags.\\n" +
+    ...     "vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.\\n" +
+    ...     "faded blue bags contain no other bags.\\ndotted black bags contain no other bags.")
     >>> part2(data)
     32
     >>> part2(read_input())

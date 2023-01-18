@@ -6,8 +6,8 @@ PATTERN = re.compile("^(\\d+)-(\\d+) (\\w): (.*)")
 
 
 def read_input():
-    file = open('input/2020/day2-input.txt', 'r')
-    return file.readlines()
+    with open('input/2020/day2-input.txt', encoding='utf-8') as file:
+        return file.readlines()
 
 
 def valid_sled_password(line):
@@ -27,7 +27,7 @@ def valid_sled_password(line):
     match = PATTERN.match(line)
 
     if not match:
-        raise ValueError("Invalid input '{}'".format(line))
+        raise ValueError(f"Invalid input '{line}'")
 
     lower = int(match.group(1))
     upper = int(match.group(2))
@@ -55,7 +55,7 @@ def valid_toboggan_password(line):
     match = PATTERN.match(line)
 
     if not match:
-        raise ValueError("Invalid input '{}'".format(line))
+        raise ValueError(f"Invalid input '{line}'")
 
     firstIndex = int(match.group(1)) - 1
     secondIndex = int(match.group(2)) - 1

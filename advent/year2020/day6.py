@@ -3,25 +3,26 @@ from functools import reduce
 
 
 def read_input():
-    file = open('input/2020/day6-input.txt', 'r')
     groups = []
     group = []
 
-    for line in chain(file, ['']):
-        line = line.strip()
+    with open('input/2020/day6-input.txt', encoding='utf-8') as file:
+        for line in chain(file, ['']):
+            line = line.strip()
 
-        if line == '':
-            groups.append(group)
-            group = []
-        else:
-            group.append(set(line.strip()))
+            if line == '':
+                groups.append(group)
+                group = []
+            else:
+                group.append(set(line.strip()))
 
     return groups
 
 
 def part1(groups):
     """
-    >>> part1([[set('abc')], [set('a'), set('b'), set('c')], [set('ab'), set('ac')], [set('a'), set('a'), set('a'), set('a')], [set('b')]])
+    >>> part1([[set('abc')], [set('a'), set('b'), set('c')], [set('ab'), set('ac')],
+    ...     [set('a'), set('a'), set('a'), set('a')], [set('b')]])
     11
     >>> part1(read_input())
     6680

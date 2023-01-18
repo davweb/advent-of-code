@@ -1,14 +1,10 @@
-import re
-from collections import defaultdict
-
-
 def read_input():
-    file = open('input/2020/day8-input.txt', 'r')
     data = []
 
-    for line in file.readlines():
-        ins, val = line.split()
-        data.append((ins, int(val)))
+    with open('input/2020/day8-input.txt', encoding='utf-8') as file:
+        for line in file:
+            ins, val = line.split()
+            data.append((ins, int(val)))
 
     return data
 
@@ -30,7 +26,7 @@ def run(data):
         elif ins == 'jmp':
             index += val
         else:
-            raise ValueError("Invalid instruction '{}'".format(ins))
+            raise ValueError(f"Invalid instruction '{ins}'")
 
     return (acc, index < len(data))
 
@@ -61,7 +57,7 @@ def part2(data):
         elif ins == 'jmp':
             copy[index] = ('nop', val)
         else:
-            raise ValueError("Invalid instruction '{}'".format(ins))
+            raise ValueError(f"Invalid instruction '{ins}'")
 
         (acc, looped) = run(copy)
 

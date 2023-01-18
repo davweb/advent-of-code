@@ -1,7 +1,7 @@
 import re
 import math
 from enum import Enum
-
+from itertools import product
 
 TILE_PATTERN = re.compile(r'Tile (\d+):\n(([.#]{10}\n){10})', re.MULTILINE)
 SEA_MONSTER = (
@@ -17,13 +17,13 @@ def rotations(rows):
     [('...', '###', '#.#'), ('##.', '.#.', '##.'), ('#.#', '###', '...'), ('.##', '.#.', '.##')]
     """
 
-    rotations = []
+    output = []
 
     for _ in range(4):
-        rotations.append(rows)
+        output.append(rows)
         rows = tuple("".join(row) for row in zip(*rows[::-1]))
 
-    return rotations
+    return output
 
 
 def flips(rows):
@@ -32,18 +32,19 @@ def flips(rows):
     [('...', '###', '#..'), ('#..', '###', '...'), ('...', '###', '..#')]
     """
 
-    flips = []
-    flips.append(rows)
-    flips.append(reversed(rows))
-    flips.append(reversed(row) for row in rows)
+    options = []
+    options.append(rows)
+    options.append(reversed(rows))
+    options.append(reversed(row) for row in rows)
 
-    return [tuple("".join(row) for row in flip) for flip in flips]
+    return [tuple("".join(row) for row in flip) for flip in options]
 
 
 def permutations(rows):
     """
-    >>> permutations(['...', '###', '#..'])
-    [('##.', '.#.', '.#.'), ('#..', '###', '...'), ('.##', '.#.', '.#.'), ('.#.', '.#.', '##.'), ('.#.', '.#.', '.##'), ('..#', '###', '...'), ('...', '###', '#..'), ('...', '###', '..#')]
+    >>> permutations(['...', '###', '#..']) # doctest: +NORMALIZE_WHITESPACE
+    [('##.', '.#.', '.#.'), ('#..', '###', '...'), ('.##', '.#.', '.#.'), ('.#.', '.#.', '##.'),
+    ('.#.', '.#.', '.##'), ('..#', '###', '...'), ('...', '###', '#..'), ('...', '###', '..#')]
     """
 
     result = set()
@@ -124,7 +125,7 @@ class Tile:
         if side == Side.RIGHT:
             return "".join(row[-1] for row in self.rows())
 
-        raise ValueError("Unknown side '{}'".format(side))
+        raise ValueError(f"Unknown side '{side}'")
 
     def matches(self, side, other):
         """
@@ -154,14 +155,14 @@ class Tile:
         elif side == Side.RIGHT:
             other_row = other.side(Side.LEFT)
         else:
-            raise ValueError("Unknown side '{}'".format(side))
+            raise ValueError(f"Unknown side '{side}'")
 
         return this_row == other_row
 
 
 def read_input():
-    file = open('input/2020/day20-input.txt', 'r')
-    text = file.read()
+    with open('input/2020/day20-input.txt', encoding='utf-8') as file:
+        text = file.read()
 
     tiles = set()
 
@@ -265,17 +266,11 @@ def sea_monsters(pattern):
             if match:
                 count += 1
 
-                for row in range(0, height):
-                    for column in range(0, width):
-                        if SEA_MONSTER[row][column] == '#':
-                            pattern[y + row][x + column] = 'O'
+                for row, column in product(range(height), range(width)):
+                    if SEA_MONSTER[row][column] == '#':
+                        pattern[y + row][x + column] = 'O'
 
-    hashes = 0
-
-    for y in range(0, len(pattern)):
-        for x in range(0, len(pattern[y])):
-            if pattern[y][x] == '#':
-                hashes += 1
+    hashes = sum(char == '#' for row in pattern for char in row)
 
     return (count, hashes)
 

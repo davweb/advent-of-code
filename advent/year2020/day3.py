@@ -4,8 +4,8 @@ from math import prod
 
 
 def read_input():
-    file = open('input/2020/day3-input.txt', 'r')
-    return [[c == '#' for c in line.strip()] for line in file.readlines()]
+    with open('input/2020/day3-input.txt', encoding='utf-8') as file:
+        return [[c == '#' for c in line.strip()] for line in file]
 
 
 def count_trees(data, route):

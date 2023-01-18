@@ -17,7 +17,7 @@ def bytes_to_hex(list_of_bytes):
     if any(i < 0 or i > 255 for i in list_of_bytes):
         raise ValueError("Value outside range 0 to 255")
 
-    return "".join("{:02x}".format(i) for i in list_of_bytes)
+    return ''.join(f'{i:02x}' for i in list_of_bytes)
 
 
 def knot_hash(value):

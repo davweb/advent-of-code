@@ -1,11 +1,9 @@
-from os import truncate
-import re
 from itertools import combinations
 
 
 def read_input():
-    file = open('input/2020/day9-input.txt', 'r')
-    return [int(line.strip()) for line in file.readlines()]
+    with open('input/2020/day9-input.txt', encoding='utf-8') as file:
+        return [int(line.strip()) for line in file]
 
 
 def validate_stream(window, stream):
@@ -15,7 +13,7 @@ def validate_stream(window, stream):
     """
 
     previous = stream[0:window]
-    del (stream[0:window])
+    del stream[0:window]
 
     for number in stream:
         valid_numbers = [sum(x) for x in combinations(previous, 2)]
@@ -31,7 +29,8 @@ def validate_stream(window, stream):
 
 def find_combination(value, stream):
     """
-    >>> find_combination(127, [35, 20, 15, 25, 47, 40, 62, 55, 65, 95, 102, 117, 150, 182, 127, 219, 299, 277, 309, 576])
+    >>> find_combination(127,
+    ...     [35, 20, 15, 25, 47, 40, 62, 55, 65, 95, 102, 117, 150, 182, 127, 219, 299, 277, 309, 576])
     62
     """
 

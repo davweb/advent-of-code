@@ -15,7 +15,7 @@ def moves_for_line(line):
             if previous is None:
                 steps.append(c)
             else:
-                steps.append("{}{}".format(previous, c))
+                steps.append(f'{previous}{c}')
 
             previous = None
 
@@ -23,37 +23,38 @@ def moves_for_line(line):
 
 
 def read_input():
-    file = open("input/2020/day24-input.txt", "r")
-    return [moves_for_line(line) for line in file]
+    with open('input/2020/day24-input.txt', encoding='utf-8') as file:
+        return [moves_for_line(line) for line in file]
 
 
 def direction_for_location(location, direction):
     _, y = location
 
-    if direction == 'e':
-        return (1, 0)
-    elif direction == 'w':
-        return (-1, 0)
-    elif direction == 'se':
-        if y % 2 == 0:
-            return (0, -1)
-        else:
-            return (1, -1)
-    elif direction == 'sw':
-        if y % 2 == 0:
-            return (-1, -1)
-        else:
-            return (0, -1)
-    elif direction == 'ne':
-        if y % 2 == 0:
-            return (0, 1)
-        else:
-            return (1, 1)
-    elif direction == 'nw':
-        if y % 2 == 0:
-            return (-1, 1)
-        else:
-            return (0, 1)
+    match direction, y % 2 == 0:
+        case 'e', _:
+            value = (1, 0)
+        case 'w', _:
+            value = (-1, 0)
+        case 'se', True:
+            value = (0, -1)
+        case 'se', False:
+            value = (1, -1)
+        case 'sw', True:
+            value = (-1, -1)
+        case 'sw', False:
+            value = (0, -1)
+        case 'ne', True:
+            value = (0, 1)
+        case 'ne', False:
+            value = (1, 1)
+        case 'nw', True:
+            value = (-1, 1)
+        case 'nw', False:
+            value = (0, 1)
+        case _, _:
+            raise ValueError()
+
+    return value
 
 
 def move(location, direction):

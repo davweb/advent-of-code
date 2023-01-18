@@ -7,8 +7,8 @@ class Seat(Enum):
 
 
 def read_input():
-    file = open('input/2020/day11-input.txt', 'r')
-    return file.read()
+    with open('input/2020/day11-input.txt', encoding='utf-8') as file:
+        return file.read()
 
 
 class Floor:
@@ -28,7 +28,7 @@ class Floor:
                 elif cell == '.':
                     acre = None
                 else:
-                    raise ValueError("Invalid Forest acre '{}'".format(cell))
+                    raise ValueError(f"Invalid Forest acre '{cell}'")
 
                 self.set(x, y, acre)
 
@@ -104,7 +104,8 @@ class Floor:
 
     def run(self):
         """
-        >>> floor = Floor("L.LL.LL.LL\\nLLLLLLL.LL\\nL.L.L..L..\\nLLLL.LL.LL\\nL.LL.LL.LL\\nL.LLLLL.LL\\n..L.L.....\\nLLLLLLLLLL\\nL.LLLLLL.L\\nL.LLLLL.LL")
+        >>> floor = Floor("L.LL.LL.LL\\nLLLLLLL.LL\\nL.L.L..L..\\nLLLL.LL.LL\\nL.LL.LL.LL\\nL.LLLLL.LL\\n" +
+        ...     "..L.L.....\\nLLLLLLLLLL\\nL.LLLLLL.L\\nL.LLLLL.LL")
         >>> floor.run()
         37
         """
@@ -137,7 +138,8 @@ class Floor:
 
     def run_visible(self):
         """
-        >>> floor = Floor("L.LL.LL.LL\\nLLLLLLL.LL\\nL.L.L..L..\\nLLLL.LL.LL\\nL.LL.LL.LL\\nL.LLLLL.LL\\n..L.L.....\\nLLLLLLLLLL\\nL.LLLLLL.L\\nL.LLLLL.LL")
+        >>> floor = Floor("L.LL.LL.LL\\nLLLLLLL.LL\\nL.L.L..L..\\nLLLL.LL.LL\\nL.LL.LL.LL\\nL.LLLLL.LL\\n" +
+        ...     "..L.L.....\\nLLLLLLLLLL\\nL.LLLLLL.L\\nL.LLLLL.LL")
         >>> floor.run_visible()
         26
         """

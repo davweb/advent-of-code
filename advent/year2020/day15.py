@@ -3,7 +3,7 @@
 INPUT = [16, 1, 0, 18, 12, 14, 19]
 
 
-def play(start, rounds):
+def play(start, turns):
     """
     >>> play((0, 3, 6), 4)
     0
@@ -18,18 +18,18 @@ def play(start, rounds):
     """
 
     numbers = {}
-    round = len(start)
+    turn = len(start)
 
     for i, j in enumerate(start[:-1]):
         numbers[j] = i + 1
 
     last = start[-1]
 
-    while round < rounds:
+    while turn < turns:
         index = numbers.get(last)
-        numbers[last] = round
-        last = 0 if index is None else round - index
-        round += 1
+        numbers[last] = turn
+        last = 0 if index is None else turn - index
+        turn += 1
 
     return last
 

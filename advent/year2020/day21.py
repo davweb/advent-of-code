@@ -6,14 +6,14 @@ PATTERN = re.compile(r"((\w+ )*)(\(contains (.*)\))?")
 
 
 def read_input():
-    file = open("input/2020/day21-input.txt", "r")
     data = []
 
-    for line in file:
-        match = PATTERN.match(line)
-        ingredients = set(match.group(1).strip().split(' '))
-        allergens = set(match.group(4).strip().split(', '))
-        data.append((ingredients, allergens))
+    with open('input/2020/day21-input.txt', encoding='utf-8') as file:
+        for line in file:
+            match = PATTERN.match(line)
+            ingredients = set(match.group(1).strip().split(' '))
+            allergens = set(match.group(4).strip().split(', '))
+            data.append((ingredients, allergens))
 
     return data
 

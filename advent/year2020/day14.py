@@ -8,28 +8,27 @@ MEM_PATTERN = re.compile(r"mem\[(\d+)\] = (\d+)")
 
 
 def read_input():
-    file = open("input/2020/day14-input.txt", "r")
     data = []
+    with open('input/2020/day14-input.txt', encoding='utf-8') as file:
+        for line in file:
+            match = MASK_PATTERN.match(line)
 
-    for line in file:
-        match = MASK_PATTERN.match(line)
+            if match:
+                data.append(("mask", match.group(1)))
+                continue
 
-        if match:
-            data.append(("mask", match.group(1)))
-            continue
+            match = MEM_PATTERN.match(line)
 
-        match = MEM_PATTERN.match(line)
+            if match:
+                data.append(("mem", (int(match.group(1)), int(match.group(2)))))
+                continue
 
-        if match:
-            data.append(("mem", (int(match.group(1)), int(match.group(2)))))
-            continue
-
-        raise ValueError("Did not match line '{}'".format(line))
+            raise ValueError(f"Did not match line '{line}'")
 
     return data
 
 
-def mask(value, mask):
+def mask(value, source):
     """
     >>> mask(11, "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX1XXXX0X")
     73
@@ -40,10 +39,10 @@ def mask(value, mask):
     >>> mask(0, "1XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
     34359738368
     """
-    mask = list(mask)
-    mask.reverse()
+    source = list(source)
+    source.reverse()
 
-    for i, c in enumerate(mask):
+    for i, c in enumerate(source):
         if c == 'X':
             continue
 
@@ -57,21 +56,25 @@ def mask(value, mask):
     return value
 
 
-def floating_mask(value, mask):
+def floating_mask(value, source):
     """
     >>> floating_mask(42, "000000000000000000000000000000X1001X")
     [26, 27, 58, 59]
     >>> floating_mask(26, "00000000000000000000000000000000X0XX")
     [16, 17, 18, 19, 24, 25, 26, 27]
     """
-    mask = list(mask)
-    mask.reverse()
+    source = list(source)
+    source.reverse()
     masks = []
 
-    for i, c in enumerate(mask):
+    for i, c in enumerate(source):
         bit = 2 ** i
-        def set_bit(x, bit=bit): return x | bit
-        def unset_bit(x, bit=bit): return x & ~bit
+
+        def set_bit(x, bit=bit):
+            return x | bit
+
+        def unset_bit(x, bit=bit):
+            return x & ~bit
 
         if c == '1':
             value = set_bit(value)
