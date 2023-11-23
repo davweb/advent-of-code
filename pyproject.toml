@@ -7,5 +7,26 @@ aggressive = 2
 [tool.pylint.FORMAT]
 max-line-length = 120
 
+[tool.pylint."MESSAGES CONTROL"]
+disable = [
+    "raw-checker-failed",
+    "bad-inline-option",
+    "locally-disabled",
+    "file-ignored",
+    "suppressed-message",
+    "useless-suppression",
+    "deprecated-pragma",
+    "use-symbolic-message-instead",
+    # my additions start here
+    "missing-function-docstring",
+    "missing-class-docstring",
+    "missing-module-docstring",
+    "duplicate-code",
+    "invalid-name"
+]
+
+[tool.pylint.TYPECHECK]
+generated-members = "re.M"
+
 [tool.pytest.ini_options]
 addopts = "--doctest-modules"
