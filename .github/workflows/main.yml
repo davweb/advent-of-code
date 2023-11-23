@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - name: Checkout Workspace
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Python
         uses: actions/setup-python@v4
@@ -38,7 +38,7 @@ jobs:
         run: pytest
 
       - name: Linting
-        run: pylint advent
+        run: pylint -n auto advent
 
       - name: Check formatting
         run: autopep8 --exit-code advent
