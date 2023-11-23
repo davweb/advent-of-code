@@ -152,7 +152,6 @@ def part2(nanobots):
     """
 
     for bot in nanobots:
-        ((x, y, z), bot_range) = bot
         overlap_count = 0
         contains_count = 0
 
