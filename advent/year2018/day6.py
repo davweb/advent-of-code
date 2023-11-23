@@ -78,7 +78,7 @@ def part2(points, progress=False):
             count += 1
 
             if count % increment == 0:
-                print(f'{count / pc:3.0f}%', end='\r', file=sys.stderr)
+                print(f'{count / pc: 3.0f}%', end='\r', file=sys.stderr)
 
         distance = 0
 

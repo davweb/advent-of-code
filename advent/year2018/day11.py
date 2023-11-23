@@ -96,7 +96,7 @@ def part2(serial_number, progress=False):
 
     for size in range(1, 301):
         if progress:
-            print(f"{size / 3:3.0f}%", end="\r")
+            print(f"{size / 3: 3.0f}%", end="\r")
 
         for cell in product(range(1, 302 - size), range(1, 302 - size)):
             grid_power = calc_grid_power(serial_number, cell, size)

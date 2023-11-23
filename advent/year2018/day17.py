@@ -229,7 +229,7 @@ class Slice:
                 else:
                     row.append(block.value)
 
-            output.append(f"{y:4d} {''.join(row)}")
+            output.append(f"{y: 4d} {''.join(row)}")
 
         return "\n".join(output)
 

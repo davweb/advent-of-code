@@ -93,7 +93,14 @@ class Group:
         return self.boost(0)
 
     def __repr__(self):
-        return f"Group(units={self.units}, hit_points={self.hit_points}, initiative={self.initiative}, damage={self.damage}, attack_type='{self.attack_type}', weaknesses={self.weaknesses}, immunities={self.immunities})"
+        return f"Group(units={
+            self.units}, hit_points={
+            self.hit_points}, initiative={
+            self.initiative}, damage={
+                self.damage}, attack_type='{
+                    self.attack_type}', weaknesses={
+                        self.weaknesses}, immunities={
+                            self.immunities})"
 
 
 def sort_by_effective_power(army):
