@@ -13,10 +13,7 @@ def read_input():
     nanobots = []
 
     for groups in PATTERN.findall(text):
-        x = int(groups[0])
-        y = int(groups[1])
-        z = int(groups[2])
-        r = int(groups[3])
+        x, y, z, r = [int(g) for g in groups]
         nanobots.append(((x, y, z), r))
 
     return nanobots
@@ -56,6 +53,30 @@ def surface(radius):
     for dx in range(radius):
         for dy in range(radius - dx):
             yield dx, dy, radius - dx - dy
+
+
+def contains(sphere_one, sphere_two):
+    """
+    Function which determines if one sphere is contained by another sphere.
+    """
+
+    centre_one, radius_one = sphere_one
+    centre_two, radius_two = sphere_two
+
+    separation = distance(centre_one, centre_two)
+    return radius_one >= separation + radius_two
+
+
+def overlaps(sphere_one, sphere_two):
+    """
+    Function which determines where one sphere is overlaps another sphere.
+    """
+
+    centre_one, radius_one = sphere_one
+    centre_two, radius_two = sphere_two
+
+    separation = distance(centre_one, centre_two)
+    return radius_one + radius_two >= separation
 
 
 def part1(nanobots):
@@ -114,69 +135,44 @@ def part2_every_location(nanobots):
     return min(distance((0, 0, 0), location) for location in location_options)
 
 
-def part2_by_surface(nanobots):
-    """
-    >>> part2_by_surface([
-    ...     ((10, 12, 12), 2),
-    ...     ((12, 14, 12), 2),
-    ...     ((16, 12, 12), 4),
-    ...     ((14, 14, 14), 6),
-    ...     ((50, 50, 50), 200),
-    ...     ((10, 10, 10), 5)
-    ... ])
-    36
-    """
-
-    max_count = 0
-    min_distance = None
-
-    for bot_location, bot_range in nanobots:
-        for delta in surface(bot_range):
-            for location in options(bot_location, delta):
-                count = 0
-
-                for other, other_range in nanobots:
-                    if distance(location, other) <= other_range:
-                        count += 1
-
-                if count >= max_count:
-                    max_count = count
-                    home_distance = distance(location, (0, 0, 0))
-
-                    if min_distance is None or min_distance > home_distance:
-                        min_distance = home_distance
-
-    return home_distance
-
-
 def part2(nanobots):
     """
-    >>> part2([
-    ...     ((10, 12, 12), 2),
-    ...     ((12, 14, 12), 2),
-    ...     ((16, 12, 12), 4),
-    ...     ((14, 14, 14), 6),
-    ...     ((50, 50, 50), 200),
-    ...     ((10, 10, 10), 5)
-    ... ])
-    0
-    >>> part2(read_input())
-    0
+    # >>> part2([
+    # ...     ((10, 12, 12), 2),
+    # ...     ((12, 14, 12), 2),
+    # ...     ((16, 12, 12), 4),
+    # ...     ((14, 14, 14), 6),
+    # ...     ((50, 50, 50), 200),
+    # ...     ((10, 10, 10), 5)
+    # ... ])
+    # (12, 12, 12)
+
+    # >>> part2(read_input())
+    # 0
     """
 
-    max_count = 0
-
     for bot in nanobots:
-        count = sum(overlapping(bot, other) for other in nanobots)
-        max_count = max(max_count, count)
+        ((x, y, z), bot_range) = bot
+        overlap_count = 0
+        contains_count = 0
 
-    return 0
+        for other in nanobots:
+            if other == bot:
+                continue
+
+            if contains(bot, other):
+                contains_count += 1
+
+            if overlaps(bot, other):
+                overlap_count += 1
+
+        print(bot, contains_count, overlap_count)
 
 
 def main():
     data = read_input()
     print(part1(data))
-    #  print(part2(data))
+    print(part2(data))
 
 
 if __name__ == "__main__":
