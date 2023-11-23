@@ -51,7 +51,9 @@ class BingoCard:
         return any(len(line) == 0 for line in self.rows + self.columns)
 
     def __repr__(self):
-        return '\n'.join(' '.join(f'{cell: 2d}' for cell in row) for row in self.rows)
+        # autopep8: off
+        return '\n'.join(' '.join(f'{cell:2d}' for cell in row) for row in self.rows)
+        # autopep8: on
 
     def remaining(self):
         return sum(self.values)

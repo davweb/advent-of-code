@@ -229,7 +229,9 @@ class Slice:
                 else:
                     row.append(block.value)
 
-            output.append(f"{y: 4d} {''.join(row)}")
+            # autopep8: off
+            output.append(f"{y:4d} {''.join(row)}")
+            # autopep8: on
 
         return "\n".join(output)
 
