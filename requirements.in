@@ -1,6 +1,6 @@
 autopep8
-numpy==1.26.0
-pylint
+numpy>=1.26
+pylint>=3
 pytest
 pytest-xdist
 regex

@@ -40,7 +40,7 @@ def part2(data):
         if execute(data, noun, verb) == 19690720:
             return 100 * noun + verb
 
-    raise Exception("No result found")
+    raise ValueError("No result found")
 
 
 def main():

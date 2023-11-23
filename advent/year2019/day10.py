@@ -108,6 +108,7 @@ def part2(asteroids):
 
     asteroids = asteroids.copy()
     max_seen = 0
+    base = None
 
     for asteroid in asteroids:
         seen = len(can_see(asteroid, asteroids))

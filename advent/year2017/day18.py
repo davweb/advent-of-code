@@ -19,7 +19,7 @@ def parse_input(data):
         elif command in ['set', 'add', 'mul', 'mod', 'jgz']:
             y = line[2]
         else:
-            raise Exception(f'Unknown instruction: {command}')
+            raise ValueError(f'Unknown instruction: {command}')
 
         instructions.append((command, x, y))
 
@@ -136,7 +136,7 @@ def part2(instructions):
                 if x > 0:
                     step = y
             case _:
-                raise Exception(f'Unknown instruction {command}')
+                raise ValueError(f'Unknown instruction {command}')
 
         all_pointers[program] += step
 
