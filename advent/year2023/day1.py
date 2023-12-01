@@ -1,48 +1,62 @@
 # -*- coding: utf-8 -*-
-# pylint: skip-file
-
-import re
-from collections import defaultdict
-from itertools import combinations
-import numpy
-
-PATTERN = re.compile(r'(\d+) <-> ((\d+, )*\d+)')
 
 
-def read_input(filename='input/2016/day1-input.txt'):
+def read_input(filename='input/2023/day1-input.txt'):
     with open(filename, encoding='utf8') as file:
-        # return [int(line) for line in file.readlines()]
-        # return file.read().split(",")
-        return 0
+        return file.readlines()
 
 
-def my_function(input_arg):
-    """
-    >>> my_function(12)
-    12
-    >>> my_function(14)
-    14
-    """
-
-    return input_arg
+DIGITS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
 
 
 def part1(data):
     """
     >>> part1(read_input())
-    0
+    55123
     """
 
-    return data
+    total = 0
+
+    for line in data:
+        first = None
+
+        for c in line:
+            if c.isdigit():
+                n = int(c)
+                if first is None:
+                    first = n
+
+        total += first * 10 + n
+
+    return total
 
 
 def part2(data):
     """
     >>> part2(read_input())
-    0
+    55260
     """
 
-    return 0
+    total = 0
+
+    for line in data:
+        first = None
+        n = None
+
+        for i, c in enumerate(line):
+            for value, text in enumerate(DIGITS):
+                if line[i - len(text) + 1:i + 1] == text:
+                    n = value
+
+            if c.isdigit():
+                n = int(c)
+
+            if first is None:
+                first = n
+
+        total += first * 10 + n
+
+    return total
 
 
 def main():
