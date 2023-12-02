@@ -34,12 +34,11 @@ jobs:
       - name: Install dependencies
         run: pip-sync
 
-      - name: Execute tests
-        run: pytest -n auto
-
       - name: Linting
         run: pylint advent
 
       - name: Check formatting
         run: autopep8 --exit-code advent
 
+      - name: Execute tests
+        run: pytest -n auto
