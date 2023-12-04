@@ -17,7 +17,7 @@ def read_input(filename='input/2023/day4-input.txt'):
 
 def card_matches(cards):
     for winners, numbers in cards:
-        yield len(set.intersection(winners, numbers))
+        yield len(winners & numbers)
 
 
 def part1(data):

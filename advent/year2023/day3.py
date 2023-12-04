@@ -89,7 +89,7 @@ def part2(grid):
             adjacent_cells = set(adjacent(index, grid))
 
             for (indexes, value) in numbers:
-                if set.intersection(adjacent_cells, indexes):
+                if adjacent_cells & indexes:
                     ratio *= value
                     count += 1
 
