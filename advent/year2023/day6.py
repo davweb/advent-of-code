@@ -3,7 +3,7 @@
 import re
 from math import prod
 
-PATTERN = re.compile(r'Time:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\nDistance:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)', re.MULTILINE)
+PATTERN = re.compile(r'Time:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\nDistance:\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)')
 
 
 def read_input(filename='input/2023/day6-input.txt'):
@@ -19,11 +19,11 @@ def is_win(time, distance, hold):
     return (time - hold) * hold > distance
 
 
-def binary_search(lower, upper, test):
+def binary_search(lower, upper, test_function):
     while upper - lower > 1:
         middle = (upper + lower) // 2
 
-        if test(middle):
+        if test_function(middle):
             lower = middle
         else:
             upper = middle
