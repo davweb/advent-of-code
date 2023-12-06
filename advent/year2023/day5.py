@@ -104,7 +104,7 @@ def part2(data):
 
             # item overlaps range on upper end
             if item_start < source_end <= item_end:
-                queue.append((source_name, item_start, source_end))
+                queue.append((destination_name, item_start, source_end))
                 queue.append((source_name, source_end, item_end))
                 queued = True
                 break
