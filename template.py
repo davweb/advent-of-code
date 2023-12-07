@@ -7,7 +7,7 @@ import numpy
 
 PATTERN = re.compile(r'(\d+) <-> ((\d+, )*\d+)')
 
-def read_input(filename='input/2016/day1-input.txt'):
+def read_input(filename='input/2023/day1-input.txt'):
     with open(filename, encoding='utf8') as file:
         #return [int(line) for line in file.readlines()]
         #return file.read().split(",")
