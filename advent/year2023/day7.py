@@ -24,6 +24,7 @@ def read_input(filename='input/2023/day7-input.txt'):
             yield values[0], int(values[1])
 
 
+# pylint: disable = too-many-return-statements
 def type_of_hand(hand, jokers=False):
     """
     >>> type_of_hand('AAAAA')
@@ -36,6 +37,8 @@ def type_of_hand(hand, jokers=False):
     <Hand.TWO_PAIR: 2>
     >>> type_of_hand('AJKQ3')
     <Hand.HIGH_CARD: 0>
+    >>> type_of_hand('AJKQ3', jokers=True)
+    <Hand.ONE_PAIR: 1>
     """
 
     counts = Counter(hand)
@@ -47,14 +50,8 @@ def type_of_hand(hand, jokers=False):
         joker_count = 0
 
     mc = counts.most_common()
-    first = mc[0][1]
+    first = mc[0][1] + joker_count
     second = 0 if len(mc) == 1 else mc[1][1]
-
-    first += joker_count
-
-    if first > 5:
-        second += first - 5
-        first = 5
 
     match first, second:
         case 5, _:
