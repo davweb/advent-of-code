@@ -106,7 +106,6 @@ def part1(grid):
     """
     >>> part1(read_input())
     108955
-
     """
 
     roll(grid, Direction.NORTH)
