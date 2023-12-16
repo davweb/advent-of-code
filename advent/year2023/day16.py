@@ -22,6 +22,10 @@ def read_input(filename='input/2023/day16-input.txt'):
     return grid
 
 
+def bounds(grid):
+    return max(x for x, _ in grid) + 1, max(y for _, y in grid) + 1
+
+
 def move(location, direction):
     lx, ly = location
     dx, dy = direction.value
@@ -32,14 +36,13 @@ def reflect(grid, start_location, start_direction):
     beams = [(start_location, start_direction)]
     visits = defaultdict(set)
 
-    width = max(x for x, _ in grid) + 1
-    height = max(y for _, y in grid) + 1
+    width, height = bounds(grid)
 
     while beams:
         location, direction = beams.pop(0)
         x, y = location
 
-        if x < 0 or x >= width or y < 0 or y >= height:
+        if not (0 <= x < width and 0 <= y < height):
             continue
 
         if direction in visits[location]:
@@ -48,18 +51,17 @@ def reflect(grid, start_location, start_direction):
         visits[location].add(direction)
 
         match grid[location], direction:
-            case '.', _:
+            # Carry straight on
+            case ('.', _) | ('-', (Direction.LEFT | Direction.RIGHT)) | ('|', (Direction.UP | Direction.DOWN)):
                 beams.append((move(location, direction), direction))
-            case '-', (Direction.LEFT | Direction.RIGHT):
-                beams.append((move(location, direction), direction))
+            # Split beams
             case '-', (Direction.UP | Direction.DOWN):
                 beams.append((location, Direction.LEFT))
                 beams.append((location, Direction.RIGHT))
-            case '|', (Direction.UP | Direction.DOWN):
-                beams.append((move(location, direction), direction))
             case '|', (Direction.LEFT | Direction.RIGHT):
                 beams.append((location, Direction.UP))
                 beams.append((location, Direction.DOWN))
+            # Reflections
             case ('/', Direction.LEFT) | ('\\', Direction.RIGHT):
                 beams.append((move(location, Direction.DOWN), Direction.DOWN))
             case ('/', Direction.RIGHT) | ('\\', Direction.LEFT):
@@ -69,7 +71,7 @@ def reflect(grid, start_location, start_direction):
             case ('/', Direction.DOWN) | ('\\', Direction.UP):
                 beams.append((move(location, Direction.LEFT), Direction.LEFT))
 
-    return sum(1 for location in visits)
+    return len(visits)
 
 
 def part1(data):
@@ -89,9 +91,7 @@ def part2(data):
     7513
     """
 
-    width = max(x for x, _ in data) + 1
-    height = max(y for _, y in data) + 1
-
+    width, height = bounds(data)
     options = []
 
     for y in range(height):
