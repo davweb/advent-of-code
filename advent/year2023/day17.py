@@ -50,12 +50,6 @@ def opposite(direction):
             raise ValueError(direction)
 
 
-def dimensions(grid):
-    width = max(x for x, _ in grid) + 1
-    height = max(y for _, y in grid) + 1
-    return width, height
-
-
 def shortest_route(grid, straight_limit=3, turn_limit=0):
     """
     >>> shortest_route(read_input('input/2023/day17-sample.txt'), 3, 0)
@@ -64,9 +58,7 @@ def shortest_route(grid, straight_limit=3, turn_limit=0):
     94
     """
 
-    width, height = dimensions(grid)
-    end = (width - 1, height - 1)
-
+    end = (max(x for x, _ in grid), max(y for _, y in grid))
     best = None
     queue = []
     heappush(queue, (0, 0, (0, 0), Direction.DOWN, 0))
@@ -110,8 +102,7 @@ def shortest_route(grid, straight_limit=3, turn_limit=0):
             if next_location not in grid:
                 continue
 
-            priority = taxicab_distance(next_location, end)
-            heappush(queue, (priority, heat_loss + grid[next_location],
+            heappush(queue, (taxicab_distance(next_location, end), heat_loss + grid[next_location],
                              next_location, next_direction, next_direction_count))
 
     return best
