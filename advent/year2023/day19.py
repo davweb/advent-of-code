@@ -43,7 +43,7 @@ def part1(data):
     for part in parts:
         workflow = list(workflows['in'])
 
-        while workflow:
+        while True:
             step = workflow.pop(0)
 
             if step == 'A':
@@ -65,7 +65,7 @@ def part1(data):
 
             if operator(variable, value):
                 workflow = [destination]
-                continue
+
 
     return total
 
