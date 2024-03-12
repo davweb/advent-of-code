@@ -66,7 +66,6 @@ def part1(data):
             if operator(variable, value):
                 workflow = [destination]
 
-
     return total
 
 

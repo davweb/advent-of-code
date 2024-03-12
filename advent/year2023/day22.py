@@ -2,12 +2,13 @@
 
 from copy import deepcopy
 
+
 def read_input(filename='input/2023/day22-input.txt'):
     bricks = []
 
     with open(filename, encoding='utf8') as file:
         for line in file:
-            start, end  = line.strip().split('~')
+            start, end = line.strip().split('~')
             bricks.append([tuple(int(i) for i in start.split(',')), tuple(int(i) for i in end.split(','))])
 
     return bricks
@@ -61,7 +62,6 @@ def make_grid(bricks):
             grid[location] = brick_id
 
     return grid
-
 
 
 def drop_bricks(bricks):
@@ -126,9 +126,6 @@ def find_candidates(bricks):
     return disintegrate
 
 
-
-
-
 def part1(data):
     """
     >>> part1(read_input())
@@ -137,7 +134,6 @@ def part1(data):
 
     bricks, _ = drop_bricks(data)
     return find_candidates(bricks)
-
 
 
 def part2(data):
