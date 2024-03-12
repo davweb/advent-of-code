@@ -122,8 +122,7 @@ def part2(robot_map):
     while queue:
         (location, distance) = queue.pop(0)
         seen.add(location)
-        if distance > max_distance:
-            max_distance = distance
+        distance = max(distance, max_distance)
 
         neighbours = [node for node in nodes if abs(node[0] - location[0]) + abs(node[1] - location[1]) == 1]
 

@@ -42,9 +42,7 @@ def part2(polymer):
         upper = lower.upper()
         optimized = polymer.replace(lower, '').replace(upper, '')
         length = reduce(optimized)
-
-        if length < min_length:
-            min_length = length
+        min_length = min(min_length, length)
 
     return min_length
 
