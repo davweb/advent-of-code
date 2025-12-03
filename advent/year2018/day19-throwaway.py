@@ -1,3 +1,4 @@
+# pylint: disable=too-many-branches
 import re
 
 POINTER_PATTERN = re.compile(r"#ip (\d)")

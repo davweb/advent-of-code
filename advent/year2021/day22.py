@@ -1,4 +1,4 @@
-# pylint: disable=too-many-arguments,too-many-locals
+# pylint: disable=too-many-arguments,too-many-locals,too-many-positional-arguments
 # -*- coding: utf-8 -*-
 
 import re

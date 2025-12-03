@@ -136,7 +136,7 @@ def part1(moons):
 def part2(moons):
     """
     >>> part2(input_moons())
-    356658899375688
+    np.int64(356658899375688)
     """
 
     cycles = []

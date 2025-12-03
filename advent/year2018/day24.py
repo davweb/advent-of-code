@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=too-many-arguments,line-too-long
+# pylint: disable=too-many-arguments,too-many-positional-arguments,line-too-long
 
 import re
 

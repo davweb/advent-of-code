@@ -27,6 +27,7 @@ def part1(points):
 
     areas = defaultdict(int)
     exclusions = set()
+    closest_point = None
 
     for i in itertools.product(range(left, right + 1), range(top, bottom + 1)):
         closest_distance = bottom + right

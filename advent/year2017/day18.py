@@ -1,3 +1,4 @@
+# pylint: disable=too-many-branches
 from collections import defaultdict
 
 

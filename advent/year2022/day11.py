@@ -1,4 +1,4 @@
-# pylint: disable=too-many-arguments,too-many-instance-attributes
+# pylint: disable=too-many-arguments,too-many-instance-attributes,too-many-positional-arguments
 # -*- coding: utf-8 -*-
 
 import re

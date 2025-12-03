@@ -87,7 +87,7 @@ def part1(serial_number):
             max_power = grid_power
             max_cell = cell
 
-    return max_cell
+    return max_cell  # pylint: disable=possibly-used-before-assignment
 
 
 def part2(serial_number, progress=False):
@@ -106,7 +106,7 @@ def part2(serial_number, progress=False):
                 max_cell = cell
                 max_size = size
 
-    return (max_cell) + (max_size,)
+    return (max_cell) + (max_size,)  # pylint: disable=possibly-used-before-assignment
 
 
 def main():

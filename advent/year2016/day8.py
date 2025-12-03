@@ -42,7 +42,7 @@ class Screen:
     >>> screen.rotate_row(2, 5)
     >>> screen.fill(4, 4)
     >>> screen.count()
-    24
+    np.int64(24)
     """
 
     def __init__(self):

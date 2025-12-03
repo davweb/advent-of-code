@@ -48,7 +48,6 @@ PATTERN = re.compile(r'(.*): (\d+)')
 
 
 def read_input():
-
     with open('input/2015/day21-input.txt', encoding='utf8') as file:
 
         for line in file:
@@ -68,7 +67,7 @@ def read_input():
             else:
                 raise ValueError(line)
 
-    return (hit_points, damage, armor)
+    return (hit_points, damage, armor)  # pylint: disable=possibly-used-before-assignment
 
 
 def player_wins(player, boss):

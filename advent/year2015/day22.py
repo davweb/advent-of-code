@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=too-many-instance-attributes
+# pylint: disable=too-many-instance-attributes,possibly-used-before-assignment
 
 import re
 

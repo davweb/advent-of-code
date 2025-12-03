@@ -1,4 +1,4 @@
-# pylint: disable=used-before-assignment,too-many-locals,line-too-long
+# pylint: disable=used-before-assignment,too-many-locals,line-too-long,too-many-branches
 
 def value_of(value, register):
     if value in register:

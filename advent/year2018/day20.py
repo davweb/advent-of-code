@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+# pylint: disable=too-many-branches
 
 def read_input():
     with open("input/2018/day20-input.txt", encoding='utf-8') as file:

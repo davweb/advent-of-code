@@ -244,6 +244,7 @@ def count_inside(grid):
     count = 0
     min_y, max_y = grid.y_range()
     y = min_y
+    fill_start = None
 
     while y <= max_y:
         grid_slice, height = grid.slice(y)
