@@ -142,6 +142,9 @@ class Span():
         return other.lower in self or other.upper in self
 
     def merge(self, other):
+        if not self.overlaps(other):
+            raise ValueError("Can't merge Spans than don't overlap")
+
         self.lower = min(self.lower, other.lower)
         self.upper = max(self.upper, other.upper)
 
