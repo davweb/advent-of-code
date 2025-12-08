@@ -23,7 +23,7 @@ def part1(data):
     connections = sorted(combinations(data, 2), key=distance)
     circuits = [{c} for c in data]
 
-    for (a, b) in connections[:1000]:
+    for a, b in connections[:1000]:
         found = []
 
         for circuit in circuits:
@@ -48,7 +48,7 @@ def part2(data):
     connections = sorted(combinations(data, 2), key=distance)
     circuits = [{c} for c in data]
 
-    for (a, b) in connections:
+    for a, b in connections:
         found = []
 
         for circuit in circuits:
