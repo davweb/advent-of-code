@@ -42,7 +42,7 @@ def part1(data):
 def part2(data):
     """
     >>> part2(read_input())
-    01474050600
+    1474050600
     """
 
     connections = sorted(combinations(data, 2), key=distance)
